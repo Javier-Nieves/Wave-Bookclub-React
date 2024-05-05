@@ -1,0 +1,56 @@
+.modernBack,
+.classicBack {
+  width: 85%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  font-size: 20px;
+  background-color: rgba(176, 176, 174, 0.605);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: transform 0.5s ease-out;
+  color: white;
+}
+.classicBack {
+  font-size: 24px;
+  background: linear-gradient(
+    0deg,
+    rgba(224, 188, 121, 0.88) 0%,
+    rgba(221, 193, 55, 0.75) 100%
+  );
+}
+.modernBack {
+  font-size: 28px;
+  background: linear-gradient(
+    0deg,
+    rgba(36, 226, 251, 0.4) 0%,
+    rgba(36, 226, 251, 0.7) 100%
+  );
+}
+
+.modernBack:hover,
+.classicBack:hover {
+  cursor: pointer;
+  transform: translate(5px, 5px);
+}
+.upcomingPic {
+  width: 60%;
+  margin: 12px;
+}
+.upcomingTitle {
+  color: white;
+}
+.addDateContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+}
+.meetingDate {
+  font-size: 20px;
+  color: rgba(201, 201, 201, 0.94);
+}
+.picker {
+  width: 85%;
+}

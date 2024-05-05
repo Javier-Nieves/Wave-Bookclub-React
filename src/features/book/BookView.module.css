@@ -1,0 +1,31 @@
+.viewTitle {
+  margin-top: 8px;
+  font-size: 3.2rem;
+}
+.viewDesc,
+.newDesc {
+  font-size: 24px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 15px;
+}
+.viewAuthor {
+  font-size: 25px;
+}
+.viewPages {
+  font-size: 23px;
+}
+
+.bookInfo {
+  gap: 15px;
+  margin: 20px 0 50px 0;
+  background-color: rgba(232, 232, 232, 0.87);
+  border-radius: 10px;
+}
+.bookInfoTop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}

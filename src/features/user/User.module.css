@@ -1,0 +1,15 @@
+.enterContainer {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: absolute;
+  right: 20px;
+  top: 25px;
+}
+
+.nameText {
+  text-transform: capitalize;
+  font-size: 24px;
+  font-family: var(--font-classic);
+  color: rgba(201, 201, 201, 0.94);
+}

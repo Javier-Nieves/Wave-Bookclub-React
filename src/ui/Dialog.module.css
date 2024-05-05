@@ -1,0 +1,42 @@
+dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s;
+  background-color: rgba(117, 117, 117, 0.3);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+}
+.dialogContent {
+  padding: 80px;
+  margin-bottom: 150px;
+  border-radius: 20px;
+  border: 1px solid yellow;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.dialogContent > * {
+  margin: 15px;
+}
+
+.modalText {
+  font-family: var(--font-classic);
+  font-size: 35px;
+  color: whitesmoke;
+}
+
+.modalForm-remove,
+.modalForm-enter,
+.modalForm-register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.modalForm-register {
+  display: none;
+}

@@ -1,0 +1,135 @@
+table {
+  backdrop-filter: blur(13px);
+  -webkit-backdrop-filter: blur(13px);
+  background-color: hsla(0, 0%, 27%, 0.514);
+  vertical-align: middle;
+  font-family: "Playfair Display", serif;
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 5vh;
+}
+th,
+td {
+  padding: 10px;
+  border-radius: 3px;
+}
+.classicHead {
+  background-color: var(--color-classic-head);
+  color: white;
+  font-family: var(--font-classic);
+  font-weight: var(--font-weight-classic);
+  font-size: var(--font-size-classic);
+}
+.classicBody:nth-of-type(odd) {
+  background-color: var(--color-classic-odd);
+  transition: transform 0.3s ease-in-out;
+  font-family: var(--font-classic);
+  font-weight: var(--font-weight-classic);
+  font-size: var(--font-size-classic);
+}
+.classicBody:nth-of-type(even) {
+  background-color: var(--color-classic-even);
+  transition: transform 0.3s ease-in-out;
+  font-family: var(--font-classic);
+  font-weight: var(--font-weight-classic);
+  font-size: var(--font-size-classic);
+  color: white;
+}
+.classicBody:hover {
+  background-color: var(--color-classic-hover);
+  box-shadow: 0 0 10px #fcfdf7;
+  -webkit-box-shadow: 0 0 10px #fcfdf7;
+  cursor: pointer;
+  transform: scale(1.02);
+}
+.modernHead {
+  font-family: var(--font-modern);
+  font-weight: var(--font-weight-modern);
+  font-size: var(--font-size-modern);
+  background: var(--color-modern-head);
+  color: #050801;
+  box-shadow: 0 0 5px var(--color-modern-head),
+    0 0 20px var(--color-modern-head), 0 0 40px var(--color-modern-head),
+    0 0 160px var(--color-modern-head);
+  -webkit-box-shadow: 0 0 5px var(--color-modern-head),
+    0 0 20px var(--color-modern-head), 0 0 40px var(--color-modern-head);
+}
+.modernBody:nth-of-type(odd) {
+  font-family: var(--font-modern);
+  font-weight: var(--font-weight-modern);
+  font-size: var(--font-size-modern);
+  background-color: var(--color-modern-odd);
+  color: #fefefe;
+}
+.modernBody:nth-of-type(even) {
+  font-family: var(--font-modern);
+  font-weight: var(--font-weight-modern);
+  font-size: var(--font-size-modern);
+  background-color: var(--color-modern-even);
+  color: #fefefe;
+}
+.modernBody:hover {
+  background-color: #193e3ed4;
+  cursor: pointer;
+  -webkit-box-shadow: 0 0 5px rgba(244, 3, 200, 0.608),
+    0 0 25px rgb(39, 231, 248), 0 0 50px rgb(3, 233, 244),
+    0 0 200px rgb(3, 233, 244);
+  box-shadow: 0 0 5px #f403c89b, 0 0 25px #27e7f8,
+    0 0 50px var(--color-modern-head), 0 0 200px var(--color-modern-head);
+  text-shadow: 0 0 2px #fff;
+}
+
+.historyHead,
+.searchHead {
+  background-color: var(--color-history-head);
+  color: black;
+}
+.historyBody:nth-of-type(odd),
+.searchBody:nth-of-type(odd) {
+  background-color: var(--color-history-odd);
+}
+.historyBody:nth-of-type(even),
+.searchBody:nth-of-type(even) {
+  background-color: var(--color-history-even);
+  color: rgb(237, 237, 237);
+}
+.historyBody:hover,
+.searchBody:hover {
+  background-color: rgba(250, 196, 70, 0.83);
+  color: black;
+  cursor: pointer;
+}
+.smallPic {
+  width: 60px;
+}
+.flagContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.smallFlag {
+  width: 23px;
+  height: fit-content;
+  margin-left: 7px;
+}
+.searchResultBig {
+  font-size: 1.3rem;
+}
+.searchResultSmall {
+  font-size: 1.2rem;
+}
+.yearRow {
+  width: 100%;
+}
+.yearRow td {
+  width: 100%;
+  font-size: 25px;
+  background-color: var(--color-history-head);
+  color: black;
+}
+
+.upcomBook > * {
+  background-color: rgb(187, 181, 1);
+  color: #050801;
+  box-shadow: 0 0 5px #ffffff9b, 0 0 25px #d4ca01, 0 0 50px #f5e901a5;
+}

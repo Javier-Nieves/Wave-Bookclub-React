@@ -1,0 +1,116 @@
+button {
+  color: rgba(201, 201, 201, 0.94);
+  font-size: 22px;
+  font-family: var(--font-classic);
+  border: 1px solid gray;
+  border-radius: 8px;
+  padding: 8px;
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.searchBtn {
+  width: 10vw;
+}
+.pagination-btn,
+.pagination-btn_null {
+  width: 6vw;
+}
+.addBtn,
+.rateBtn {
+  justify-content: center;
+  align-items: center;
+}
+.rateBtn,
+.nextBtn,
+.welcome-btn,
+.register-btn {
+  margin-top: 13px;
+  width: 180px;
+  height: 100px;
+  font-size: 35px;
+  font-family: Copperplate, Didot, cursive;
+  padding: 15px;
+  background-image: url("/public/img/rate1.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: black;
+  background-color: transparent;
+  border: 1px solid var(--color-bright);
+  -webkit-text-stroke: 1px rgb(247, 247, 247);
+  transition: transform 0.5s ease-in-out;
+}
+.register-btn {
+  font-size: 30px;
+  background-image: url("/public/img/register.png");
+  background-position: center;
+}
+.meetingBtn {
+  border: 1px solid var(--color-bright);
+  background-color: rgba(9, 9, 9, 0.6);
+  transition: transform 0.5s ease-in-out;
+  font-size: 20px;
+  height: 80%;
+}
+.modal-btn {
+  width: 9vw;
+  height: 6vw;
+  border: 1px solid var(--color-bright);
+  font-size: 21px;
+  margin-right: 15px;
+}
+.edit-btn,
+.save-btn {
+  color: black;
+  border: 1px solid var(--color-bright);
+  padding: 0px 18px 0px 18px;
+  height: 6vh;
+}
+.save-btn {
+  display: none;
+  background-color: rgba(3, 3, 3, 0.877);
+  color: whitesmoke;
+}
+
+.enter-btn,
+.pagination-btn {
+  border: 1px solid var(--color-bright);
+  transition: transform 0.5s ease-in-out;
+}
+
+button:hover,
+.welcome-btn:hover {
+  text-decoration: none;
+  transform: scale(1.05);
+  cursor: pointer;
+  box-shadow: 0 0 15px var(--color-bright);
+}
+.searchBtn:hover,
+.addBtn:hover,
+.removeBtn:hover,
+.modal-btn:hover {
+  background-color: rgba(255, 255, 255, 0.273);
+  box-shadow: 0 0 5px #f9f9f9d2;
+  cursor: pointer;
+}
+.meetingBtn:hover {
+  background-color: rgba(5, 8, 1, 0.91);
+  box-shadow: 0 0 55px #f9f9f9d2;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.enter-btn:hover,
+.edit-btn:hover,
+.pagination-btn:hover,
+.save-btn:hover,
+.example-enter:hover {
+  background-color: rgba(254, 236, 39, 0.806);
+  box-shadow: 0 0 55px #f9f9f9d2;
+  transform: scale(1.1);
+  color: #050801;
+  cursor: pointer;
+}
+.edit-btn:hover {
+  transform: none;
+}
