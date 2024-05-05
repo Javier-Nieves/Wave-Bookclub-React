@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
 
-import { useBooks } from "../Contexts/BooksContext";
-import { useCountries } from "../Contexts/CountriesContext";
+import { useBooks } from "../contexts/BooksContext";
+import { useCountries } from "../contexts/CountriesContext";
 
-import Loader from "../Components/Loader";
+import Loader from "./Loader";
 
 import styles from "./Main.module.css";
 

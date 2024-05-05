@@ -1,6 +1,6 @@
-import { useBooks } from "../Contexts/BooksContext";
+import { useBooks } from "../contexts/BooksContext";
 import { Navbar } from "./Navbar";
-import Search from "./Search";
+import Search from "../features/search/Search";
 import Upcoming from "./Upcoming";
 import Controls from "./Controls";
 

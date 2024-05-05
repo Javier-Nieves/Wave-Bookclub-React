@@ -1,5 +1,5 @@
-import { useBooks } from "../Contexts/BooksContext";
-import { CLASSIC_LIMIT } from "../config";
+import { useBooks } from "../contexts/BooksContext";
+import { CLASSIC_LIMIT } from "../utils/config";
 
 import styles from "./Main.module.css";
 

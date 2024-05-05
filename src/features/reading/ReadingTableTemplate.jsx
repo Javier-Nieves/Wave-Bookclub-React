@@ -1,8 +1,8 @@
-import { useBooks } from "../Contexts/BooksContext";
-import { CLASSIC_LIMIT } from "../config";
-import { TableRow } from "./TableRow";
+import { useBooks } from "../../contexts/BooksContext";
+import { CLASSIC_LIMIT } from "../../utils/config";
+import { TableRow } from "../../ui/TableRow";
 
-import styles from "./Tables.module.css";
+import styles from "../../ui/Tables.module.css";
 
 export default function Table({ period }) {
   const { books } = useBooks();

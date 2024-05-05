@@ -31,7 +31,7 @@ button {
   font-size: 35px;
   font-family: Copperplate, Didot, cursive;
   padding: 15px;
-  background-image: url("/public/img/rate1.webp");
+  background-image: url("/img/rate1.webp");
   background-repeat: no-repeat;
   background-size: cover;
   color: black;
@@ -42,7 +42,7 @@ button {
 }
 .register-btn {
   font-size: 30px;
-  background-image: url("/public/img/register.png");
+  background-image: url("/img/register.png");
   background-position: center;
 }
 .meetingBtn {

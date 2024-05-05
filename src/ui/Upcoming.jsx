@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
-import { useBooks } from "../Contexts/BooksContext";
-import { CLASSIC_LIMIT } from "../config";
+import { useBooks } from "../contexts/BooksContext";
+import { CLASSIC_LIMIT } from "../utils/config";
 
 import Button from "./Button";
 

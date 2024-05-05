@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useAuth } from "../Contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
+import Button from "../ui/Button";
 
 import styles from "./HomePage.module.css";
-import Button from "../Components/Button";
 
 // const TestUser = {
 //   name: "wave",
@@ -13,6 +13,11 @@ import Button from "../Components/Button";
 
 function Login() {
   const { login, isLoggedIn } = useAuth();
+  // const isLoggedIn = false;
+  // function login() {
+  //   console.log("login");
+  // }
+
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [pass, setPass] = useState("");

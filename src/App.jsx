@@ -1,12 +1,19 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { Suspense } from "react";
 
+import { useBooks } from "./contexts/BooksContext";
 import ProtectedRoutes from "./ui/ProtectedRoutes";
 import AppLayout from "./ui/AppLayout";
-import NotFound from "./ui/NotFound";
 import Loader from "./ui/Loader";
+import { ReadingTable, HistoryTable, SearchTable } from "./ui/TableTypes";
+import Book from "./features/book/BookView";
+import HomePage from "./pages/HomePage";
+import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
 
 function App() {
+  const { defaultStyle } = useBooks();
+
   return (
     <BrowserRouter>
       <Suspense fallback={<Loader />}>

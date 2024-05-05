@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext, useContext } from "react";
 
-import { COUNTRIES_API } from "../config";
+import { COUNTRIES_API } from "../utils/config";
 
 const CountriesContext = createContext();
 

@@ -7,8 +7,8 @@ import {
 } from "react";
 import axios from "axios";
 
-import { SITE_URL, CLASSIC_LIMIT, BOOK_API } from "../config";
-import { getSearchedBooks, AJAX, makeUniformedBook } from "../helpers";
+import { SITE_URL, CLASSIC_LIMIT, BOOK_API } from "../utils/config";
+import { getSearchedBooks, AJAX, makeUniformedBook } from "../utils/helpers";
 import { useAuth } from "./AuthContext";
 
 const BooksContext = createContext();
@@ -36,11 +36,11 @@ function reducer(state, action) {
         totalResults: 0,
         searchResults: [],
       };
-    case "books/loaded":
+    case "books/loaded": {
       // prettier-ignore
       const upcomingBook = action.payload.find((book) => book.upcoming === true);
-      // prettier-ignore
-      const defaultStyle = upcomingBook?.year < CLASSIC_LIMIT ? "modern" : "classic";
+      const defaultStyle =
+        upcomingBook?.year < CLASSIC_LIMIT ? "modern" : "classic";
       return {
         ...state,
         loadingBooks: false,
@@ -48,6 +48,7 @@ function reducer(state, action) {
         upcomingBook,
         defaultStyle,
       };
+    }
     case "book/loaded":
       return {
         ...state,

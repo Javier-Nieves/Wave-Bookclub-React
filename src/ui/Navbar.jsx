@@ -1,20 +1,22 @@
 import { NavLink } from "react-router-dom";
-import { useBooks } from "../Contexts/BooksContext";
+import { useBooks } from "../contexts/BooksContext";
+
+import styles from "./Navbar.module.css";
 
 export function Navbar() {
   const { defaultStyle, changeView } = useBooks();
   return (
-    <div className="navbar">
+    <div className={styles.navbar}>
       <NavLink
         to={defaultStyle}
-        className={`link brand-modern`}
+        className={styles.brandModern}
         onClick={() => changeView(defaultStyle)}
       >
         Reading List
       </NavLink>
       <NavLink
         to="history"
-        className={`link brand-modern`}
+        className={styles.brandModern}
         onClick={() => changeView("history")}
       >
         History

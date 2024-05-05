@@ -1,12 +1,12 @@
-import Main from "../Components/Main";
-import User from "../Components/User";
-import Sidebar from "../Components/Sidebar";
-import RightColumn from "../Components/RightColumn";
+import Main from "./Main";
+import User from "../features/user/User";
+import Sidebar from "../ui/Sidebar";
+import RightColumn from "../ui/RightColumn";
 
 function AppLayout() {
   return (
     <Main>
-      <User />
+      {/* <User /> */}
       <Sidebar />
       <RightColumn />
     </Main>

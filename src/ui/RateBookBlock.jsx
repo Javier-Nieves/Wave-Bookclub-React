@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useBooks } from "../Contexts/BooksContext";
+import { useBooks } from "../contexts/BooksContext";
 import Button from "./Button";
 import styles from "./Main.module.css";
 import Dialog from "./Dialog";

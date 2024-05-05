@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 
 import Switch from "./Switch";
-import ReadingTableTemplate from "./ReadingTableTemplate";
-import HistoryTableTemplate from "./HistoryTableTemplate";
-import SearchTableTemplate from "./SearchTableTemplate";
-import { useBooks } from "../Contexts/BooksContext";
+import ReadingTableTemplate from "../features/reading/ReadingTableTemplate";
+import HistoryTableTemplate from "../features/history/HistoryTableTemplate";
+import SearchTableTemplate from "../features/search/SearchTableTemplate";
+import { useBooks } from "../contexts/BooksContext";
 
 export function ReadingTable({ period = "classic" }) {
   const { changeView } = useBooks();

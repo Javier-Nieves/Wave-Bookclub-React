@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useBooks } from "../Contexts/BooksContext";
-import { useCountries } from "../Contexts/CountriesContext";
-import { useAuth } from "../Contexts/AuthContext";
+import { useBooks } from "../contexts/BooksContext";
+import { useCountries } from "../contexts/CountriesContext";
+import { useAuth } from "../contexts/AuthContext";
 import { RateBookBlock } from "./RateBookBlock";
 import Button from "./Button";
 import Dialog from "./Dialog";
@@ -83,7 +83,7 @@ export default function Controls() {
 
             <datalist id="countryList">
               {countries.map((country) => (
-                <option>{country.name.common}</option>
+                <option key={country.name.common}>{country.name.common}</option>
               ))}
             </datalist>
             <div className={styles.countryContainer}>
@@ -137,7 +137,7 @@ function Cover({ image }) {
 function Rating({ rating }) {
   return (
     <>
-      <div className={styles.upcomText}>Club's rating:</div>
+      <div className={styles.upcomText}>Club&apos;s rating:</div>
       <button className={styles.viewRating}>{rating}</button>
     </>
   );

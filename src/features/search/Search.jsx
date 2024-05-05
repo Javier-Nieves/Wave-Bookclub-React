@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useBooks } from "../Contexts/BooksContext";
-import { RES_PAGE } from "../config";
+import { useBooks } from "../../contexts/BooksContext";
+// import { RES_PAGE } from "../../utils/config";
 
 export default function Search() {
   const [titleToSearch, setTitleToSearch] = useState("");

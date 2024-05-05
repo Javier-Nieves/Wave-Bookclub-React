@@ -7,7 +7,7 @@ import {
 } from "react";
 import axios from "axios";
 
-import { SITE_URL } from "../config";
+import { SITE_URL } from "../utils/config";
 
 const AuthContext = createContext();
 

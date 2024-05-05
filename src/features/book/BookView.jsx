@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { CLASSIC_LIMIT } from "../config";
-import { useBooks } from "../Contexts/BooksContext";
-import Switch from "./Switch";
+import { CLASSIC_LIMIT } from "../../utils/config";
+import { useBooks } from "../../contexts/BooksContext";
+import Switch from "../../ui/Switch";
 
 import styles from "./BookView.module.css";
 

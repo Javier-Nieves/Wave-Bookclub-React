@@ -1,16 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Provider } from "react-redux";
+
+import { BooksProvider } from "./contexts/BooksContext";
+import { AuthProvider } from "./contexts/AuthContext";
+import { CountriesProvider } from "./contexts/CountriesContext";
 
 import App from "./App.jsx";
-import store from "./store.js";
 
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <AuthProvider>
+      <BooksProvider>
+        <CountriesProvider>
+          <App />
+        </CountriesProvider>
+      </BooksProvider>
+    </AuthProvider>
   </React.StrictMode>
 );

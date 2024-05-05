@@ -49,26 +49,25 @@
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-
 input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
-
 .slider.round {
   border-radius: 34px;
 }
-
 .slider.round:before {
   border-radius: 50%;
 }
-
 .switchText {
   font-size: 32px;
   color: grey;
 }
-
 .selected {
   color: white;
+}
+.historyWaveLogo {
+  width: 100px;
+  margin: 10px;
 }

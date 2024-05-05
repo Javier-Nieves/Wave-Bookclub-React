@@ -9,7 +9,7 @@
       rgba(36, 42, 46, 0.6),
       rgba(36, 42, 46, 0.6)
     ),
-    url("/public/img/book-back.jpg");
+    url("/img/book-back.jpg");
   background-size: cover;
   background-position: center;
   padding: 1.5rem;

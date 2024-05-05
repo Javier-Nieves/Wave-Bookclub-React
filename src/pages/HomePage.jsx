@@ -1,14 +1,15 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useAuth } from "../Contexts/AuthContext";
-import Loader from "../Components/Loader";
-import Button from "../Components/Button";
+// import { useAuth } from "../Contexts/AuthContext";
+import Loader from "../ui/Loader";
+import Button from "../ui/Button";
 
 import styles from "./HomePage.module.css";
 
 export default function Homepage() {
-  const { isLoggedIn } = useAuth();
+  // const { isLoggedIn } = useAuth();
+  const isLoggedIn = false;
   const navigate = useNavigate();
   useEffect(
     function () {
@@ -30,7 +31,7 @@ export default function Homepage() {
 function WelcomeTitle() {
   return (
     <>
-      <div className={styles.welcomeText}>Hey! You're in the</div>
+      <div className={styles.welcomeText}>Hey! You are in the</div>
       <div className={styles.welcomeTitle}>Wave Bookclub</div>
     </>
   );

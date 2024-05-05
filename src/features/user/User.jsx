@@ -1,5 +1,5 @@
-import { useAuth } from "../Contexts/AuthContext";
-import Button from "./Button";
+import { useAuth } from "../../contexts/AuthContext";
+import Button from "../../ui/Button";
 
 import styles from "./User.module.css";
 

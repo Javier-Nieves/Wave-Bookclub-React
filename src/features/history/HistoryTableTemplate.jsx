@@ -1,7 +1,7 @@
-import { useBooks } from "../Contexts/BooksContext";
-import { TableRow, TableRowYear } from "./TableRow";
+import { useBooks } from "../../contexts/BooksContext";
+import { TableRow, TableRowYear } from "../../ui/TableRow";
 
-import styles from "./Tables.module.css";
+import styles from "../../ui/Tables.module.css";
 
 export default function HistoryTable() {
   const { books } = useBooks();
