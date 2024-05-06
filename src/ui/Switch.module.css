@@ -1,7 +1,7 @@
 .switchContainer {
   display: flex;
   align-items: center;
-  margin-right: 90px;
+  margin-right: 130px;
 }
 
 .switch {
@@ -61,7 +61,7 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 .switchText {
-  font-size: 32px;
+  font-size: 42px;
   color: grey;
 }
 .selected {

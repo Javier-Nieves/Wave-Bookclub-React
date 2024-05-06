@@ -6,7 +6,7 @@ import RightColumn from "../ui/RightColumn";
 function AppLayout() {
   return (
     <Main>
-      {/* <User /> */}
+      <User />
       <Sidebar />
       <RightColumn />
     </Main>

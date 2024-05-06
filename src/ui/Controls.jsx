@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useBooks } from "../contexts/BooksContext";
 import { useCountries } from "../contexts/CountriesContext";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext.jsx";
 import { RateBookBlock } from "./RateBookBlock";
 import Button from "./Button";
 import Dialog from "./Dialog";
@@ -127,7 +127,7 @@ function Cover({ image }) {
   return (
     <img
       className={styles.viewImage}
-      src={image}
+      src={image || "/img/club2.png"}
       alt="Book Cover"
       loading="lazy"
     />

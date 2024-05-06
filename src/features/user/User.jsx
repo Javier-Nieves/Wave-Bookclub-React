@@ -1,4 +1,4 @@
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext.jsx";
 import Button from "../../ui/Button";
 
 import styles from "./User.module.css";
@@ -9,8 +9,8 @@ function User() {
     <div className={styles.enterContainer}>
       {isLoggedIn && (
         <>
-          <div className={styles.nameText}>{user} Bookclub</div>
-          <Button type="enter-btn" onClick={logout}>
+          <div className={styles.nameText}>{user.name} Bookclub</div>
+          <Button type="searchBtn" onClick={logout}>
             Logout
           </Button>
         </>

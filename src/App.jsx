@@ -9,6 +9,7 @@ import { ReadingTable, HistoryTable, SearchTable } from "./ui/TableTypes";
 import Book from "./features/book/BookView";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
         <Routes>
           <Route index element={<HomePage />} />
           <Route
-            path="app"
+            path="/app"
             element={
               <ProtectedRoutes>
                 <AppLayout />
@@ -36,6 +37,7 @@ function App() {
             <Route path="book/:id" element={<Book />} />
           </Route>
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

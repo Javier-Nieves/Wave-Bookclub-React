@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import Button from "../../ui/Button";
 import { useBooks } from "../../contexts/BooksContext";
 // import { RES_PAGE } from "../../utils/config";
 
@@ -56,7 +57,7 @@ export default function Search() {
           onChange={(e) => setTitleToSearch(e.target.value)}
           ref={searchInput}
         />
-        <button className="searchBtn">Search</button>
+        <Button type="searchBtn">Search</Button>
       </form>
       {currentView === "search" && (
         <div className="flex-column" id="searchInfo">

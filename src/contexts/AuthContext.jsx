@@ -119,6 +119,32 @@ function AuthProvider({ children }) {
     },
     [user]
   );
+  const register = useCallback(
+    async function register(name, password, passwordConfirm) {
+      if (user === name) return;
+      dispatch({ type: "loading" });
+      const data = {
+        name,
+        password,
+        passwordConfirm,
+      };
+      const res = await axios({
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        url: `${SITE_URL}api/v1/users`,
+        data,
+      });
+      if (res.data.status === "success") {
+        dispatch({
+          type: "login",
+          payload: { user: res.data.data.user, jwt: res.data.token },
+        });
+      }
+    },
+    [user]
+  );
 
   function logout() {
     dispatch({ type: "logout" });
@@ -126,7 +152,7 @@ function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, isLoggedIn, loadingLogin, login, logout }}
+      value={{ user, isLoggedIn, loadingLogin, login, logout, register }}
     >
       {children}
     </AuthContext.Provider>

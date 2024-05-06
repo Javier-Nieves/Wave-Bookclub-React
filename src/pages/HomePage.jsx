@@ -1,15 +1,16 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-// import { useAuth } from "../Contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext.jsx";
+
 import Loader from "../ui/Loader";
 import Button from "../ui/Button";
 
-import styles from "./HomePage.module.css";
+import styles from "./Pages.module.css";
 
 export default function Homepage() {
-  // const { isLoggedIn } = useAuth();
-  const isLoggedIn = false;
+  const { isLoggedIn } = useAuth();
+
   const navigate = useNavigate();
   useEffect(
     function () {
@@ -49,7 +50,7 @@ function ButtonContainer() {
       </div>
 
       <div className="flex-column">
-        <div className={styles.welcomeTextSmall}>Login to a Bookclub</div>
+        <div className={styles.welcomeTextSmall}>Login to a bookclub</div>
         <Button onClick={() => navigate("/login")} type="welcome-btn">
           Enter
         </Button>

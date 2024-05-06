@@ -47,7 +47,7 @@
   margin-bottom: 50px;
 }
 
-/* for Login page */
+/* for Login - Register page */
 .enterForm {
   display: flex;
   flex-direction: column;
@@ -55,6 +55,7 @@
   justify-content: center;
   gap: 1rem;
   width: 40%;
+  margin-bottom: 70px;
 }
 .enterInput {
   border-color: var(--color-light);
@@ -63,4 +64,21 @@
   height: 2.5rem;
   font-size: 2rem;
   color: var(--color-bright);
+}
+.loginTitle {
+  font-family: var(--font-classic);
+  font-size: 5rem;
+  color: var(--color-light);
+  margin-bottom: 1rem;
+}
+.underlineContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.underline {
+  position: absolute;
+  bottom: -18px;
+  color: var(--color-dark-gold);
 }

@@ -9,7 +9,7 @@ import axios from "axios";
 
 import { SITE_URL, CLASSIC_LIMIT, BOOK_API } from "../utils/config";
 import { getSearchedBooks, AJAX, makeUniformedBook } from "../utils/helpers";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "./AuthContext.jsx";
 
 const BooksContext = createContext();
 
@@ -129,7 +129,7 @@ function BooksProvider({ children }) {
   useEffect(
     function () {
       async function getAllBooks() {
-        if (!isLoggedIn) return;
+        if (!isLoggedIn || !user.id) return;
         dispatch({ type: "loading" });
         try {
           // geting all books for one user/club
