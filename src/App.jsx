@@ -28,7 +28,10 @@ function App() {
               </ProtectedRoutes>
             }
           >
-            <Route index element={<Navigate replace to={defaultStyle} />} />
+            <Route
+              path="/app"
+              element={<Navigate replace to={defaultStyle} />}
+            />
             <Route path="classic" element={<ReadingTable period="classic" />} />
             <Route path="modern" element={<ReadingTable period="modern" />} />
             <Route path="history" element={<HistoryTable />} />

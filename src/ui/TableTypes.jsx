@@ -31,12 +31,7 @@ export function HistoryTable() {
     },
     [changeView]
   );
-  return (
-    <>
-      <Switch />
-      <HistoryTableTemplate />
-    </>
-  );
+  return <HistoryTableTemplate />;
 }
 
 export function SearchTable() {
@@ -47,10 +42,5 @@ export function SearchTable() {
     },
     [changeView]
   );
-  return (
-    <>
-      <Switch />
-      <SearchTableTemplate />
-    </>
-  );
+  return <SearchTableTemplate />;
 }

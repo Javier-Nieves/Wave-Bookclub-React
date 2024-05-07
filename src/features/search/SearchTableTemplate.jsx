@@ -8,12 +8,12 @@ export default function SearchTable() {
 
   if (!searchResults) return;
   return (
-    <table>
+    <table style={{ marginTop: "6rem" }}>
       <thead>
         <tr className={styles.searchHead}>
-          <th className="cl0 Up">Book</th>
+          <th className="Up">Book</th>
           <th>Title</th>
-          <th className="cl1 Up">Author</th>
+          <th className="Up">Author</th>
         </tr>
       </thead>
 

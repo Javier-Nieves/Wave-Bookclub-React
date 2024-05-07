@@ -55,13 +55,13 @@ export default function Switch({ period = undefined }) {
         </>
       )}
 
-      {period !== "classic" && period !== "modern" && (
+      {/* {period !== "classic" && period !== "modern" && (
         <img
           src={"/img/club2.png"}
           className={styles.historyWaveLogo}
           alt="wave-logo"
         />
-      )}
+      )} */}
     </div>
   );
 }

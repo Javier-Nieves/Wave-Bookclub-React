@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useBooks } from "../contexts/BooksContext";
 import { useCountries } from "../contexts/CountriesContext";
-import { useAuth } from "../contexts/AuthContext.jsx";
 import { RateBookBlock } from "./RateBookBlock";
 import Button from "./Button";
 import Dialog from "./Dialog";
@@ -12,7 +11,6 @@ import styles from "./Main.module.css";
 export default function Controls() {
   const { bookToShow, upcomingBook, books, nextBook, addBook, removeBook } =
     useBooks();
-  const { user } = useAuth();
   const { countries } = useCountries();
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
   const [country, setCountry] = useState("");
@@ -28,7 +26,7 @@ export default function Controls() {
   }
 
   async function handleAddBook() {
-    const newBook = { ...bookToShow, country, year, club: user.id };
+    const newBook = { ...bookToShow, country, year };
     await addBook(newBook);
     navigate("/app");
   }

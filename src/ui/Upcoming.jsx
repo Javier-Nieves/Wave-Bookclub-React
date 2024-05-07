@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { useBooks } from "../contexts/BooksContext";
 import { CLASSIC_LIMIT } from "../utils/config";
-
 import Button from "./Button";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -26,8 +25,8 @@ export default function Upcoming() {
     addBookDate(date);
   }
 
-  // transform meeting date
   let formattedDate;
+  // transform meeting date
   if (upcomingBook?.meeting_date) {
     const dateString = upcomingBook.meeting_date;
     const meetDate = new Date(dateString);
@@ -35,6 +34,7 @@ export default function Upcoming() {
     const month = (meetDate.getMonth() + 1).toString().padStart(2, "0");
     const year = meetDate.getFullYear().toString().slice(-2);
     formattedDate = `${day}.${month}.${year}`;
+    console.log("date is formatted", formattedDate);
   }
 
   return (
@@ -55,7 +55,7 @@ export default function Upcoming() {
             fontFamily,
           }}
         >
-          {upcomingBook?.title || "Choose the next book"}
+          {upcomingBook?.title || "Choose the next book ➡"}
         </h1>
         {upcomingBook && (
           <h3
@@ -68,7 +68,7 @@ export default function Upcoming() {
         )}
         <img
           className={styles.upcomingPic}
-          src={upcomingBook?.image_link || "img/club2.png"}
+          src={upcomingBook?.image_link || "/img/club2.png"}
           loading="lazy"
           alt="upcoming book"
         />
@@ -88,10 +88,11 @@ export default function Upcoming() {
             {!formattedDate && (
               <>
                 <DatePicker
+                  className={styles.picker}
                   onChange={(date) => setDate(date)}
                   selected={date}
                   dateFormat="dd/MM/yy"
-                  className={styles.picker}
+                  placeholderText="Date"
                 />
                 <Button type="meetingBtn">Add</Button>
               </>

@@ -7,15 +7,15 @@ export default function HistoryTable() {
   const { books } = useBooks();
   let yearChange;
   return (
-    <table>
+    <table style={{ marginTop: "6rem" }}>
       <thead>
         <tr className={styles.historyHead}>
-          <th className="cl0 Up">Book</th>
-          <th className="cl1 Up">Author</th>
-          <th className="cl2 Up">Year</th>
-          <th className="cl3 Up">Country</th>
-          <th className="cl4 Up">Pages</th>
-          <th className="cl5 Up">Rating</th>
+          <th className="Up">Book</th>
+          <th className="Up">Author</th>
+          <th className="Up">Year</th>
+          <th className="Up">Country</th>
+          <th className="Up">Pages</th>
+          <th className="Up">Rating</th>
         </tr>
       </thead>
 

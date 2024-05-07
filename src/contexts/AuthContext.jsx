@@ -7,7 +7,7 @@ import {
 } from "react";
 import axios from "axios";
 
-import { SITE_URL } from "../utils/config";
+import { SERVER_URL } from "../utils/config";
 
 const AuthContext = createContext();
 
@@ -72,7 +72,7 @@ function AuthProvider({ children }) {
 
           const res = await axios({
             method: "POST",
-            url: `${SITE_URL}api/v1/users/logged-check`,
+            url: `${SERVER_URL}api/v1/users/logged-check`,
             data: { token: jwt },
           });
           if (res.data.status === "success") {
@@ -106,7 +106,7 @@ function AuthProvider({ children }) {
         headers: {
           "Content-Type": "application/json",
         },
-        url: `${SITE_URL}api/v1/users/login`,
+        url: `${SERVER_URL}api/v1/users/login`,
         //   credentials: "include",
         data,
       });
@@ -133,7 +133,7 @@ function AuthProvider({ children }) {
         headers: {
           "Content-Type": "application/json",
         },
-        url: `${SITE_URL}api/v1/users`,
+        url: `${SERVER_URL}api/v1/users`,
         data,
       });
       if (res.data.status === "success") {

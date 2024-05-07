@@ -1,6 +1,6 @@
 import axios from "axios";
 import { TIMEOUT_SEC, RES_PAGE, BOOK_API } from "./config.js";
-import { SITE_URL } from "./config";
+import { SERVER_URL } from "./config";
 
 // import { mockBooks } from "./booklist.js";
 const mockBooks = [];
@@ -34,7 +34,7 @@ async function fillDb() {
   mockBooks.forEach(async (data) => {
     await axios({
       method: "POST",
-      url: `${SITE_URL}api/v1/books`,
+      url: `${SERVER_URL}api/v1/books`,
       data,
     });
   });

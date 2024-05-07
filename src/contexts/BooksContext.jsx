@@ -7,7 +7,7 @@ import {
 } from "react";
 import axios from "axios";
 
-import { SITE_URL, CLASSIC_LIMIT, BOOK_API } from "../utils/config";
+import { SERVER_URL, CLASSIC_LIMIT, BOOK_API } from "../utils/config";
 import { getSearchedBooks, AJAX, makeUniformedBook } from "../utils/helpers";
 import { useAuth } from "./AuthContext.jsx";
 
@@ -75,6 +75,15 @@ function reducer(state, action) {
         books: [...state.books, action.payload],
         loadingBooks: false,
       };
+    case "book/meetingDateChanged":
+      return {
+        ...state,
+        upcomingBook: {
+          ...state.upcomingBook,
+          meeting_date: action.payload.meeting_date,
+        },
+        loadingBooks: false,
+      };
     case "book/remove":
       return {
         ...state,
@@ -135,7 +144,7 @@ function BooksProvider({ children }) {
           // geting all books for one user/club
           const res = await axios({
             method: "GET",
-            url: `${SITE_URL}api/v1/books/all/${user.id}`,
+            url: `${SERVER_URL}api/v1/books/all/${user.id}`,
           });
           if (res.data.status === "success") {
             dispatch({
@@ -187,21 +196,35 @@ function BooksProvider({ children }) {
     [bookToShow, books]
   );
 
+  // Change existing Book document
   async function changeBookDocument(id, data) {
-    await axios({
-      method: "PATCH",
-      url: `${SITE_URL}api/v1/books/${id}`,
-      data,
-    });
+    if (!user.id) return;
+    dispatch({ type: "loading" });
+    try {
+      data = { ...data, club: user.id };
+      await axios({
+        method: "PATCH",
+        url: `${SERVER_URL}api/v1/books/${id}`,
+        data,
+      });
+      dispatch({ type: "book/meetingDateChanged", payload: data });
+    } catch (err) {
+      dispatch({
+        type: "rejected",
+        payload: "Error while changing book data!",
+      });
+    }
   }
 
   // Add new Book
   async function addBook(data) {
+    if (!user.id) return;
+    data = { ...data, club: user.id };
     dispatch({ type: "loading" });
     try {
       await axios({
         method: "POST",
-        url: `${SITE_URL}api/v1/books`,
+        url: `${SERVER_URL}api/v1/books`,
         data,
       });
       dispatch({ type: "book/add", payload: data });
@@ -217,7 +240,7 @@ function BooksProvider({ children }) {
   async function addBookDate(meetingDate) {
     dispatch({ type: "loading" });
     try {
-      const data = { meeting_date: meetingDate };
+      const data = { club: user._id, meeting_date: meetingDate };
       await changeBookDocument(upcomingBook.bookid, data);
       dispatch({ type: "book/add", payload: data });
     } catch {
@@ -273,7 +296,7 @@ function BooksProvider({ children }) {
     try {
       await axios({
         method: "DELETE",
-        url: `${SITE_URL}api/v1/books/${bookToShow._id}`,
+        url: `${SERVER_URL}api/v1/books/${bookToShow._id}`,
       });
       dispatch({ type: "book/remove" });
     } catch {

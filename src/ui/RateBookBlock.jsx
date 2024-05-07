@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 import { useBooks } from "../contexts/BooksContext";
 import Button from "./Button";
-import styles from "./Main.module.css";
 import Dialog from "./Dialog";
+
+import styles from "./Main.module.css";
 
 export function RateBookBlock() {
   const { rateBook } = useBooks();

@@ -33,14 +33,11 @@ export default function BookView() {
   if (loadingBooks || !bookToShow) return;
 
   return (
-    <>
-      <Switch />
-      <div className={styles.bookInfo}>
-        <BookTitle />
-        <BookStats />
-        <BookDescription />
-      </div>
-    </>
+    <div className={styles.bookInfo}>
+      <BookTitle />
+      <BookStats />
+      <BookDescription />
+    </div>
   );
 }
 

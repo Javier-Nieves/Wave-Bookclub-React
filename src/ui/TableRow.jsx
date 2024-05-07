@@ -18,10 +18,10 @@ export function TableRow({ book }) {
       }`}
       onClick={() => navigate(`/app/book/${book.bookid}`)}
     >
-      <td className="cl0">{book.title}</td>
-      <td className="cl1">{book.author}</td>
-      <td className="cl2">{book.year}</td>
-      <td className="cl3" data-country={book.country}>
+      <td>{book.title}</td>
+      <td>{book.author}</td>
+      <td>{book.year}</td>
+      <td>
         <div className={styles.flagContainer}>
           <div>{book.country}</div>
           <img
@@ -31,8 +31,8 @@ export function TableRow({ book }) {
           />
         </div>
       </td>
-      <td className="cl4">{book.pages}</td>
-      {currentView === "history" && <td className="cl5">{book.rating}</td>}
+      <td>{book.pages}</td>
+      {currentView === "history" && <td>{book.rating}</td>}
     </tr>
   );
 }
@@ -61,7 +61,7 @@ export function SearchRow({ book }) {
       className={styles.historyBody}
       onClick={() => navigate(`/app/book/${book.bookid}`)}
     >
-      <td className="cl0">
+      <td>
         <img
           className={styles.smallPic}
           src={book.image_link}
