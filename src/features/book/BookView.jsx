@@ -2,19 +2,21 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { CLASSIC_LIMIT } from "../../utils/config";
 import { useBooks } from "../../contexts/BooksContext";
-import Switch from "../../ui/Switch";
+import { useViews } from "../../contexts/ViewsContext";
 
 import styles from "./BookView.module.css";
 
 export default function BookView() {
   const { id } = useParams();
   const { bookToShow, showBook, loadingBooks } = useBooks();
+  const { changeView, currentView } = useViews();
 
   useEffect(
     function () {
+      currentView !== "book" && changeView("book");
       showBook(id);
     },
-    [id, showBook]
+    [id, showBook, changeView, currentView]
   );
 
   //changing tab title

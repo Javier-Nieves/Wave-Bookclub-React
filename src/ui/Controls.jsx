@@ -25,7 +25,16 @@ export default function Controls() {
     navigate("/app");
   }
 
-  async function handleAddBook() {
+  async function handleAddBook(e) {
+    e.preventDefault();
+    // check if country exist and year is ok
+    if (
+      !countries.find((item) => item.name.common === country) ||
+      year < 0 ||
+      year > new Date().getFullYear()
+    )
+      return;
+
     const newBook = { ...bookToShow, country, year };
     await addBook(newBook);
     navigate("/app");

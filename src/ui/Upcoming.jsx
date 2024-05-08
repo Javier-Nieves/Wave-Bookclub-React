@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { useBooks } from "../contexts/BooksContext";
@@ -34,7 +34,6 @@ export default function Upcoming() {
     const month = (meetDate.getMonth() + 1).toString().padStart(2, "0");
     const year = meetDate.getFullYear().toString().slice(-2);
     formattedDate = `${day}.${month}.${year}`;
-    console.log("date is formatted", formattedDate);
   }
 
   return (

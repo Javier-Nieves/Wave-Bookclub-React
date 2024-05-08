@@ -4,43 +4,42 @@ import Switch from "./Switch";
 import ReadingTableTemplate from "../features/reading/ReadingTableTemplate";
 import HistoryTableTemplate from "../features/history/HistoryTableTemplate";
 import SearchTableTemplate from "../features/search/SearchTableTemplate";
+import { useViews } from "../contexts/ViewsContext";
 import { useBooks } from "../contexts/BooksContext";
 
-export function ReadingTable({ period = "classic" }) {
-  const { changeView } = useBooks();
+export default function Table({ section = "classic" }) {
+  const { changeView, currentView } = useViews();
+  const { clearBookToShow, bookToShow, books, upcomingBook } = useBooks();
+
   useEffect(
     function () {
-      changeView(period);
+      currentView !== section && changeView(section);
+      bookToShow && clearBookToShow();
     },
-    [period, changeView]
+    [section, changeView, bookToShow, clearBookToShow, currentView]
   );
 
-  return (
-    <>
-      <Switch period={period} />
-      <ReadingTableTemplate period={period} />
-    </>
-  );
-}
+  // let oneBook = books.find((item) => item === upcomingBook);
+  // oneBook = { ...oneBook, rating: 10, read: true, upcoming: false };
+  // let newBooks = books.filter((item) => item?.bookid !== oneBook?.bookid);
+  // newBooks = [...newBooks, oneBook];
 
-export function HistoryTable() {
-  const { changeView } = useBooks();
-  useEffect(
-    function () {
-      changeView("history");
-    },
-    [changeView]
-  );
-  return <HistoryTableTemplate />;
-}
+  // let newBooks = books.map((item) =>
+  //   item === upcomingBook
+  //     ? { ...item, rating: 10, read: true, upcoming: false }
+  //     : item
+  // );
+  // console.log(newBooks);
 
-export function SearchTable() {
-  const { changeView } = useBooks();
-  useEffect(
-    function () {
-      changeView("search");
-    },
-    [changeView]
-  );
-  return <SearchTableTemplate />;
+  if (section === "history") return <HistoryTableTemplate />;
+
+  if (section === "search") return <SearchTableTemplate />;
+
+  if (section === "classic" || section === "modern")
+    return (
+      <>
+        <Switch section={section} />
+        <ReadingTableTemplate section={section} />
+      </>
+    );
 }

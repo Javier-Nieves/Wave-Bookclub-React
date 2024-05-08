@@ -2,27 +2,27 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 import styles from "./Switch.module.css";
 
-export default function Switch({ period = undefined }) {
+export default function Switch({ section = undefined }) {
   const navigate = useNavigate();
 
-  function handleChangeView(period) {
-    navigate(period === "classic" ? "/app/modern" : "/app/classic");
+  function handleChangeView(section) {
+    navigate(section === "classic" ? "/app/modern" : "/app/classic");
   }
   return (
     <div className={styles.switchContainer}>
-      {(period === "modern" || period === "classic") && (
+      {(section === "modern" || section === "classic") && (
         //* with images
         // <NavLink
-        //   to={period === "classic" ? "/app/modern" : "/app/classic"}
+        //   to={section === "classic" ? "/app/modern" : "/app/classic"}
         //   className="switch"
-        //   style={{ backgroundImage: `url("/img/${period}.png")` }}
+        //   style={{ backgroundImage: `url("/img/${section}.png")` }}
         // />
 
         //* with slider
         <>
           <span
             className={`${styles.switchText} ${
-              period === "classic" ? styles.selected : ""
+              section === "classic" ? styles.selected : ""
             }`}
             style={{ fontFamily: "var(--font-classic)" }}
           >
@@ -30,15 +30,15 @@ export default function Switch({ period = undefined }) {
           </span>
           <label className={styles.switch}>
             <input
-              checked={period === "modern"}
+              checked={section === "modern"}
               type="checkbox"
-              onChange={() => handleChangeView(period)}
+              onChange={() => handleChangeView(section)}
             />
             <span
               className={`${styles.slider} ${styles.round} ${styles.wColor}`}
               style={{
                 backgroundColor:
-                  period === "classic"
+                  section === "classic"
                     ? "var(--color-classic-even)"
                     : "var(--color-modern-even)",
               }}
@@ -46,7 +46,7 @@ export default function Switch({ period = undefined }) {
           </label>
           <span
             className={`${styles.switchText} ${
-              period === "modern" ? styles.selected : ""
+              section === "modern" ? styles.selected : ""
             }`}
             style={{ fontFamily: "var(--font-modern)" }}
           >
@@ -55,7 +55,7 @@ export default function Switch({ period = undefined }) {
         </>
       )}
 
-      {/* {period !== "classic" && period !== "modern" && (
+      {/* {section !== "classic" && section !== "modern" && (
         <img
           src={"/img/club2.png"}
           className={styles.historyWaveLogo}

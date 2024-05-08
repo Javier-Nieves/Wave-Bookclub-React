@@ -1,10 +1,11 @@
 import { NavLink } from "react-router-dom";
-import { useBooks } from "../contexts/BooksContext";
+import { useViews } from "../contexts/ViewsContext";
 
 import styles from "./Navbar.module.css";
 
 export function Navbar() {
-  const { defaultStyle, changeView } = useBooks();
+  const { defaultStyle, changeView } = useViews();
+
   return (
     <div className={styles.navbar}>
       <NavLink
@@ -24,16 +25,3 @@ export function Navbar() {
     </div>
   );
 }
-
-// function NavButton({ children, linkTo }) {
-//   const { changeView, defaultStyle } = useBooks();
-//   return (
-//     <button
-//       id="reading-link"
-//       className={`link brand-modern`}
-//       onClick={() => changeView(linkTo || defaultStyle)}
-//     >
-//       {children}
-//     </button>
-//   );
-// }

@@ -1,10 +1,12 @@
 import { useBooks } from "../contexts/BooksContext";
+import { useViews } from "../contexts/ViewsContext";
 import { CLASSIC_LIMIT } from "../utils/config";
 
 import styles from "./Main.module.css";
 
 export default function Main({ children }) {
-  const { currentView, bookToShow } = useBooks();
+  const { bookToShow } = useBooks();
+  const { currentView } = useViews();
   let image;
   if (currentView === "book")
     image = bookToShow?.year < CLASSIC_LIMIT ? "classic" : "modern";

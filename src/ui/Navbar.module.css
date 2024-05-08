@@ -13,7 +13,10 @@
   text-decoration: none;
 }
 .brandModern:hover {
-  animation: flicker 1s infinite alternate;
+  /* animation: flicker 1s infinite alternate; */
+  text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff,
+    0 0 40px var(--color-light-gold), 0 0 80px var(--color-light-gold),
+    0 0 90px var(--color-light-gold), 0 0 100px var(--color-light-gold);
   cursor: pointer;
 }
 

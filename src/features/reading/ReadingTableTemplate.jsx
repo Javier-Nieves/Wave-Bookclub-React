@@ -4,12 +4,12 @@ import { TableRow } from "../../ui/TableRow";
 
 import styles from "../../ui/Tables.module.css";
 
-export default function Table({ period }) {
+export default function Table({ section }) {
   const { books } = useBooks();
   return (
-    <table id={styles[`${period}Table`]}>
+    <table id={styles[`${section}Table`]}>
       <thead>
-        <tr className={styles[`${period}Head`]}>
+        <tr className={styles[`${section}Head`]}>
           <th className="Up">Book</th>
           <th className="Up">Author</th>
           <th className="Up">Year</th>
@@ -18,15 +18,15 @@ export default function Table({ period }) {
         </tr>
       </thead>
 
-      <tbody className={styles[`${period}Table`]}>
-        {period === "classic" &&
+      <tbody className={styles[`${section}Table`]}>
+        {section === "classic" &&
           books.map(
             (book) =>
               book.year < CLASSIC_LIMIT &&
               !book.read && <TableRow book={book} key={book.bookid} />
           )}
 
-        {period === "modern" &&
+        {section === "modern" &&
           books.map(
             (book) =>
               book.year > CLASSIC_LIMIT &&

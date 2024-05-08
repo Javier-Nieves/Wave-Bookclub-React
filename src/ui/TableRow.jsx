@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { useBooks } from "../contexts/BooksContext";
+import { useViews } from "../contexts/ViewsContext";
 import { useCountries } from "../contexts/CountriesContext";
 
 import styles from "./Tables.module.css";
 
 export function TableRow({ book }) {
-  const { currentView } = useBooks();
+  const { currentView } = useViews();
   const { countries } = useCountries();
   const navigate = useNavigate();
 

@@ -7,8 +7,8 @@ import {
 } from "react";
 import axios from "axios";
 
-import { SERVER_URL, CLASSIC_LIMIT, BOOK_API } from "../utils/config";
-import { getSearchedBooks, AJAX, makeUniformedBook } from "../utils/helpers";
+import { SERVER_URL, BOOK_API } from "../utils/config";
+import { getSearchedBooks, makeUniformedBook } from "../utils/helpers";
 import { useAuth } from "./AuthContext.jsx";
 
 const BooksContext = createContext();
@@ -20,8 +20,6 @@ const initialState = {
   upcomingBook: undefined,
   searchResults: [],
   totalResults: 0,
-  currentView: "modern",
-  defaultStyle: "modern",
   error: "",
 };
 
@@ -29,6 +27,8 @@ function reducer(state, action) {
   switch (action.type) {
     case "loading":
       return { ...state, loadingBooks: true };
+    case "bookToShow/cleared":
+      return { ...state, bookToShow: null };
     case "search/started":
       return {
         ...state,
@@ -39,14 +39,11 @@ function reducer(state, action) {
     case "books/loaded": {
       // prettier-ignore
       const upcomingBook = action.payload.find((book) => book.upcoming === true);
-      const defaultStyle =
-        upcomingBook?.year < CLASSIC_LIMIT ? "modern" : "classic";
       return {
         ...state,
         loadingBooks: false,
         books: action.payload,
         upcomingBook,
-        defaultStyle,
       };
     }
     case "book/loaded":
@@ -54,11 +51,21 @@ function reducer(state, action) {
         ...state,
         bookToShow: action.payload,
         loadingBooks: false,
-        currentView: "book",
       };
     case "book/rated":
       return {
         ...state,
+        books: state.books.map((item) =>
+          item.bookid === state.upcomingBook.bookid
+            ? {
+                ...item,
+                rating: Number(action.payload.rating),
+                meeting_date: action.payload.meeting_date,
+                read: true,
+                upcoming: false,
+              }
+            : item
+        ),
         bookToShow: null,
         loadingBooks: false,
         upcomingBook: null,
@@ -66,8 +73,14 @@ function reducer(state, action) {
     case "book/next":
       return {
         ...state,
+        books: state.books.map((item) =>
+          item.bookid === state.bookToShow.bookid
+            ? { ...item, upcoming: true }
+            : item
+        ),
         upcomingBook: { ...state.bookToShow, upcoming: true },
         loadingBooks: false,
+        bookToShow: null,
       };
     case "book/add":
       return {
@@ -100,15 +113,8 @@ function reducer(state, action) {
       return {
         ...state,
         loadingBooks: false,
-        currentView: "search",
         totalResults: action.payload.total,
         searchResults: action.payload.results,
-      };
-    case "changeView":
-      return {
-        ...state,
-        currentView: action.payload,
-        bookToShow: undefined,
       };
     case "rejected":
       return { ...state, loadingBooks: false, error: action.payload };
@@ -124,10 +130,9 @@ function BooksProvider({ children }) {
       bookToShow,
       loadingBooks,
       upcomingBook,
-      currentView,
+      // currentView,
       searchResults,
       totalResults,
-      defaultStyle,
       error,
     },
     dispatch,
@@ -174,7 +179,7 @@ function BooksProvider({ children }) {
   // 3) Specific Book data is received. Also checking if it's already in the DB
   const showBook = useCallback(
     async function showBook(id) {
-      if (bookToShow !== undefined) return;
+      if (bookToShow) return;
       dispatch({ type: "loading" });
       try {
         // looking for the book in the DB:
@@ -182,8 +187,9 @@ function BooksProvider({ children }) {
         let bookFromApi;
         // if it's not in the DB - look in the web api
         if (bookInDb === undefined) {
-          const response = await AJAX(`${BOOK_API}/${id}`);
-          bookFromApi = makeUniformedBook(response);
+          const response = await fetch(`${BOOK_API}/${id}`);
+          const data = await response.json();
+          bookFromApi = makeUniformedBook(data);
         }
         dispatch({ type: "book/loaded", payload: bookInDb || bookFromApi });
       } catch {
@@ -193,7 +199,7 @@ function BooksProvider({ children }) {
         });
       }
     },
-    [bookToShow, books]
+    [books, bookToShow]
   );
 
   // Change existing Book document
@@ -222,12 +228,12 @@ function BooksProvider({ children }) {
     data = { ...data, club: user.id };
     dispatch({ type: "loading" });
     try {
-      await axios({
+      const reply = await axios({
         method: "POST",
         url: `${SERVER_URL}api/v1/books`,
         data,
       });
-      dispatch({ type: "book/add", payload: data });
+      dispatch({ type: "book/add", payload: reply.data.data.newBook });
     } catch {
       dispatch({
         type: "rejected",
@@ -255,17 +261,18 @@ function BooksProvider({ children }) {
   async function rateBook(rating) {
     if (!upcomingBook) return;
     dispatch({ type: "loading" });
+    const meeting_date = upcomingBook.meeting_date
+      ? upcomingBook.meeting_date
+      : new Date().toISOString();
     try {
       const data = {
+        upcoming: false,
         read: true,
         rating,
-        upcoming: false,
-        meeting_date: upcomingBook.meeting_date
-          ? upcomingBook.meeting_date
-          : Date.now(),
+        meeting_date,
       };
       await changeBookDocument(upcomingBook.bookid, data);
-      dispatch({ type: "book/rated", payload: rating });
+      dispatch({ type: "book/rated", payload: { rating, meeting_date } });
     } catch {
       dispatch({
         type: "rejected",
@@ -307,9 +314,11 @@ function BooksProvider({ children }) {
     }
   }
 
-  const changeView = useCallback(function changeView(view) {
-    dispatch({ type: "changeView", payload: view });
-  }, []);
+  // Clear bookToShow
+  function clearBookToShow() {
+    if (!bookToShow) return;
+    dispatch({ type: "bookToShow/cleared" });
+  }
 
   return (
     <BooksContext.Provider
@@ -320,8 +329,6 @@ function BooksProvider({ children }) {
         upcomingBook,
         searchResults,
         totalResults,
-        currentView,
-        defaultStyle,
         error,
         showBook,
         rateBook,
@@ -329,8 +336,8 @@ function BooksProvider({ children }) {
         addBook,
         addBookDate,
         removeBook,
+        clearBookToShow,
         searchBooks,
-        changeView,
       }}
     >
       {children}

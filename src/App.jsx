@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { Suspense } from "react";
 
-import { useBooks } from "./contexts/BooksContext";
+import { useViews } from "./contexts/ViewsContext";
 import ProtectedRoutes from "./ui/ProtectedRoutes";
 import AppLayout from "./ui/AppLayout";
 import Loader from "./ui/Loader";
-import { ReadingTable, HistoryTable, SearchTable } from "./ui/TableTypes";
+import Table from "./ui/TableTypes";
 import Book from "./features/book/BookView";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
@@ -13,7 +13,7 @@ import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 
 function App() {
-  const { defaultStyle } = useBooks();
+  const { defaultStyle } = useViews();
 
   return (
     <BrowserRouter>
@@ -32,11 +32,11 @@ function App() {
               path="/app"
               element={<Navigate replace to={defaultStyle} />}
             />
-            <Route path="classic" element={<ReadingTable period="classic" />} />
-            <Route path="modern" element={<ReadingTable period="modern" />} />
-            <Route path="history" element={<HistoryTable />} />
+            <Route path="classic" element={<Table section="classic" />} />
+            <Route path="modern" element={<Table section="modern" />} />
+            <Route path="history" element={<Table section="history" />} />
             (// todo - add search query param)
-            <Route path="search" element={<SearchTable />} />
+            <Route path="search" element={<Table section="search" />} />
             <Route path="book/:id" element={<Book />} />
           </Route>
           <Route path="/login" element={<Login />} />

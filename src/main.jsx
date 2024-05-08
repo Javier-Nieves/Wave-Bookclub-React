@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 
 import { BooksProvider } from "./contexts/BooksContext";
 import { AuthProvider } from "./contexts/AuthContext";
+import { ViewsProvider } from "./contexts/ViewsContext.jsx";
 import { CountriesProvider } from "./contexts/CountriesContext";
 
 import App from "./App.jsx";
@@ -13,9 +14,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
       <BooksProvider>
-        <CountriesProvider>
-          <App />
-        </CountriesProvider>
+        <ViewsProvider>
+          <CountriesProvider>
+            <App />
+          </CountriesProvider>
+        </ViewsProvider>
       </BooksProvider>
     </AuthProvider>
   </React.StrictMode>

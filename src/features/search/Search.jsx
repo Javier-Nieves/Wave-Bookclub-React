@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 import Button from "../../ui/Button";
 import { useBooks } from "../../contexts/BooksContext";
+import { useViews } from "../../contexts/ViewsContext";
 // import { RES_PAGE } from "../../utils/config";
 
 export default function Search() {
   const [titleToSearch, setTitleToSearch] = useState("");
-  const { currentView, totalResults, searchBooks } = useBooks();
+  const { totalResults, searchBooks } = useBooks();
+  const { currentView } = useViews();
   const navigate = useNavigate();
 
   const [page, setPage] = useState(1);
