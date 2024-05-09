@@ -1,11 +1,18 @@
 import { useBooks } from "../../contexts/BooksContext";
-import { TableRow, TableRowYear } from "../../ui/TableRow";
+import NoContentYet from "../../ui/NoContentYet";
+import { TableRow, TableRowYear } from "./TableRow";
 
-import styles from "../../ui/Tables.module.css";
+import styles from "./Tables.module.css";
 
 export default function HistoryTable() {
   const { books } = useBooks();
   let yearChange;
+
+  const readBooks = books.filter((item) => item.read);
+
+  if (!readBooks.length)
+    return <NoContentYet>Your reading history will be here</NoContentYet>;
+
   return (
     <table style={{ marginTop: "6rem" }}>
       <thead>

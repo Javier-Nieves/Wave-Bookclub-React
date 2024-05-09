@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 
-import Switch from "./Switch";
-import ReadingTableTemplate from "../features/reading/ReadingTableTemplate";
-import HistoryTableTemplate from "../features/history/HistoryTableTemplate";
-import SearchTableTemplate from "../features/search/SearchTableTemplate";
-import { useViews } from "../contexts/ViewsContext";
-import { useBooks } from "../contexts/BooksContext";
+import Switch from "../../ui/Switch";
+import ReadingTableTemplate from "./ReadingTableTemplate";
+import HistoryTableTemplate from "./HistoryTableTemplate";
+import SearchTableTemplate from "../search/SearchTableTemplate";
+import { useViews } from "../../contexts/ViewsContext";
+import { useBooks } from "../../contexts/BooksContext";
 
 export default function Table({ section = "classic" }) {
   const { changeView, currentView } = useViews();

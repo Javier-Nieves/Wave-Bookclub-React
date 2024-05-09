@@ -1,0 +1,15 @@
+.noContentContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 60%;
+  width: 70%;
+  margin-top: 10%;
+  background-color: var(--color-pale);
+  border-radius: 30px;
+}
+
+.noContextText {
+  color: white;
+  width: 80%;
+}

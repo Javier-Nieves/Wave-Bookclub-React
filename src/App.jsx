@@ -5,7 +5,7 @@ import { useViews } from "./contexts/ViewsContext";
 import ProtectedRoutes from "./ui/ProtectedRoutes";
 import AppLayout from "./ui/AppLayout";
 import Loader from "./ui/Loader";
-import Table from "./ui/TableTypes";
+import Table from "./features/tables/Table";
 import Book from "./features/book/BookView";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { useViews } from "../contexts/ViewsContext";
-import { useCountries } from "../contexts/CountriesContext";
+import { useViews } from "../../contexts/ViewsContext";
+import { useCountries } from "../../contexts/CountriesContext";
 
 import styles from "./Tables.module.css";
 

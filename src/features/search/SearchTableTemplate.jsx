@@ -1,7 +1,7 @@
 import { useBooks } from "../../contexts/BooksContext";
-import { SearchRow } from "../../ui/TableRow";
+import { SearchRow } from "../tables/TableRow";
 
-import styles from "../../ui/Tables.module.css";
+import styles from "../tables/Tables.module.css";
 
 export default function SearchTable() {
   const { searchResults } = useBooks();
