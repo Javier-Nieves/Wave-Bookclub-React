@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CLASSIC_LIMIT } from "../../utils/config";
 import { useBooks } from "../../contexts/BooksContext";
 import { useViews } from "../../contexts/ViewsContext";
+import Loader from "../../ui/Loader";
 
 import styles from "./BookView.module.css";
 
@@ -32,7 +33,10 @@ export default function BookView() {
     [bookToShow]
   );
 
-  if (loadingBooks || !bookToShow) return;
+  if (loadingBooks || !bookToShow) return <Loader />;
+
+  if (!bookToShow?.bookid)
+    return <h1 className={styles.noBook}>No such book</h1>;
 
   return (
     <div className={styles.bookInfo}>

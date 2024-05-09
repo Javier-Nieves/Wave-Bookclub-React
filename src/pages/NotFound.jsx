@@ -1,8 +1,10 @@
+import styles from "./Pages.module.css";
+
 function NotFound() {
   return (
-    <div>
-      <h3>404 Page not Found :(</h3>;
-    </div>
+    <main className={styles.homepage}>
+      <h1 className={styles.loginTitle}>404 No Such page</h1>
+    </main>
   );
 }
 

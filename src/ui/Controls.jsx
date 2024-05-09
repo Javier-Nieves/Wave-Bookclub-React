@@ -20,7 +20,7 @@ export default function Controls() {
   const navigate = useNavigate();
   const selectedCountry = countries.find((c) => c.name.common === country);
 
-  if (!bookToShow) return;
+  if (!bookToShow?.bookid) return;
 
   async function handleNextBook() {
     await nextBook();

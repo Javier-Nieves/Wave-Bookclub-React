@@ -29,3 +29,11 @@
   align-items: center;
   gap: 20px;
 }
+
+.noBook {
+  font-size: 70px;
+  font-weight: 700;
+  margin-top: 300px;
+  font-family: var(--font-classic);
+  color: White;
+}
