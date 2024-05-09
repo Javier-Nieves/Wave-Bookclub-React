@@ -7,13 +7,15 @@ import {
 } from "react";
 import { useBooks } from "./BooksContext";
 import { CLASSIC_LIMIT } from "../utils/config";
+import { useAuth } from "./AuthContext";
 
 const ViewsContext = createContext();
 
 const initialState = {
   currentView: "modern",
   defaultStyle: "modern",
-  message: "",
+  message: null,
+  //   message: { style: "good", text: "You are logged in" },
 };
 
 function reducer(state, action) {
@@ -29,6 +31,17 @@ function reducer(state, action) {
         ...state,
         currentView: action.payload,
       };
+    case "message/show":
+      // payload is {style: ('good', 'bad'), text: text}
+      return {
+        ...state,
+        message: action.payload,
+      };
+    case "message/delete":
+      return {
+        ...state,
+        message: null,
+      };
     default:
       throw new Error("Unknown action");
   }
@@ -39,8 +52,18 @@ function ViewsProvider({ children }) {
     reducer,
     initialState
   );
-  const { upcomingBook, clearBookToShow, bookToShow } = useBooks();
+  const { upcomingBook } = useBooks();
+  const { isLoggedIn } = useAuth();
 
+  function showMessage(text, style = "good") {
+    console.log("received message: ", text);
+    if (!message) dispatch({ type: "message/show", payload: { text, style } });
+    setTimeout(() => {
+      dispatch({ type: "message/delete" });
+    }, 2000);
+  }
+
+  // setting default app style based on the upcomming book type (modern or classic)
   useEffect(
     function () {
       if (!upcomingBook) return;
@@ -49,6 +72,14 @@ function ViewsProvider({ children }) {
     [upcomingBook]
   );
 
+  // logged in message
+  //   useEffect(
+  //     function () {
+  //       isLoggedIn && showMessage("You are logged in");
+  //     },
+  //     [isLoggedIn]
+  //   );
+
   function changeView(view) {
     if (currentView === view) return;
     dispatch({ type: "changeView", payload: view });
@@ -56,7 +87,9 @@ function ViewsProvider({ children }) {
   }
 
   return (
-    <ViewsContext.Provider value={{ defaultStyle, currentView, changeView }}>
+    <ViewsContext.Provider
+      value={{ defaultStyle, currentView, message, changeView, showMessage }}
+    >
       {children}
     </ViewsContext.Provider>
   );

@@ -10,7 +10,7 @@ function User() {
       {isLoggedIn && (
         <>
           <div className={styles.nameText}>{user.name} Bookclub</div>
-          <Button type="searchBtn" onClick={logout}>
+          <Button type="greyBtn" onClick={logout}>
             Logout
           </Button>
         </>

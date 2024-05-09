@@ -62,7 +62,7 @@ input:checked + .slider:before {
 }
 .switchText {
   font-size: 42px;
-  color: grey;
+  color: var(--color-pale);
 }
 .selected {
   color: white;

@@ -8,5 +8,11 @@
   width: 70%;
 }
 .loadScreenGifSmall {
-  width: 15vw;
+  width: 50%;
+}
+.loginLoading {
+  position: absolute;
+  left: calc(50% - 100px);
+  width: 200px;
+  top: 10px;
 }

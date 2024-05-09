@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useBooks } from "../contexts/BooksContext";
+import { useViews } from "../contexts/ViewsContext";
 import Button from "./Button";
 import Dialog from "./Dialog";
 
@@ -9,6 +10,7 @@ import styles from "./Main.module.css";
 
 export function RateBookBlock() {
   const { rateBook } = useBooks();
+  const { message, showMessage } = useViews();
   const [dialogIsopen, setDialogIsOpen] = useState(false);
   const [rating, setRating] = useState("");
   const navigate = useNavigate();
@@ -23,13 +25,14 @@ export function RateBookBlock() {
     await rateBook(rating);
     setDialogIsOpen(false);
     navigate("/app");
+    !message && showMessage("Book is rated", "good");
   }
 
   return (
     <>
       <div>
         <div className={styles.upcomText}>Reading now</div>
-        <Button type="rateBtn" onClick={() => setDialogIsOpen(true)}>
+        <Button type="pictureBtn" onClick={() => setDialogIsOpen(true)}>
           Rate
         </Button>
       </div>
@@ -54,7 +57,7 @@ export function RateBookBlock() {
               onChange={(e) => setRating(e.target.value)}
               value={rating}
             />
-            <Button type="searchBtn">Rate</Button>
+            <Button type="brightBtn">Rate</Button>
           </form>
         </Dialog>
       )}

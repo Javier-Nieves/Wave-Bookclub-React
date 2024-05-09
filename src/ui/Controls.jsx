@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useBooks } from "../contexts/BooksContext";
+import { useViews } from "../contexts/ViewsContext";
 import { useCountries } from "../contexts/CountriesContext";
 import { RateBookBlock } from "./RateBookBlock";
 import Button from "./Button";
@@ -11,6 +12,7 @@ import styles from "./Main.module.css";
 export default function Controls() {
   const { bookToShow, upcomingBook, books, nextBook, addBook, removeBook } =
     useBooks();
+  const { message, showMessage } = useViews();
   const { countries } = useCountries();
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
   const [country, setCountry] = useState("");
@@ -23,26 +25,31 @@ export default function Controls() {
   async function handleNextBook() {
     await nextBook();
     navigate("/app");
+    !message && showMessage("Next book is selected", "good");
   }
 
   async function handleAddBook(e) {
     e.preventDefault();
     // check if country exist and year is ok
-    if (
-      !countries.find((item) => item.name.common === country) ||
-      year < 0 ||
-      year > new Date().getFullYear()
-    )
+    if (!countries.find((item) => item.name.common === country)) {
+      !message && showMessage("Country name should be correct", "bad");
       return;
+    }
+    if (year < -3000 || year > new Date().getFullYear()) {
+      !message && showMessage("No time travel please!", "bad");
+      return;
+    }
 
     const newBook = { ...bookToShow, country, year };
     await addBook(newBook);
     navigate("/app");
+    !message && showMessage("New book is added", "good");
   }
 
   async function handleRemoveBook() {
     await removeBook();
     navigate("/app");
+    !message && showMessage("Book is removed", "good");
   }
 
   if (bookToShow.read)
@@ -101,7 +108,7 @@ export default function Controls() {
                   alt={selectedCountry.flags.alt}
                 />
               )}
-              <Button type="addBtn">Add book</Button>
+              <Button type="blackBtn">Add book</Button>
             </div>
           </form>
         </Dialog>
@@ -111,17 +118,17 @@ export default function Controls() {
 
         {books.some((b) => b === bookToShow) ? (
           <>
-            <Button type="removeBtn" onClick={handleRemoveBook}>
+            <Button type="greyBtn" onClick={handleRemoveBook}>
               Remove from the reading list
             </Button>
             {!upcomingBook && (
-              <Button type="nextBtn" onClick={handleNextBook}>
+              <Button type="pictureBtn" onClick={handleNextBook}>
                 Next
               </Button>
             )}
           </>
         ) : (
-          <Button type="addBtn" onClick={() => setDialogIsOpen(true)}>
+          <Button type="greyBtn" onClick={() => setDialogIsOpen(true)}>
             To the Reading List
           </Button>
         )}

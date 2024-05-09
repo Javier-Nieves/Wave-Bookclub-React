@@ -9,8 +9,12 @@
   --color-light-gold: rgb(221, 193, 55);
   --color-dark: rgb(255, 146, 43);
   --color-bright: rgb(246, 222, 38);
-  --color-pale: rgba(154, 154, 154, 0.614);
-  /* tables: */
+  --color-pale: rgba(255, 240, 176, 0.4);
+  --color-back-filter: rgba(42, 42, 42, 0.9);
+  --color-upcoming: rgba(151, 238, 52, 0.6);
+  --color-good: rgb(148, 207, 89);
+  --color-bad: rgb(230, 91, 78);
+
   --font-classic: "Cormorant", serif;
   --font-weight-classic: 500;
   --font-size-classic: 26px;
@@ -22,7 +26,7 @@
   --font-modern: "Handjet", sans-serif;
   --font-weight-modern: 400;
   --font-size-modern: 26px;
-  --color-modern-head: rgba(3, 232, 244, 0.9);
+  --color-modern-head: rgba(3, 232, 244, 0.75);
   --color-modern-odd: rgba(101, 100, 100, 0.5);
   --color-modern-even: rgba(36, 226, 251, 0.4);
 
@@ -53,7 +57,7 @@ input,
 .newTitleInput,
 .newAuthorInput,
 .newPagesInput {
-  width: 60%;
+  width: 90%;
   color: whitesmoke;
   font-size: 24px;
   font-family: var(--font-classic);

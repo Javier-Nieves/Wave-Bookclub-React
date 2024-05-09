@@ -16,8 +16,8 @@ export default function Main({ children }) {
       className={styles.mainView}
       style={{
         backgroundImage: ` linear-gradient(
-        rgba(55, 55, 55, 0.7),
-        rgba(55, 55, 55, 0.7)
+        var(--color-back-filter),
+        var(--color-back-filter)
       ),
       url(/img/${image}-back.jpg)`,
       }}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { useBooks } from "../contexts/BooksContext";
+import { useViews } from "../contexts/ViewsContext";
 import { CLASSIC_LIMIT } from "../utils/config";
 import Button from "./Button";
 
@@ -9,9 +10,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import styles from "./Upcoming.module.css";
 
 export default function Upcoming() {
-  const { upcomingBook, addBookDate } = useBooks();
-  const navigate = useNavigate();
   const [date, setDate] = useState();
+  const { upcomingBook, addBookDate } = useBooks();
+  const { message, showMessage } = useViews();
+  const navigate = useNavigate();
 
   const isModern = upcomingBook?.year > CLASSIC_LIMIT;
   let fontSize;
@@ -23,6 +25,7 @@ export default function Upcoming() {
   function handleChangeDate(e) {
     e.preventDefault();
     addBookDate(date);
+    !message && showMessage("Meeting date is selected", "good");
   }
 
   let formattedDate;
@@ -93,7 +96,7 @@ export default function Upcoming() {
                   dateFormat="dd/MM/yy"
                   placeholderText="Date"
                 />
-                <Button type="meetingBtn">Add</Button>
+                <Button type="blackBtn">Add</Button>
               </>
             )}
           </form>

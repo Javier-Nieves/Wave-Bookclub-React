@@ -9,19 +9,22 @@ button {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
-.pagination-btn,
-.pagination-btn_null {
-  width: 6vw;
+.blackBtn {
+  border: 1px solid var(--color-bright);
+  background-color: rgba(9, 9, 9, 0.6);
+  transition: transform 0.5s ease-in-out;
+  font-size: 20px;
+  height: 80%;
 }
-.addBtn,
-.rateBtn {
-  justify-content: center;
-  align-items: center;
+.brightBtn {
+  font-size: 30px;
+  border: 1px solid var(--color-bright);
+  transition: transform 0.5s ease-in-out;
 }
-.rateBtn,
-.nextBtn,
-.welcome-btn,
-.register-btn {
+
+/* buttons with pictures: */
+.pictureBtn,
+.registerBtn {
   margin-top: 13px;
   width: 180px;
   height: 100px;
@@ -37,78 +40,35 @@ button {
   -webkit-text-stroke: 1px rgb(247, 247, 247);
   transition: transform 0.5s ease-in-out;
 }
-.register-btn {
+.registerBtn {
   font-size: 30px;
   background-image: url("/img/register.png");
   background-position: center;
 }
-.meetingBtn {
-  border: 1px solid var(--color-bright);
-  background-color: rgba(9, 9, 9, 0.6);
-  transition: transform 0.5s ease-in-out;
-  font-size: 20px;
-  height: 80%;
-}
-.modal-btn {
-  width: 9vw;
-  height: 6vw;
-  border: 1px solid var(--color-bright);
-  font-size: 21px;
-  margin-right: 15px;
-}
-.edit-btn,
-.save-btn {
-  color: black;
-  border: 1px solid var(--color-bright);
-  padding: 0px 18px 0px 18px;
-  height: 6vh;
-}
-.save-btn {
-  display: none;
-  background-color: rgba(3, 3, 3, 0.877);
-  color: whitesmoke;
-}
 
-.enter-btn,
-.pagination-btn {
-  font-size: 30px;
-  border: 1px solid var(--color-bright);
-  transition: transform 0.5s ease-in-out;
-}
-
+/* 4 types of hover */
 button:hover,
-.welcome-btn:hover {
+.pictureBtn:hover {
   text-decoration: none;
   transform: scale(1.05);
   cursor: pointer;
   box-shadow: 0 0 15px var(--color-bright);
 }
-.searchBtn:hover,
-.addBtn:hover,
-.removeBtn:hover,
-.modal-btn:hover {
+.greyBtn:hover {
   background-color: rgba(255, 255, 255, 0.273);
   box-shadow: 0 0 5px #f9f9f9d2;
   cursor: pointer;
 }
-.meetingBtn:hover {
+.blackBtn:hover {
   background-color: rgba(5, 8, 1, 0.91);
   box-shadow: 0 0 55px #f9f9f9d2;
   transform: scale(1.1);
   cursor: pointer;
 }
-
-.enter-btn:hover,
-.edit-btn:hover,
-.pagination-btn:hover,
-.save-btn:hover,
-.example-enter:hover {
-  background-color: rgba(254, 236, 39, 0.806);
+.brightBtn:hover {
+  background-color: var(--color-bright);
   box-shadow: 0 0 55px #f9f9f9d2;
   transform: scale(1.1);
   color: #050801;
   cursor: pointer;
-}
-.edit-btn:hover {
-  transform: none;
 }

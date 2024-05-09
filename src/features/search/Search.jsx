@@ -6,6 +6,8 @@ import { useBooks } from "../../contexts/BooksContext";
 import { useViews } from "../../contexts/ViewsContext";
 // import { RES_PAGE } from "../../utils/config";
 
+import styles from "./Search.module.css";
+
 export default function Search() {
   const [titleToSearch, setTitleToSearch] = useState("");
   const { totalResults, searchBooks } = useBooks();
@@ -49,21 +51,22 @@ export default function Search() {
 
   return (
     <div id="search-field-container">
-      <form className="search-form" onSubmit={searchHandler}>
+      <form className={styles.searchForm} onSubmit={searchHandler}>
         <input
           type="text"
-          className="searchField"
           placeholder="Search for books"
           required
           value={titleToSearch}
           onChange={(e) => setTitleToSearch(e.target.value)}
           ref={searchInput}
         />
-        <Button type="searchBtn">Search</Button>
+        <Button type="greyBtn">Search</Button>
       </form>
       {currentView === "search" && (
-        <div className="flex-column" id="searchInfo">
-          <div className="paginationText"> Total results: {totalResults}</div>
+        <div>
+          <div className={styles.SearchInfoText}>
+            Total results: {totalResults}
+          </div>
         </div>
       )}
     </div>

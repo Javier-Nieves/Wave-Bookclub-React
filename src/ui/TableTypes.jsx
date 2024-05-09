@@ -9,7 +9,7 @@ import { useBooks } from "../contexts/BooksContext";
 
 export default function Table({ section = "classic" }) {
   const { changeView, currentView } = useViews();
-  const { clearBookToShow, bookToShow, books, upcomingBook } = useBooks();
+  const { clearBookToShow, bookToShow } = useBooks();
 
   useEffect(
     function () {
@@ -18,18 +18,6 @@ export default function Table({ section = "classic" }) {
     },
     [section, changeView, bookToShow, clearBookToShow, currentView]
   );
-
-  // let oneBook = books.find((item) => item === upcomingBook);
-  // oneBook = { ...oneBook, rating: 10, read: true, upcoming: false };
-  // let newBooks = books.filter((item) => item?.bookid !== oneBook?.bookid);
-  // newBooks = [...newBooks, oneBook];
-
-  // let newBooks = books.map((item) =>
-  //   item === upcomingBook
-  //     ? { ...item, rating: 10, read: true, upcoming: false }
-  //     : item
-  // );
-  // console.log(newBooks);
 
   if (section === "history") return <HistoryTableTemplate />;
 

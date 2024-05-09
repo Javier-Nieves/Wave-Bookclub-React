@@ -46,9 +46,15 @@ function reducer(state, action) {
       };
     case "logout":
       localStorage.removeItem("jwt");
-      return { ...state, isLoggedIn: false, user: null, jwt: null };
+      return {
+        ...state,
+        isLoggedIn: false,
+        user: null,
+        jwt: null,
+        loadingLogin: false,
+      };
     case "rejected":
-      return { ...state, loadingBooks: false, error: action.payload };
+      return { ...state, loadingLogin: false, error: action.payload };
     default:
       throw new Error("Unknown action");
   }
@@ -64,7 +70,6 @@ function AuthProvider({ children }) {
   useEffect(
     function () {
       async function checkAuth() {
-        dispatch({ type: "loading" });
         try {
           // check LocalStarage for jwt token. In case of page refresh
           const savedJwt = localStorage.getItem("jwt");
@@ -101,19 +106,25 @@ function AuthProvider({ children }) {
         name,
         password,
       };
-      const res = await axios({
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        url: `${SERVER_URL}api/v1/users/login`,
-        //   credentials: "include",
-        data,
-      });
-      if (res.data.status === "success") {
+      try {
+        const res = await axios({
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          url: `${SERVER_URL}api/v1/users/login`,
+          //   credentials: "include",
+          data,
+        });
+        if (res.data.status === "success")
+          dispatch({
+            type: "login",
+            payload: { user: res.data.data.user, jwt: res.data.token },
+          });
+      } catch (err) {
         dispatch({
-          type: "login",
-          payload: { user: res.data.data.user, jwt: res.data.token },
+          type: "rejected",
+          payload: `Incorrect`,
         });
       }
     },
@@ -128,18 +139,25 @@ function AuthProvider({ children }) {
         password,
         passwordConfirm,
       };
-      const res = await axios({
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        url: `${SERVER_URL}api/v1/users`,
-        data,
-      });
-      if (res.data.status === "success") {
+      try {
+        const res = await axios({
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          url: `${SERVER_URL}api/v1/users`,
+          data,
+        });
+        if (res.data.status === "success") {
+          dispatch({
+            type: "login",
+            payload: { user: res.data.data.user, jwt: res.data.token },
+          });
+        }
+      } catch (err) {
         dispatch({
-          type: "login",
-          payload: { user: res.data.data.user, jwt: res.data.token },
+          type: "rejected",
+          payload: `Something went wrong`,
         });
       }
     },

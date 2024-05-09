@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "../contexts/AuthContext.jsx";
+import Loader from "../ui/Loader.jsx";
 import Button from "../ui/Button";
 
 import styles from "./Pages.module.css";
@@ -13,13 +14,16 @@ function Register() {
   const [name, setName] = useState("");
   const [pass, setPass] = useState("");
   const [passConfirm, setPassConfirm] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function handleRegister(e) {
+    setLoading(true);
     e.preventDefault();
     if (!name || !pass || !passConfirm) return;
     if (pass !== passConfirm) return;
     await register(name, pass, passConfirm);
     navigate("/app");
+    setLoading(false);
     return null;
   }
 
@@ -34,6 +38,8 @@ function Register() {
   return (
     <main className={styles.homepage}>
       <h1 className={styles.loginTitle}>Create a bookclub</h1>
+      {loading && <Loader name="loginLoading" />}
+      {/* <Message centered={true} /> */}
       <form className={styles.enterForm} onSubmit={handleRegister}>
         <div className={styles.underlineContainer}>
           <input
@@ -83,7 +89,9 @@ function Register() {
             </div>
           )}
         </div>
-        <Button type="enter-btn">Register</Button>
+        <Button type="brightBtn" disabled={loading}>
+          {loading ? "Loading..." : "Register"}
+        </Button>
       </form>
     </main>
   );

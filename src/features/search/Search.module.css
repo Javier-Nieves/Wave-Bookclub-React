@@ -1,0 +1,10 @@
+.searchForm {
+  display: flex;
+  align-items: center;
+}
+
+.SearchInfoText {
+  color: whitesmoke;
+  font-family: var(--font-classic);
+  font-size: 32px;
+}
