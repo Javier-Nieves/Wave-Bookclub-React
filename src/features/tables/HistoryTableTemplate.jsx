@@ -17,12 +17,12 @@ export default function HistoryTable() {
     <table style={{ marginTop: "6rem" }}>
       <thead>
         <tr className={styles.historyHead}>
-          <th className="Up">Book</th>
-          <th className="Up">Author</th>
-          <th className="Up">Year</th>
-          <th className="Up">Country</th>
-          <th className="Up">Pages</th>
-          <th className="Up">Rating</th>
+          <th>Book</th>
+          <th>Author</th>
+          <th>Year</th>
+          <th>Country</th>
+          <th>Pages</th>
+          <th>Rating</th>
         </tr>
       </thead>
 

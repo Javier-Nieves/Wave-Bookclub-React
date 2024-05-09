@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useBooks } from "../../contexts/BooksContext";
 import NoContentYet from "../../ui/NoContentYet";
 import { CLASSIC_LIMIT } from "../../utils/config";
@@ -7,9 +8,30 @@ import styles from "./Tables.module.css";
 
 export default function Table({ section }) {
   const { books } = useBooks();
+  const [sortedColumn, setSortedColumn] = useState(null);
+  const [sortDirection, setSortDirection] = useState("asc");
 
-  const classicBooks = books.filter((book) => book.year < CLASSIC_LIMIT);
-  const modernBooks = books.filter((book) => book.year > CLASSIC_LIMIT);
+  function handleSort(columnName) {
+    if (sortedColumn === columnName) {
+      // If already sorted, toggle the direction
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+    } else {
+      // If sorting a new column, set it as sorted and default to ascending
+      setSortedColumn(columnName);
+      setSortDirection("asc");
+    }
+  }
+
+  const sortedBooks = books.sort((a, b) => {
+    const columnA = a[sortedColumn];
+    const columnB = b[sortedColumn];
+    if (columnA < columnB) return sortDirection === "asc" ? -1 : 1;
+    if (columnA > columnB) return sortDirection === "asc" ? 1 : -1;
+    return 0;
+  });
+
+  const classicBooks = sortedBooks.filter((book) => book.year < CLASSIC_LIMIT);
+  const modernBooks = sortedBooks.filter((book) => book.year > CLASSIC_LIMIT);
 
   if (section === "classic" && !classicBooks.length)
     return (
@@ -31,11 +53,11 @@ export default function Table({ section }) {
     <table id={styles[`${section}Table`]}>
       <thead>
         <tr className={styles[`${section}Head`]}>
-          <th className="Up">Book</th>
-          <th className="Up">Author</th>
-          <th className="Up">Year</th>
-          <th className="Up">Country</th>
-          <th className="Up">Pages</th>
+          <th onClick={() => handleSort("title")}>Book</th>
+          <th onClick={() => handleSort("author")}>Author</th>
+          <th onClick={() => handleSort("year")}>Year</th>
+          <th onClick={() => handleSort("country")}>Country</th>
+          <th onClick={() => handleSort("pages")}>Pages</th>
         </tr>
       </thead>
 

@@ -13,6 +13,10 @@ td {
   padding: 10px;
   border-radius: 3px;
 }
+th:hover {
+  text-decoration: underline;
+}
+
 .classicHead {
   background-color: var(--color-classic-head);
   color: white;
