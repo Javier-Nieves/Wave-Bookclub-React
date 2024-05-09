@@ -1,3 +1,5 @@
+/* types: blackBtn, brightBtn, greyBtn, redBtn */
+
 button {
   color: rgba(201, 201, 201, 0.94);
   font-size: 22px;
@@ -20,6 +22,11 @@ button {
   font-size: 30px;
   border: 1px solid var(--color-bright);
   transition: transform 0.5s ease-in-out;
+}
+.redBtn {
+  background-color: rgb(253, 47, 47);
+  font-size: 24px;
+  color: white;
 }
 
 /* buttons with pictures: */
@@ -71,4 +78,7 @@ button:hover,
   transform: scale(1.1);
   color: #050801;
   cursor: pointer;
+}
+.redBtn:hover {
+  box-shadow: 0 0 15px red;
 }

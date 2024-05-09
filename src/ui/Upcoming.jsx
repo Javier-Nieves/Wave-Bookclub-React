@@ -42,21 +42,13 @@ export default function Upcoming() {
   return (
     <div
       className={isModern ? styles.modernBack : styles.classicBack}
-      style={{
-        fontFamily,
-      }}
+      style={{ fontFamily }}
       onClick={() =>
         upcomingBook && navigate(`/app/book/${upcomingBook.bookid}`)
       }
     >
       <div>
-        <h1
-          className={styles.upcomingTitle}
-          style={{
-            fontSize,
-            fontFamily,
-          }}
-        >
+        <h1 className={styles.upcomingTitle} style={{ fontSize, fontFamily }}>
           {upcomingBook?.title || "Choose the next book ➡"}
         </h1>
         {upcomingBook && (
