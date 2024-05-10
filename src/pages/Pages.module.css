@@ -14,6 +14,12 @@
   background-position: center;
   padding: 1.5rem;
 }
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
 .welcomeText,
 .welcomeTextSmall {
@@ -25,7 +31,6 @@
 .welcomeTextSmall {
   font-size: 1.5rem;
 }
-
 .welcomeTitle {
   background-image: linear-gradient(
     90deg,
@@ -35,7 +40,7 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 13vh;
+  font-size: 6rem;
   margin: 30px;
 }
 
@@ -82,11 +87,33 @@
   bottom: -18px;
   color: var(--color-dark-gold);
 }
-.brandModern {
+.backLink {
+  position: absolute;
+  top: 30px;
   text-shadow: 0 0 4px #fff, 0 0 11px #fff;
   font-size: 34px;
   font-family: var(--font-classic);
   color: rgba(252, 249, 252, 0.802);
   margin: 14px 0 9px 0;
   text-decoration: none;
+}
+
+@media screen and (max-width: 430px) {
+  .homepage {
+    padding: 0;
+    margin: 5px;
+  }
+  .welcomeTitle {
+    font-size: 3rem;
+  }
+  .buttonContainer {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .enterForm {
+    width: 80%;
+  }
+  .loginTitle {
+    font-size: 3rem;
+  }
 }

@@ -8,7 +8,7 @@ export default function SearchTable() {
 
   if (!searchResults) return;
   return (
-    <table style={{ marginTop: "6rem" }}>
+    <table className={styles.searchTable}>
       <thead>
         <tr className={styles.searchHead}>
           <th className="Up">Book</th>

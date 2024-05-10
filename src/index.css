@@ -46,11 +46,6 @@ body {
   background-color: rgb(37, 37, 37);
 }
 
-/* ::placeholder {
-  color: var(--color-light);
-  opacity: 1;
-} */
-
 input,
 .searchField,
 .meetingField,
@@ -75,4 +70,8 @@ input:focus,
 .meetingField:focus {
   outline: none;
   box-shadow: 0 0 10px #f9f9f9d2;
+}
+
+.react-datepicker-popper {
+  z-index: 100;
 }

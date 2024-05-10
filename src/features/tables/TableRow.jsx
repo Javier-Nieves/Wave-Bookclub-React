@@ -34,7 +34,7 @@ export function TableRow({ book }) {
         </div>
       </td>
       <td className={styles.mobileOnly}>{book.pages}</td>
-      {currentView === "history" && <td>{book.rating}</td>}
+      {currentView === "history" && <td>{book.rating || "-"}</td>}
     </tr>
   );
 }
@@ -45,9 +45,9 @@ export function TableRowYear({ yearChange, book }) {
       <tr className={styles.yearRow}>
         <td>{yearChange}</td>
         <td />
-        <td />
-        <td />
-        <td />
+        <td className={styles.mobileOnly} />
+        <td className={styles.mobileOnly} />
+        <td className={styles.mobileOnly} />
         <td />
       </tr>
       <TableRow book={book} key={book.bookid} />

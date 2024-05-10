@@ -30,8 +30,12 @@ export default function Table({ section }) {
     return 0;
   });
 
-  const classicBooks = sortedBooks.filter((book) => book.year < CLASSIC_LIMIT);
-  const modernBooks = sortedBooks.filter((book) => book.year > CLASSIC_LIMIT);
+  const classicBooks = sortedBooks.filter(
+    (book) => book.year < CLASSIC_LIMIT && !book.read
+  );
+  const modernBooks = sortedBooks.filter(
+    (book) => book.year > CLASSIC_LIMIT && !book.read
+  );
 
   if (section === "classic" && !classicBooks.length)
     return (

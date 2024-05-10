@@ -53,4 +53,5 @@
 }
 .picker {
   width: 85%;
+  z-index: 100;
 }

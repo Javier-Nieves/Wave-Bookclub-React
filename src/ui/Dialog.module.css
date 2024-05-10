@@ -42,3 +42,12 @@ dialog {
 .modalForm-register {
   display: none;
 }
+
+@media screen and (max-width: 430px) {
+  .dialogContent {
+    width: 50%;
+  }
+  input {
+    width: 100%;
+  }
+}

@@ -42,14 +42,14 @@ function ButtonContainer() {
   const navigate = useNavigate();
   return (
     <div className={styles.buttonContainer}>
-      <div className="flex-column">
+      <div className={styles.flexColumn}>
         <div className={styles.welcomeTextSmall}>Create your bookclub</div>
         <Button onClick={() => navigate("/register")} type="registerBtn">
           Register
         </Button>
       </div>
 
-      <div className="flex-column">
+      <div className={styles.flexColumn}>
         <div className={styles.welcomeTextSmall}>Login to a bookclub</div>
         <Button onClick={() => navigate("/login")} type="pictureBtn">
           Enter

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../contexts/AuthContext.jsx";
 import Loader from "../ui/Loader.jsx";
@@ -37,6 +37,9 @@ function Register() {
 
   return (
     <main className={styles.homepage}>
+      <NavLink to="/" className={styles.backLink}>
+        ⬅ Return
+      </NavLink>
       <h1 className={styles.loginTitle}>Create a bookclub</h1>
       {loading && <Loader name="loginLoading" />}
       {/* <Message centered={true} /> */}

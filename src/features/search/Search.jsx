@@ -11,7 +11,7 @@ import styles from "./Search.module.css";
 export default function Search() {
   const [titleToSearch, setTitleToSearch] = useState("");
   const { totalResults, searchBooks } = useBooks();
-  const { currentView } = useViews();
+  const { currentView, showMessage } = useViews();
   const navigate = useNavigate();
 
   const [page, setPage] = useState(1);
@@ -36,10 +36,11 @@ export default function Search() {
     function () {
       if (currentView === "search" && totalResults === 0) {
         navigate("/app");
+        showMessage(`Can't find book with ${titleToSearch} title`, "bad");
         setTitleToSearch("");
       }
     },
-    [totalResults, currentView, navigate]
+    [totalResults, currentView, navigate, showMessage, titleToSearch]
   );
 
   async function searchHandler(e) {

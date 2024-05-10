@@ -37,3 +37,9 @@
   font-family: var(--font-classic);
   color: White;
 }
+
+@media screen and (max-width: 430px) {
+  .bookInfo {
+    margin: 5px 5px 20px 5px;
+  }
+}

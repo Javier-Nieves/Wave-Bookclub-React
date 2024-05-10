@@ -53,7 +53,7 @@ function ViewsProvider({ children }) {
     initialState
   );
   const { upcomingBook } = useBooks();
-  const { isLoggedIn } = useAuth();
+  // const { isLoggedIn } = useAuth();
 
   function showMessage(text, style = "good") {
     if (!message) dispatch({ type: "message/show", payload: { text, style } });

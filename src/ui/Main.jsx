@@ -16,10 +16,10 @@ export default function Main({ children }) {
       className={styles.mainView}
       style={{
         backgroundImage: ` linear-gradient(
-        var(--color-back-filter),
-        var(--color-back-filter)
-      ),
-      url(/img/${image}-back.jpg)`,
+            var(--color-back-filter),
+            var(--color-back-filter)
+          ),
+          url(/img/${image}-back.jpg)`,
       }}
     >
       {children}
