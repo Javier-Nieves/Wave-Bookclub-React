@@ -105,6 +105,7 @@
   }
   .welcomeTitle {
     font-size: 3rem;
+    margin: 20px 5px;
   }
   .buttonContainer {
     flex-direction: column;

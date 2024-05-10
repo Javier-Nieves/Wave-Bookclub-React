@@ -6,7 +6,7 @@ table {
   font-family: "Playfair Display", serif;
   text-align: center;
   font-size: 22px;
-  margin-bottom: 5vh;
+  margin-bottom: 50px;
 }
 th,
 td {
@@ -149,5 +149,8 @@ th:hover {
   .histTable,
   .searchTable {
     margin-top: 10px;
+  }
+  table {
+    font-size: 18px;
   }
 }
