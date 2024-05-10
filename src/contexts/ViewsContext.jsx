@@ -56,7 +56,6 @@ function ViewsProvider({ children }) {
   const { isLoggedIn } = useAuth();
 
   function showMessage(text, style = "good") {
-    console.log("received message: ", text);
     if (!message) dispatch({ type: "message/show", payload: { text, style } });
     setTimeout(() => {
       dispatch({ type: "message/delete" });

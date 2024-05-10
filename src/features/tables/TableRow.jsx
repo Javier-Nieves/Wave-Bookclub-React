@@ -20,8 +20,10 @@ export function TableRow({ book }) {
     >
       <td>{book.title}</td>
       <td>{book.author}</td>
-      <td>{book.year}</td>
-      <td>
+      <td className={currentView === "history" ? styles.mobileOnly : ""}>
+        {book.year}
+      </td>
+      <td className={styles.mobileOnly}>
         <div className={styles.flagContainer}>
           <div>{book.country}</div>
           <img
@@ -31,7 +33,7 @@ export function TableRow({ book }) {
           />
         </div>
       </td>
-      <td>{book.pages}</td>
+      <td className={styles.mobileOnly}>{book.pages}</td>
       {currentView === "history" && <td>{book.rating}</td>}
     </tr>
   );

@@ -56,8 +56,12 @@ export default function Table({ section }) {
           <th onClick={() => handleSort("title")}>Book</th>
           <th onClick={() => handleSort("author")}>Author</th>
           <th onClick={() => handleSort("year")}>Year</th>
-          <th onClick={() => handleSort("country")}>Country</th>
-          <th onClick={() => handleSort("pages")}>Pages</th>
+          {/* prettier-ignore */}
+          <th className={styles.mobileOnly} onClick={() => handleSort("country")}>
+            Country </th>
+          <th className={styles.mobileOnly} onClick={() => handleSort("pages")}>
+            Pages
+          </th>
         </tr>
       </thead>
 

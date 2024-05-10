@@ -71,3 +71,11 @@ input:checked + .slider:before {
   width: 100px;
   margin: 10px;
 }
+@media screen and (max-width: 430px) {
+  .switchContainer {
+    margin: 0;
+  }
+  .switchText {
+    font-size: 28px;
+  }
+}

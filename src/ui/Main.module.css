@@ -106,3 +106,17 @@
   align-items: center;
   gap: 40px;
 }
+
+@media screen and (max-width: 430px) {
+  .mainView {
+    display: block;
+  }
+  .mainLeftPart {
+    position: inherit;
+    width: 100%;
+  }
+  .mainRightPart {
+    margin: 0px;
+    width: 100%;
+  }
+}

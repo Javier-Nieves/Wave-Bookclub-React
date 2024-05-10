@@ -14,14 +14,14 @@ export default function HistoryTable() {
     return <NoContentYet>Your reading history will be here</NoContentYet>;
 
   return (
-    <table style={{ marginTop: "6rem" }}>
+    <table className={styles.histTable}>
       <thead>
         <tr className={styles.historyHead}>
           <th>Book</th>
           <th>Author</th>
-          <th>Year</th>
-          <th>Country</th>
-          <th>Pages</th>
+          <th className={styles.mobileOnly}>Year</th>
+          <th className={styles.mobileOnly}>Country</th>
+          <th className={styles.mobileOnly}>Pages</th>
           <th>Rating</th>
         </tr>
       </thead>

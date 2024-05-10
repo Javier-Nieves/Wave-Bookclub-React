@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useBooks } from "../contexts/BooksContext";
 import { useViews } from "../contexts/ViewsContext";
@@ -17,7 +17,17 @@ export default function Controls() {
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
   const navigate = useNavigate();
 
-  if (!bookToShow?.bookid) return;
+  const [activeBook, setActiveBook] = useState(bookToShow);
+  useEffect(
+    function () {
+      setActiveBook(
+        books.find((item) => item._id === bookToShow?._id) || bookToShow
+      );
+    },
+    [books, bookToShow]
+  );
+
+  if (!activeBook?.bookid) return;
 
   async function handleNextBook() {
     await nextBook();
@@ -32,19 +42,19 @@ export default function Controls() {
   }
 
   // History view
-  if (bookToShow.read)
+  if (activeBook.read)
     return (
       <>
-        <Cover image={bookToShow.image_link} />
-        {bookToShow.rating && <Rating rating={bookToShow.rating} />}
+        <Cover image={activeBook.image_link} />
+        {activeBook.rating && <Rating rating={activeBook.rating} />}
       </>
     );
 
   // Upcoming Book view
-  if (bookToShow.upcoming)
+  if (activeBook.upcoming)
     return (
       <div className={styles.controlGroup}>
-        <Cover image={bookToShow.image_link} />
+        <Cover image={activeBook.image_link} />
         <RateBookBlock />
       </div>
     );
@@ -59,9 +69,9 @@ export default function Controls() {
       )}
 
       <div className={styles.controlGroup}>
-        <Cover image={bookToShow.image_link} />
+        <Cover image={activeBook.image_link} />
 
-        {books.some((b) => b === bookToShow) ? (
+        {books.some((b) => b === activeBook) ? (
           <>
             <Button type="greyBtn" onClick={handleRemoveBook}>
               Remove from the reading list

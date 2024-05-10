@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 
+const AppLayout = lazy(() => import("./ui/AppLayout"));
 import { useViews } from "./contexts/ViewsContext";
 import ProtectedRoutes from "./ui/ProtectedRoutes";
-import AppLayout from "./ui/AppLayout";
 import Loader from "./ui/Loader";
-import Table from "./features/tables/Table";
 import Book from "./features/book/BookView";
+import Table from "./features/tables/Table";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -41,7 +41,6 @@ function App() {
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          (// todo:)
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

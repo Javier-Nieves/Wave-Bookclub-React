@@ -16,7 +16,6 @@ function DeleteForm({ setDialogIsOpen }) {
   }
   async function handleHistDelete(e) {
     e.preventDefault();
-    console.log("test");
     await removeBook();
     navigate("/app");
     !message && showMessage("Book is removed from history", "good");
