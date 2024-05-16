@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { Suspense, lazy } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const AppLayout = lazy(() => import("./ui/AppLayout"));
 import { useViews } from "./contexts/ViewsContext";
@@ -15,36 +17,48 @@ import NotFound from "./pages/NotFound";
 function App() {
   const { defaultStyle } = useViews();
 
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 60 * 1000,
+        // staleTime: 0,
+      },
+    },
+  });
+
   return (
-    <BrowserRouter>
-      <Suspense fallback={<Loader />}>
-        <Routes>
-          <Route index element={<HomePage />} />
-          <Route
-            path="/app"
-            element={
-              <ProtectedRoutes>
-                <AppLayout />
-              </ProtectedRoutes>
-            }
-          >
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <BrowserRouter>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route index element={<HomePage />} />
             <Route
               path="/app"
-              element={<Navigate replace to={defaultStyle} />}
-            />
-            <Route path="classic" element={<Table section="classic" />} />
-            <Route path="modern" element={<Table section="modern" />} />
-            <Route path="history" element={<Table section="history" />} />
-            (// todo - add search query param)
-            <Route path="search" element={<Table section="search" />} />
-            <Route path="book/:id" element={<Book />} />
-          </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+              element={
+                <ProtectedRoutes>
+                  <AppLayout />
+                </ProtectedRoutes>
+              }
+            >
+              <Route
+                path="/app"
+                element={<Navigate replace to={defaultStyle} />}
+              />
+              <Route path="classic" element={<Table section="classic" />} />
+              <Route path="modern" element={<Table section="modern" />} />
+              <Route path="history" element={<Table section="history" />} />
+              (// todo - add search query param)
+              <Route path="search" element={<Table section="search" />} />
+              <Route path="book/:id" element={<Book />} />
+            </Route>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 
