@@ -195,26 +195,6 @@ function BooksProvider({ children }) {
     }
   }
 
-  // Add new Book
-  async function addBook(data) {
-    if (!user.id) return;
-    data = { ...data, club: user.id };
-    // dispatch({ type: "loading" });
-    try {
-      const reply = await axios({
-        method: "POST",
-        url: `${SERVER_URL}api/v1/books`,
-        data,
-      });
-      dispatch({ type: "book/add", payload: reply.data.data.newBook });
-    } catch {
-      dispatch({
-        type: "rejected",
-        payload: "Error while adding new book!",
-      });
-    }
-  }
-
   // Add meeting date
   async function addBookDate(meetingDate) {
     // dispatch({ type: "loading" });
@@ -271,21 +251,21 @@ function BooksProvider({ children }) {
   }
 
   // Remove Book
-  async function removeBook() {
-    // dispatch({ type: "loading" });
-    try {
-      await axios({
-        method: "DELETE",
-        url: `${SERVER_URL}api/v1/books/${bookToShow._id}`,
-      });
-      dispatch({ type: "book/remove" });
-    } catch {
-      dispatch({
-        type: "rejected",
-        payload: "Error while removing new book!",
-      });
-    }
-  }
+  // async function removeBook() {
+  //   // dispatch({ type: "loading" });
+  //   try {
+  //     await axios({
+  //       method: "DELETE",
+  //       url: `${SERVER_URL}api/v1/books/${bookToShow._id}`,
+  //     });
+  //     dispatch({ type: "book/remove" });
+  //   } catch {
+  //     dispatch({
+  //       type: "rejected",
+  //       payload: "Error while removing new book!",
+  //     });
+  //   }
+  // }
 
   // Clear bookToShow
   function clearBookToShow() {
@@ -306,9 +286,9 @@ function BooksProvider({ children }) {
         // showBook,
         rateBook,
         nextBook,
-        addBook,
+        // addBook,
         addBookDate,
-        removeBook,
+        // removeBook,
         clearBookToShow,
         searchBooks,
       }}

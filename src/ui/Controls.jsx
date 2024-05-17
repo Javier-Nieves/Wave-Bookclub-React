@@ -4,6 +4,7 @@ import { useBooks } from "../contexts/BooksContext";
 import { useViews } from "../contexts/ViewsContext";
 import { useLibrary } from "../features/book/useLibrary";
 import { useGetBook } from "../features/book/useGetBook";
+import { useRemoveBook } from "../features/book/useREmoveBook";
 import { RateBookBlock } from "./RateBookBlock";
 import Button from "./Button";
 import Dialog from "./Dialog";
@@ -16,7 +17,8 @@ import styles from "./Main.module.css";
 export default function Controls() {
   const { books, upcomingBook } = useLibrary();
   const { bookToShow } = useGetBook();
-  const { nextBook, removeBook } = useBooks();
+  const { removeBook } = useRemoveBook();
+  const { nextBook } = useBooks();
   const { message, showMessage } = useViews();
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -40,9 +42,8 @@ export default function Controls() {
     !message && showMessage("Next book is selected", "good");
   }
 
-  async function handleRemoveBook() {
-    await removeBook();
-    navigate("/app");
+  function handleRemoveBook() {
+    removeBook(bookToShow._id);
     !message && showMessage("Book is removed", "good");
   }
 

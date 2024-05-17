@@ -1,7 +1,6 @@
 import axios from "axios";
 import { SERVER_URL, BOOK_API } from "../utils/config";
 import { getSearchedBooks, makeUniformedBook } from "../utils/helpers";
-import { useLibrary } from "../features/book/useLibrary";
 
 export async function getAllBooks(id) {
   //   console.log("getting books for", id);
@@ -25,7 +24,6 @@ export async function getAllBooks(id) {
 
 export async function getBook(books = [], id) {
   if (id === undefined) return {};
-
   try {
     // looking for the book in the DB:
     const bookInDb = books.find((book) => book.bookid === id);
@@ -44,9 +42,7 @@ export async function getBook(books = [], id) {
 }
 
 export async function addBook(data) {
-  console.log("API call", data);
   if (!data || !data.club || !data.country || !data.year) return;
-
   try {
     const reply = await axios({
       method: "POST",
@@ -56,5 +52,17 @@ export async function addBook(data) {
     return reply;
   } catch {
     return {};
+  }
+}
+
+export async function removeBook(id) {
+  if (!id) return;
+  try {
+    await axios({
+      method: "DELETE",
+      url: `${SERVER_URL}api/v1/books/${id}`,
+    });
+  } catch {
+    console.error("erorrrrr");
   }
 }

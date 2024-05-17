@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext.jsx";
+import Loader from "./Loader.jsx";
 
 function ProtectedRoutes({ children }) {
   const { isLoggedIn } = useAuth();
@@ -18,7 +19,7 @@ function ProtectedRoutes({ children }) {
     return () => clearTimeout(timeoutId);
   }, [isLoggedIn, navigate]);
 
-  return isLoggedIn ? children : null;
+  return isLoggedIn ? children : <Loader />;
 }
 
 export default ProtectedRoutes;
