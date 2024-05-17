@@ -14,17 +14,16 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 1000,
+      // staleTime: 0,
+    },
+  },
+});
 function App() {
   const { defaultStyle } = useViews();
-
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: 60 * 1000,
-        // staleTime: 0,
-      },
-    },
-  });
 
   return (
     <QueryClientProvider client={queryClient}>

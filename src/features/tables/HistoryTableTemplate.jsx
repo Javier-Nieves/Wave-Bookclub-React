@@ -1,16 +1,19 @@
-import { useBooks } from "../../contexts/BooksContext";
-import NoContentYet from "../../ui/NoContentYet";
+import { useLibrary } from "../book/useLibrary";
 import { TableRow, TableRowYear } from "./TableRow";
+import Loader from "../../ui/Loader";
+import NoContentYet from "../../ui/NoContentYet";
 
 import styles from "./Tables.module.css";
 
 export default function HistoryTable() {
-  const { books } = useBooks();
+  const { books, isLoading } = useLibrary();
   let yearChange;
 
-  const readBooks = books.filter((item) => item.read);
+  if (isLoading) return <Loader />;
 
-  if (!readBooks.length)
+  const readBooks = books?.filter((item) => item.read);
+
+  if (!readBooks?.length)
     return <NoContentYet>Your reading history will be here</NoContentYet>;
 
   return (

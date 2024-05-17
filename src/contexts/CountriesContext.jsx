@@ -11,7 +11,6 @@ function CountriesProvider({ children }) {
   // getting initial countries list (for flags and book origin selector)
   useEffect(function () {
     async function getCountryList() {
-      // todo - catchAsync
       try {
         setLoadingCountries(true);
         const res = await fetch(COUNTRIES_API);

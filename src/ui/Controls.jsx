@@ -10,18 +10,21 @@ import { Rating } from "./Rating";
 import { AddForm } from "./AddForm";
 
 import styles from "./Main.module.css";
+import { useLibrary } from "../features/book/useLibrary";
 
 export default function Controls() {
-  const { bookToShow, upcomingBook, books, nextBook, removeBook } = useBooks();
+  const { books } = useLibrary();
+  const { bookToShow, upcomingBook, nextBook, removeBook } = useBooks();
   const { message, showMessage } = useViews();
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
   const navigate = useNavigate();
 
   const [activeBook, setActiveBook] = useState(bookToShow);
+
   useEffect(
     function () {
       setActiveBook(
-        books.find((item) => item._id === bookToShow?._id) || bookToShow
+        books?.find((item) => item._id === bookToShow?._id) || bookToShow
       );
     },
     [books, bookToShow]

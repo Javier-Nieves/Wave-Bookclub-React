@@ -1,13 +1,16 @@
 import { useState } from "react";
-import { useBooks } from "../../contexts/BooksContext";
-import NoContentYet from "../../ui/NoContentYet";
+
+import { useLibrary } from "../book/useLibrary";
 import { CLASSIC_LIMIT } from "../../utils/config";
 import { TableRow } from "./TableRow";
+import NoContentYet from "../../ui/NoContentYet";
+import Loader from "../../ui/Loader";
 
 import styles from "./Tables.module.css";
 
 export default function Table({ section }) {
-  const { books } = useBooks();
+  const { isLoading, books } = useLibrary();
+
   const [sortedColumn, setSortedColumn] = useState(null);
   const [sortDirection, setSortDirection] = useState("asc");
 
@@ -21,6 +24,8 @@ export default function Table({ section }) {
       setSortDirection("asc");
     }
   }
+
+  if (isLoading) return <Loader />;
 
   const sortedBooks = books.sort((a, b) => {
     const columnA = a[sortedColumn];
