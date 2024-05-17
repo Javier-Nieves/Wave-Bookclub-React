@@ -1,26 +1,23 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useGetBook } from "./useGetBook";
 import { CLASSIC_LIMIT } from "../../utils/config";
-import { useBooks } from "../../contexts/BooksContext";
-import { useViews } from "../../contexts/ViewsContext";
 import Loader from "../../ui/Loader";
 
 import styles from "./BookView.module.css";
+import { useViews } from "../../contexts/ViewsContext";
 
 export default function BookView() {
-  const { id } = useParams();
-  const { bookToShow, showBook, loadingBooks } = useBooks();
-  const { changeView, currentView } = useViews();
+  const { currentView, changeView } = useViews();
+  const { bookToShow, isLoading } = useGetBook();
 
   useEffect(
     function () {
       currentView !== "book" && changeView("book");
-      showBook(id);
     },
-    [id, showBook, changeView, currentView]
+    [changeView, currentView]
   );
 
-  //changing tab title
+  // changing tab title
   useEffect(
     function () {
       if (!bookToShow) return;
@@ -33,22 +30,21 @@ export default function BookView() {
     [bookToShow]
   );
 
-  if (loadingBooks || !bookToShow) return <Loader />;
+  if (isLoading || !bookToShow) return <Loader />;
 
   if (!bookToShow?.bookid)
     return <h1 className={styles.noBook}>No such book</h1>;
 
   return (
     <div className={styles.bookInfo}>
-      <BookTitle />
-      <BookStats />
-      <BookDescription />
+      <BookTitle bookToShow={bookToShow} />
+      <BookStats bookToShow={bookToShow} />
+      <BookDescription bookToShow={bookToShow} />
     </div>
   );
 }
 
-function BookTitle() {
-  const { bookToShow } = useBooks();
+function BookTitle({ bookToShow }) {
   const bookStyle = bookToShow?.year < CLASSIC_LIMIT ? "classic" : "modern";
   return (
     <h1
@@ -60,8 +56,7 @@ function BookTitle() {
   );
 }
 
-function BookStats() {
-  const { bookToShow } = useBooks();
+function BookStats({ bookToShow }) {
   const bookStyle = bookToShow?.year < CLASSIC_LIMIT ? "classic" : "modern";
   return (
     <div className={styles.bookInfoTop}>
@@ -89,8 +84,7 @@ function BookStats() {
   );
 }
 
-function BookDescription() {
-  const { bookToShow } = useBooks();
+function BookDescription({ bookToShow }) {
   const bookStyle = bookToShow?.year < CLASSIC_LIMIT ? "classic" : "modern";
   // a way to show HTML code not as a string
   return (

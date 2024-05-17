@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
+import { useLibrary } from "../features/book/useLibrary";
 import { useBooks } from "../contexts/BooksContext";
 import { useViews } from "../contexts/ViewsContext";
 import { CLASSIC_LIMIT } from "../utils/config";
@@ -11,7 +12,8 @@ import styles from "./Upcoming.module.css";
 
 export default function Upcoming() {
   const [date, setDate] = useState();
-  const { upcomingBook, addBookDate } = useBooks();
+  const { addBookDate } = useBooks();
+  const { upcomingBook } = useLibrary();
   const { message, showMessage } = useViews();
   const navigate = useNavigate();
 

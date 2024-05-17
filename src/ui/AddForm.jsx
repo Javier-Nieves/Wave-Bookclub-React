@@ -1,18 +1,22 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useBooks } from "../contexts/BooksContext";
 import { useViews } from "../contexts/ViewsContext";
 import { useCountries } from "../contexts/CountriesContext";
 import Button from "./Button";
+import { useAddBook } from "../features/book/useAddBook";
+import { useAuth } from "../contexts/AuthContext";
+import { useGetBook } from "../features/book/useGetBook";
+
 import styles from "./Main.module.css";
 
 export function AddForm() {
   const [country, setCountry] = useState("");
   const [year, setYear] = useState("");
-  const { bookToShow, addBook } = useBooks();
+
   const { message, showMessage } = useViews();
   const { countries } = useCountries();
-  const navigate = useNavigate();
+  const { bookToShow } = useGetBook();
+  const { addBook } = useAddBook();
+  const { user } = useAuth();
 
   const selectedCountry = countries.find((c) => c.name.common === country);
 
@@ -28,16 +32,14 @@ export function AddForm() {
       return;
     }
 
-    const newBook = { ...bookToShow, country, year };
-    await addBook(newBook);
-    navigate("/app");
+    addBook({ ...bookToShow, country, year, club: user.id });
     !message && showMessage("New book is added", "good");
   }
   return (
     <form
       className={styles.modalFormAdd}
       onClick={(e) => e.stopPropagation()}
-      onSubmit={handleAddBook}
+      onSubmit={(e) => handleAddBook(e)}
     >
       <input
         type="number"

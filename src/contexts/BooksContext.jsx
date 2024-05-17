@@ -15,8 +15,8 @@ const BooksContext = createContext();
 
 const initialState = {
   books: [],
-  bookToShow: undefined,
-  loadingBooks: false,
+  // bookToShow: undefined,
+  // loadingBooks: false,
   upcomingBook: undefined,
   searchResults: [],
   totalResults: 0,
@@ -25,32 +25,32 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case "loading":
-      return { ...state, loadingBooks: true };
+    // case "loading":
+    //   return { ...state, loadingBooks: true };
     case "bookToShow/cleared":
       return { ...state, bookToShow: null };
     case "search/started":
       return {
         ...state,
-        loadingBooks: true,
+        // loadingBooks: true,
         totalResults: 0,
         searchResults: [],
       };
     case "books/loaded": {
       // prettier-ignore
-      const upcomingBook = action.payload.find((book) => book.upcoming === true);
+      // const upcomingBook = action.payload.find((book) => book.upcoming === true);
       return {
         ...state,
-        loadingBooks: false,
+        // loadingBooks: false,
         books: action.payload,
-        upcomingBook,
+        // upcomingBook,
       };
     }
     case "book/loaded":
       return {
         ...state,
         bookToShow: action.payload,
-        loadingBooks: false,
+        // loadingBooks: false,
       };
     case "book/rated":
       return {
@@ -67,7 +67,7 @@ function reducer(state, action) {
             : item
         ),
         bookToShow: null,
-        loadingBooks: false,
+        // loadingBooks: false,
         upcomingBook: null,
       };
     case "book/next":
@@ -79,14 +79,14 @@ function reducer(state, action) {
             : item
         ),
         upcomingBook: { ...state.bookToShow, upcoming: true },
-        loadingBooks: false,
+        // loadingBooks: false,
         bookToShow: null,
       };
     case "book/add":
       return {
         ...state,
         books: [...state.books, action.payload],
-        loadingBooks: false,
+        // loadingBooks: false,
       };
     case "book/meetingDateChanged":
       return {
@@ -95,7 +95,7 @@ function reducer(state, action) {
           ...state.upcomingBook,
           meeting_date: action.payload.meeting_date,
         },
-        loadingBooks: false,
+        // loadingBooks: false,
       };
     case "book/remove":
       return {
@@ -106,18 +106,18 @@ function reducer(state, action) {
           ),
         ],
         bookToShow: null,
-        loadingBooks: false,
+        // loadingBooks: false,
       };
     case "search/completed":
-      if (action.payload.total === 0) return { ...state, loadingBooks: false };
+      if (action.payload.total === 0) return { ...state };
       return {
         ...state,
-        loadingBooks: false,
+        // loadingBooks: false,
         totalResults: action.payload.total,
         searchResults: action.payload.results,
       };
     case "rejected":
-      return { ...state, loadingBooks: false, error: action.payload };
+      return { ...state, error: action.payload };
     default:
       throw new Error("Unknown action");
   }
@@ -128,9 +128,8 @@ function BooksProvider({ children }) {
     {
       books,
       bookToShow,
-      loadingBooks,
+      // loadingBooks,
       upcomingBook,
-      // currentView,
       searchResults,
       totalResults,
       error,
@@ -144,7 +143,7 @@ function BooksProvider({ children }) {
     function () {
       async function getAllBooks() {
         if (!isLoggedIn || !user.id) return;
-        dispatch({ type: "loading" });
+        // dispatch({ type: "loading" });
         try {
           // geting all books for one user/club
           const res = await axios({
@@ -176,36 +175,10 @@ function BooksProvider({ children }) {
     dispatch({ type: "search/completed", payload: searchResults });
   }
 
-  // 3) Specific Book data is received. Also checking if it's already in the DB
-  const showBook = useCallback(
-    async function showBook(id) {
-      if (bookToShow) return;
-      dispatch({ type: "loading" });
-      try {
-        // looking for the book in the DB:
-        const bookInDb = books.find((book) => book.bookid === id);
-        let bookFromApi;
-        // if it's not in the DB - look in the web api
-        if (bookInDb === undefined) {
-          const response = await fetch(`${BOOK_API}/${id}`);
-          const data = await response.json();
-          bookFromApi = makeUniformedBook(data);
-        }
-        dispatch({ type: "book/loaded", payload: bookInDb || bookFromApi });
-      } catch {
-        dispatch({
-          type: "rejected",
-          payload: "Error while fetching book data!",
-        });
-      }
-    },
-    [books, bookToShow]
-  );
-
   // Change existing Book document
   async function changeBookDocument(id, data) {
     if (!user.id) return;
-    dispatch({ type: "loading" });
+    // dispatch({ type: "loading" });
     try {
       data = { ...data, club: user.id };
       await axios({
@@ -226,7 +199,7 @@ function BooksProvider({ children }) {
   async function addBook(data) {
     if (!user.id) return;
     data = { ...data, club: user.id };
-    dispatch({ type: "loading" });
+    // dispatch({ type: "loading" });
     try {
       const reply = await axios({
         method: "POST",
@@ -244,7 +217,7 @@ function BooksProvider({ children }) {
 
   // Add meeting date
   async function addBookDate(meetingDate) {
-    dispatch({ type: "loading" });
+    // dispatch({ type: "loading" });
     try {
       const data = { club: user._id, meeting_date: meetingDate };
       await changeBookDocument(upcomingBook.bookid, data);
@@ -260,7 +233,7 @@ function BooksProvider({ children }) {
   // Rate Book
   async function rateBook(rating) {
     if (!upcomingBook) return;
-    dispatch({ type: "loading" });
+    // dispatch({ type: "loading" });
     const meeting_date = upcomingBook.meeting_date
       ? upcomingBook.meeting_date
       : new Date().toISOString();
@@ -284,7 +257,7 @@ function BooksProvider({ children }) {
   // Choose Next Book
   async function nextBook() {
     if (!bookToShow || upcomingBook) return;
-    dispatch({ type: "loading" });
+    // dispatch({ type: "loading" });
     try {
       const data = { upcoming: true };
       await changeBookDocument(bookToShow.bookid, data);
@@ -299,7 +272,7 @@ function BooksProvider({ children }) {
 
   // Remove Book
   async function removeBook() {
-    dispatch({ type: "loading" });
+    // dispatch({ type: "loading" });
     try {
       await axios({
         method: "DELETE",
@@ -323,14 +296,14 @@ function BooksProvider({ children }) {
   return (
     <BooksContext.Provider
       value={{
-        books,
-        loadingBooks,
-        bookToShow,
-        upcomingBook,
+        // books,
+        // loadingBooks,
+        // bookToShow,
+        // upcomingBook,
         searchResults,
         totalResults,
         error,
-        showBook,
+        // showBook,
         rateBook,
         nextBook,
         addBook,

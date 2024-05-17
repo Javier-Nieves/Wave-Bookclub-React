@@ -5,9 +5,9 @@ import {
   useEffect,
   useReducer,
 } from "react";
-import { useBooks } from "./BooksContext";
 import { CLASSIC_LIMIT } from "../utils/config";
 import { useAuth } from "./AuthContext";
+import { useLibrary } from "../features/book/useLibrary";
 
 const ViewsContext = createContext();
 
@@ -15,7 +15,6 @@ const initialState = {
   currentView: "modern",
   defaultStyle: "modern",
   message: null,
-  //   message: { style: "good", text: "You are logged in" },
 };
 
 function reducer(state, action) {
@@ -52,7 +51,7 @@ function ViewsProvider({ children }) {
     reducer,
     initialState
   );
-  const { upcomingBook } = useBooks();
+  const { upcomingBook } = useLibrary();
   // const { isLoggedIn } = useAuth();
 
   function showMessage(text, style = "good") {
@@ -82,7 +81,6 @@ function ViewsProvider({ children }) {
   function changeView(view) {
     if (currentView === view) return;
     dispatch({ type: "changeView", payload: view });
-    //   bookToShow && clearBookToShow();
   }
 
   return (

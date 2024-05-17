@@ -11,5 +11,7 @@ export function useLibrary() {
         queryFn: () => getAllBooks(user.id)
     })
 
-  return { isLoading, books, error };
+  const upcomingBook = books?.find((book) => book.upcoming === true);
+
+  return { isLoading, books, upcomingBook, error };
 }

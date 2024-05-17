@@ -7,6 +7,7 @@ export default function SearchTable() {
   const { searchResults } = useBooks();
 
   if (!searchResults) return;
+
   return (
     <table className={styles.searchTable}>
       <thead>

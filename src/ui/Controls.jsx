@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useBooks } from "../contexts/BooksContext";
 import { useViews } from "../contexts/ViewsContext";
+import { useLibrary } from "../features/book/useLibrary";
+import { useGetBook } from "../features/book/useGetBook";
 import { RateBookBlock } from "./RateBookBlock";
 import Button from "./Button";
 import Dialog from "./Dialog";
@@ -10,11 +12,11 @@ import { Rating } from "./Rating";
 import { AddForm } from "./AddForm";
 
 import styles from "./Main.module.css";
-import { useLibrary } from "../features/book/useLibrary";
 
 export default function Controls() {
-  const { books } = useLibrary();
-  const { bookToShow, upcomingBook, nextBook, removeBook } = useBooks();
+  const { books, upcomingBook } = useLibrary();
+  const { bookToShow } = useGetBook();
+  const { nextBook, removeBook } = useBooks();
   const { message, showMessage } = useViews();
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
   const navigate = useNavigate();

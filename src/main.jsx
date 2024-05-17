@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { BooksProvider } from "./contexts/BooksContext";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -10,16 +12,28 @@ import App from "./App.jsx";
 
 import "./index.css";
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // staleTime: 60 * 1000,
+      staleTime: 0,
+    },
+  },
+});
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthProvider>
-      <BooksProvider>
-        <ViewsProvider>
-          <CountriesProvider>
-            <App />
-          </CountriesProvider>
-        </ViewsProvider>
-      </BooksProvider>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <AuthProvider>
+        <BooksProvider>
+          <ViewsProvider>
+            <CountriesProvider>
+              <App />
+            </CountriesProvider>
+          </ViewsProvider>
+        </BooksProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
