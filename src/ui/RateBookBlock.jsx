@@ -1,16 +1,19 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useBooks } from "../contexts/BooksContext";
 import { useViews } from "../contexts/ViewsContext";
+import { useLibrary } from "../features/book/useLibrary";
+import { useUpdateBook } from "../features/book/useUpdateBook";
 import Button from "./Button";
 import Dialog from "./Dialog";
 
 import styles from "./Main.module.css";
 
 export function RateBookBlock() {
-  const { rateBook } = useBooks();
+  const { upcomingBook } = useLibrary();
+  const { changeBook } = useUpdateBook();
   const { message, showMessage } = useViews();
+
   const [dialogIsopen, setDialogIsOpen] = useState(false);
   const [rating, setRating] = useState("");
   const navigate = useNavigate();
@@ -22,7 +25,18 @@ export function RateBookBlock() {
 
   async function handleRateBook(e) {
     e.preventDefault();
-    await rateBook(rating);
+    // await rateBook(rating);
+    if (!rating) return;
+
+    changeBook({
+      id: upcomingBook._id,
+      type: "Rate",
+      data: {
+        rating,
+        meetingDate: upcomingBook.meeting_date || new Date().toISOString(),
+      },
+    });
+
     setDialogIsOpen(false);
     navigate("/app");
     !message && showMessage("Book is rated", "good");

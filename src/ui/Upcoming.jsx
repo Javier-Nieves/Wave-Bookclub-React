@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { useLibrary } from "../features/book/useLibrary";
-import { useBooks } from "../contexts/BooksContext";
+import { useUpdateBook } from "../features/book/useUpdateBook";
 import { useViews } from "../contexts/ViewsContext";
 import { CLASSIC_LIMIT } from "../utils/config";
 import Button from "./Button";
@@ -12,7 +12,7 @@ import styles from "./Upcoming.module.css";
 
 export default function Upcoming() {
   const [date, setDate] = useState();
-  const { addBookDate } = useBooks();
+  const { changeBook } = useUpdateBook();
   const { upcomingBook } = useLibrary();
   const { message, showMessage } = useViews();
   const navigate = useNavigate();
@@ -26,7 +26,12 @@ export default function Upcoming() {
 
   function handleChangeDate(e) {
     e.preventDefault();
-    addBookDate(date);
+    if (!date) return;
+    changeBook({
+      id: upcomingBook._id,
+      type: "Date",
+      data: { meetingDate: date },
+    });
     !message && showMessage("Meeting date is selected", "good");
   }
 

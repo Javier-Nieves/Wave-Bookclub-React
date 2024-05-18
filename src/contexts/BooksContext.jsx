@@ -176,93 +176,76 @@ function BooksProvider({ children }) {
   }
 
   // Change existing Book document
-  async function changeBookDocument(id, data) {
-    if (!user.id) return;
-    // dispatch({ type: "loading" });
-    try {
-      data = { ...data, club: user.id };
-      await axios({
-        method: "PATCH",
-        url: `${SERVER_URL}api/v1/books/${id}`,
-        data,
-      });
-      dispatch({ type: "book/meetingDateChanged", payload: data });
-    } catch (err) {
-      dispatch({
-        type: "rejected",
-        payload: "Error while changing book data!",
-      });
-    }
-  }
+  // async function changeBookDocument(id, data) {
+  // if (!user.id) return;
+  // // dispatch({ type: "loading" });
+  // try {
+  //   data = { ...data, club: user.id };
+  //   await axios({
+  //     method: "PATCH",
+  //     url: `${SERVER_URL}api/v1/books/${id}`,
+  //     data,
+  //   });
+  //   dispatch({ type: "book/meetingDateChanged", payload: data });
+  // } catch (err) {
+  //   dispatch({
+  //     type: "rejected",
+  //     payload: "Error while changing book data!",
+  //   });
+  // }
+  // }
 
   // Add meeting date
-  async function addBookDate(meetingDate) {
-    // dispatch({ type: "loading" });
-    try {
-      const data = { club: user._id, meeting_date: meetingDate };
-      await changeBookDocument(upcomingBook.bookid, data);
-      dispatch({ type: "book/add", payload: data });
-    } catch {
-      dispatch({
-        type: "rejected",
-        payload: "Error while adding new book!",
-      });
-    }
-  }
-
-  // Rate Book
-  async function rateBook(rating) {
-    if (!upcomingBook) return;
-    // dispatch({ type: "loading" });
-    const meeting_date = upcomingBook.meeting_date
-      ? upcomingBook.meeting_date
-      : new Date().toISOString();
-    try {
-      const data = {
-        upcoming: false,
-        read: true,
-        rating,
-        meeting_date,
-      };
-      await changeBookDocument(upcomingBook.bookid, data);
-      dispatch({ type: "book/rated", payload: { rating, meeting_date } });
-    } catch {
-      dispatch({
-        type: "rejected",
-        payload: "Error while rating book!",
-      });
-    }
-  }
-
-  // Choose Next Book
-  async function nextBook() {
-    if (!bookToShow || upcomingBook) return;
-    // dispatch({ type: "loading" });
-    try {
-      const data = { upcoming: true };
-      await changeBookDocument(bookToShow.bookid, data);
-      dispatch({ type: "book/next" });
-    } catch {
-      dispatch({
-        type: "rejected",
-        payload: "Error while selecting next book!",
-      });
-    }
-  }
-
-  // Remove Book
-  // async function removeBook() {
+  // async function addBookDate(meetingDate) {
   //   // dispatch({ type: "loading" });
   //   try {
-  //     await axios({
-  //       method: "DELETE",
-  //       url: `${SERVER_URL}api/v1/books/${bookToShow._id}`,
-  //     });
-  //     dispatch({ type: "book/remove" });
+  //     const data = { club: user._id, meeting_date: meetingDate };
+  //     await changeBookDocument(upcomingBook.bookid, data);
+  //     dispatch({ type: "book/add", payload: data });
   //   } catch {
   //     dispatch({
   //       type: "rejected",
-  //       payload: "Error while removing new book!",
+  //       payload: "Error while adding new book!",
+  //     });
+  //   }
+  // }
+
+  // Rate Book
+  // async function rateBook(rating) {
+  //   if (!upcomingBook) return;
+  //   // dispatch({ type: "loading" });
+  //   const meeting_date = upcomingBook.meeting_date
+  //     ? upcomingBook.meeting_date
+  //     : new Date().toISOString();
+  //   try {
+  //     const data = {
+  //       upcoming: false,
+  //       read: true,
+  //       rating,
+  //       meeting_date,
+  //     };
+  //     await changeBookDocument(upcomingBook.bookid, data);
+  //     dispatch({ type: "book/rated", payload: { rating, meeting_date } });
+  //   } catch {
+  //     dispatch({
+  //       type: "rejected",
+  //       payload: "Error while rating book!",
+  //     });
+  //   }
+  // }
+
+  // Choose Next Book
+  // async function nextBook() {
+  //   if (!bookToShow || upcomingBook) return;
+  //   // dispatch({ type: "loading" });
+  //   try {
+  //     const data = { upcoming: true };
+  //     await changeBookDocument(bookToShow.bookid, data);
+  //     dispatch({ type: "book/next" });
+  //   } catch {
+  //     dispatch({
+  //       type: "rejected",
+  //       payload: "Error while selecting next book!",
   //     });
   //   }
   // }
@@ -284,10 +267,10 @@ function BooksProvider({ children }) {
         totalResults,
         error,
         // showBook,
-        rateBook,
-        nextBook,
+        // rateBook,
+        // nextBook,
+        // addBookDate,
         // addBook,
-        addBookDate,
         // removeBook,
         clearBookToShow,
         searchBooks,
