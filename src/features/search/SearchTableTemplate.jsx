@@ -1,5 +1,4 @@
 import { useViews } from "../../contexts/ViewsContext";
-import Loader from "../../ui/Loader";
 import { SearchRow } from "../tables/TableRow";
 
 import styles from "../tables/Tables.module.css";
@@ -7,15 +6,15 @@ import styles from "../tables/Tables.module.css";
 export default function SearchTable() {
   const { currentSearchResults } = useViews();
 
-  if (!currentSearchResults) return <Loader />;
+  // if (isSearching) return <Loader />;
 
   return (
     <table className={styles.searchTable}>
       <thead>
         <tr className={styles.searchHead}>
-          <th className="Up">Book</th>
+          <th>Book</th>
           <th>Title</th>
-          <th className="Up">Author</th>
+          <th>Author</th>
         </tr>
       </thead>
 

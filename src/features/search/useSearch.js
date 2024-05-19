@@ -3,7 +3,7 @@ import { searchBooks } from "../../services/apiBooks";
 
 export function useSearch(title, page) {
   const { isLoading: isSearching, data } = useQuery({
-    queryKey: ["search", title],
+    queryKey: ["search", title, page],
     queryFn: () => searchBooks(title, page),
     enabled: Boolean(title),
   });

@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaLongArrowAltRight, FaLongArrowAltLeft } from "react-icons/fa";
 
 import { useViews } from "../../contexts/ViewsContext";
 import { useSearch } from "./useSearch";
-// import { RES_PAGE } from "../../utils/config";
+import { RES_PAGE } from "../../utils/config";
 
 import styles from "./Search.module.css";
 
@@ -21,24 +22,31 @@ export default function Search() {
     page
   );
 
-  // TODO! :
+  // time to let the page render before rendering results
   setTimeout(() => {
     showSearchResults(searchResults);
-  }, 500);
+  }, 200);
 
-  useEffect(function () {
-    function callback(e) {
-      if (document.activeElement === searchInput.current) return;
-      if (e.code === "Enter") {
-        searchInput.current.focus();
-        searchInput.current.value = "";
+  // on Enter push - focus title input. Of go to search
+  useEffect(
+    function () {
+      function callback(e) {
+        if (document.activeElement === searchInput.current) {
+          if (e.code === "Enter") navigate("/app/search");
+          return;
+        }
+        if (e.code === "Enter") {
+          searchInput.current.focus();
+          searchInput.current.value = "";
+        }
       }
-    }
-    document.addEventListener("keydown", callback);
-    return function () {
-      document.removeEventListener("keydown", callback);
-    };
-  }, []);
+      document.addEventListener("keydown", callback);
+      return function () {
+        document.removeEventListener("keydown", callback);
+      };
+    },
+    [navigate]
+  );
 
   // TODO: correct, strange behavior. Navigate back if searchResults are none
   useEffect(
@@ -59,6 +67,13 @@ export default function Search() {
     if (currentView === "search" && e.target.value === "") navigate("/app");
   }
 
+  function incPage() {
+    if (page < Math.ceil(totalResults / RES_PAGE)) setPage((p) => p + 1);
+  }
+  function decPage() {
+    if (page > 1) setPage((p) => p - 1);
+  }
+
   return (
     <div id="search-field-container">
       <input
@@ -71,9 +86,27 @@ export default function Search() {
       />
       {currentView === "search" && (
         <div>
-          <div className={styles.SearchInfoText}>
-            Total results: {totalResults}
-          </div>
+          <>
+            <div className={styles.SearchInfoText}>
+              Total results: {totalResults}
+            </div>
+            <div className={styles.SearchInfoText} style={{ margin: "15px " }}>
+              Page:
+            </div>
+            <div className={styles.searchNavContainer}>
+              <button className={styles.searchNavBtn} onClick={() => decPage()}>
+                <FaLongArrowAltLeft />
+              </button>
+              <span className={styles.searchNavText}>
+                {isSearching
+                  ? page
+                  : `${page} / ${Math.ceil(totalResults / RES_PAGE)}`}
+              </span>
+              <button className={styles.searchNavBtn} onClick={() => incPage()}>
+                <FaLongArrowAltRight />
+              </button>
+            </div>
+          </>
         </div>
       )}
     </div>
