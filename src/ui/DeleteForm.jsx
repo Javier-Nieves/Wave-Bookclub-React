@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { useBooks } from "../contexts/BooksContext";
+import { useRemoveBook } from "../features/book/useRemoveBook";
 import { useViews } from "../contexts/ViewsContext";
 import Button from "./Button";
 
 import styles from "./Main.module.css";
 
 function DeleteForm({ setDialogIsOpen }) {
-  const { removeBook } = useBooks();
+  const { removeBook } = useRemoveBook();
   const { message, showMessage } = useViews();
   const navigate = useNavigate();
 
