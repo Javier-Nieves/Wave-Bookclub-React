@@ -1,12 +1,13 @@
-import { useBooks } from "../../contexts/BooksContext";
+import { useViews } from "../../contexts/ViewsContext";
+import Loader from "../../ui/Loader";
 import { SearchRow } from "../tables/TableRow";
 
 import styles from "../tables/Tables.module.css";
 
 export default function SearchTable() {
-  const { searchResults } = useBooks();
+  const { currentSearchResults } = useViews();
 
-  if (!searchResults) return;
+  if (!currentSearchResults) return <Loader />;
 
   return (
     <table className={styles.searchTable}>
@@ -19,7 +20,7 @@ export default function SearchTable() {
       </thead>
 
       <tbody className={styles.searchTable}>
-        {searchResults.map((book) => (
+        {currentSearchResults.map((book) => (
           <SearchRow book={book} key={book.bookid} />
         ))}
       </tbody>

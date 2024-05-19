@@ -6,7 +6,6 @@ export function useUpdateBook() {
   const { isLoading: isUpdating, mutate: changeBook } = useMutation({
     mutationFn: ({ id, type, data }) => changeBookApi({ id, type, data }),
     onSuccess: () => {
-      console.log("Updated");
       queryClient.invalidateQueries({
         queryKey: ["books"],
       });

@@ -61,7 +61,9 @@ export function SearchRow({ book }) {
   return (
     <tr
       className={styles.historyBody}
-      onClick={() => navigate(`/app/book/${book.bookid}`)}
+      onClick={() => {
+        navigate(`/app/book/${book.bookid}`);
+      }}
     >
       <td>
         <img

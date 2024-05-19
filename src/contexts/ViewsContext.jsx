@@ -8,10 +8,12 @@ import {
 import { CLASSIC_LIMIT } from "../utils/config";
 import { useAuth } from "./AuthContext";
 import { useLibrary } from "../features/book/useLibrary";
+import { arraysEqual, objectsAreEqual } from "../utils/helpers";
 
 const ViewsContext = createContext();
 
 const initialState = {
+  currentSearchResults: [],
   currentView: "modern",
   defaultStyle: "modern",
   message: null,
@@ -29,6 +31,12 @@ function reducer(state, action) {
       return {
         ...state,
         currentView: action.payload,
+        currentSearchResults: [],
+      };
+    case "searchResults/save":
+      return {
+        ...state,
+        currentSearchResults: action.payload,
       };
     case "message/show":
       // payload is {style: ('good', 'bad'), text: text}
@@ -47,10 +55,10 @@ function reducer(state, action) {
 }
 
 function ViewsProvider({ children }) {
-  const [{ defaultStyle, currentView, message }, dispatch] = useReducer(
-    reducer,
-    initialState
-  );
+  const [
+    { defaultStyle, currentView, message, currentSearchResults, currentBook },
+    dispatch,
+  ] = useReducer(reducer, initialState);
   const { upcomingBook } = useLibrary();
   // const { isLoggedIn } = useAuth();
 
@@ -59,6 +67,12 @@ function ViewsProvider({ children }) {
     setTimeout(() => {
       dispatch({ type: "message/delete" });
     }, 2000);
+  }
+
+  function showSearchResults(data) {
+    if (!data) return;
+    if (arraysEqual(data, currentSearchResults)) return;
+    dispatch({ type: "searchResults/save", payload: data });
   }
 
   // setting default app style based on the upcomming book type (modern or classic)
@@ -79,13 +93,22 @@ function ViewsProvider({ children }) {
   //   );
 
   function changeView(view) {
+    // console.log("changing view! to", view);
     if (currentView === view) return;
     dispatch({ type: "changeView", payload: view });
   }
 
   return (
     <ViewsContext.Provider
-      value={{ defaultStyle, currentView, message, changeView, showMessage }}
+      value={{
+        defaultStyle,
+        currentView,
+        message,
+        currentSearchResults,
+        changeView,
+        showMessage,
+        showSearchResults,
+      }}
     >
       {children}
     </ViewsContext.Provider>

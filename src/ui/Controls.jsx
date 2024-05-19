@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useViews } from "../contexts/ViewsContext";
 import { useLibrary } from "../features/book/useLibrary";
-import { useGetBook } from "../features/book/useGetBook";
 import { useUpdateBook } from "../features/book/useUpdateBook";
-import { useRemoveBook } from "../features/book/useREmoveBook";
+import { useGetBook } from "../features/book/useGetBook";
+import { useRemoveBook } from "../features/book/useRemoveBook";
 import { RateBookBlock } from "./RateBookBlock";
 import Button from "./Button";
 import Dialog from "./Dialog";
@@ -16,26 +16,14 @@ import styles from "./Main.module.css";
 
 export default function Controls() {
   const { books, upcomingBook } = useLibrary();
-  const { bookToShow } = useGetBook();
   const { removeBook } = useRemoveBook();
   const { changeBook } = useUpdateBook();
   const { message, showMessage } = useViews();
-
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
+  const { bookToShow } = useGetBook();
   const navigate = useNavigate();
 
-  const [activeBook, setActiveBook] = useState(bookToShow);
-
-  useEffect(
-    function () {
-      setActiveBook(
-        books?.find((item) => item._id === bookToShow?._id) || bookToShow
-      );
-    },
-    [books, bookToShow]
-  );
-
-  if (!activeBook?.bookid) return;
+  if (!bookToShow?.bookid) return;
 
   async function handleNextBook() {
     changeBook({ id: bookToShow._id, type: "Next" });
@@ -49,19 +37,19 @@ export default function Controls() {
   }
 
   // History view
-  if (activeBook.read)
+  if (bookToShow.read)
     return (
       <>
-        <Cover image={activeBook.image_link} />
-        {activeBook.rating && <Rating rating={activeBook.rating} />}
+        <Cover image={bookToShow.image_link} />
+        {bookToShow.rating && <Rating rating={bookToShow.rating} />}
       </>
     );
 
   // Upcoming Book view
-  if (activeBook.upcoming)
+  if (bookToShow.upcoming)
     return (
       <div className={styles.controlGroup}>
-        <Cover image={activeBook.image_link} />
+        <Cover image={bookToShow.image_link} />
         <RateBookBlock />
       </div>
     );
@@ -76,9 +64,9 @@ export default function Controls() {
       )}
 
       <div className={styles.controlGroup}>
-        <Cover image={activeBook.image_link} />
+        <Cover image={bookToShow.image_link} />
 
-        {books.some((b) => b === activeBook) ? (
+        {books.some((b) => b === bookToShow) ? (
           <>
             <Button type="greyBtn" onClick={handleRemoveBook}>
               Remove from the reading list

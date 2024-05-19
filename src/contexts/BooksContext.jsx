@@ -1,15 +1,9 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-  useCallback,
-} from "react";
-import axios from "axios";
+import { createContext, useContext, useReducer } from "react";
+// import axios from "axios";
 
-import { SERVER_URL, BOOK_API } from "../utils/config";
-import { getSearchedBooks, makeUniformedBook } from "../utils/helpers";
-import { useAuth } from "./AuthContext.jsx";
+// import { SERVER_URL, BOOK_API } from "../utils/config";
+// import { getSearchedBooks, makeUniformedBook } from "../utils/helpers";
+// import { useAuth } from "./AuthContext.jsx";
 
 const BooksContext = createContext();
 
@@ -126,54 +120,54 @@ function reducer(state, action) {
 function BooksProvider({ children }) {
   const [
     {
-      books,
-      bookToShow,
+      // books,
+      // bookToShow,
       // loadingBooks,
-      upcomingBook,
+      // upcomingBook,
       searchResults,
       totalResults,
       error,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
-  const { user, isLoggedIn } = useAuth();
+  // const { user, isLoggedIn } = useAuth();
 
   // 1) getting initial books
-  useEffect(
-    function () {
-      async function getAllBooks() {
-        if (!isLoggedIn || !user.id) return;
-        // dispatch({ type: "loading" });
-        try {
-          // geting all books for one user/club
-          const res = await axios({
-            method: "GET",
-            url: `${SERVER_URL}api/v1/books/all/${user.id}`,
-          });
-          if (res.data.status === "success") {
-            dispatch({
-              type: "books/loaded",
-              payload: res.data.data.books.sort((a, b) => a.year - b.year),
-            });
-          }
-        } catch {
-          dispatch({
-            type: "rejected",
-            payload: "Error while fetching books data!",
-          });
-        }
-      }
-      getAllBooks();
-    },
-    [user, isLoggedIn]
-  );
+  // useEffect(
+  //   function () {
+  //     async function getAllBooks() {
+  //       if (!isLoggedIn || !user.id) return;
+  //       // dispatch({ type: "loading" });
+  //       try {
+  //         // geting all books for one user/club
+  //         const res = await axios({
+  //           method: "GET",
+  //           url: `${SERVER_URL}api/v1/books/all/${user.id}`,
+  //         });
+  //         if (res.data.status === "success") {
+  //           dispatch({
+  //             type: "books/loaded",
+  //             payload: res.data.data.books.sort((a, b) => a.year - b.year),
+  //           });
+  //         }
+  //       } catch {
+  //         dispatch({
+  //           type: "rejected",
+  //           payload: "Error while fetching books data!",
+  //         });
+  //       }
+  //     }
+  //     getAllBooks();
+  //   },
+  //   [user, isLoggedIn]
+  // );
 
   // 2) Books from the search field
-  async function searchBooks(title, page) {
-    dispatch({ type: "search/started" });
-    const searchResults = await getSearchedBooks(title, page);
-    dispatch({ type: "search/completed", payload: searchResults });
-  }
+  // async function searchBooks(title, page) {
+  //   dispatch({ type: "search/started" });
+  //   const searchResults = await getSearchedBooks(title, page);
+  //   dispatch({ type: "search/completed", payload: searchResults });
+  // }
 
   // Change existing Book document
   // async function changeBookDocument(id, data) {
@@ -251,10 +245,10 @@ function BooksProvider({ children }) {
   // }
 
   // Clear bookToShow
-  function clearBookToShow() {
-    if (!bookToShow) return;
-    dispatch({ type: "bookToShow/cleared" });
-  }
+  // function clearBookToShow() {
+  //   if (!bookToShow) return;
+  //   dispatch({ type: "bookToShow/cleared" });
+  // }
 
   return (
     <BooksContext.Provider
@@ -272,8 +266,8 @@ function BooksProvider({ children }) {
         // addBookDate,
         // addBook,
         // removeBook,
-        clearBookToShow,
-        searchBooks,
+        // clearBookToShow,
+        // searchBooks,
       }}
     >
       {children}

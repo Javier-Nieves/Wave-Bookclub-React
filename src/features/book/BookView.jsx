@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useGetBook } from "./useGetBook";
 import { CLASSIC_LIMIT } from "../../utils/config";
+import { useViews } from "../../contexts/ViewsContext";
 import Loader from "../../ui/Loader";
 
 import styles from "./BookView.module.css";
-import { useViews } from "../../contexts/ViewsContext";
 
 export default function BookView() {
   const { currentView, changeView } = useViews();

@@ -1,21 +1,18 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import { getBook } from "../../services/apiBooks";
 import { useLibrary } from "./useLibrary";
+import { useParams } from "react-router-dom";
 
 export function useGetBook() {
-  const queryClient = useQueryClient();
-  const { books } = useLibrary();
   const { id } = useParams();
-  // make old bookToShow query stale to update it
-  queryClient.invalidateQueries({ queryKey: ["bookToShow"] });
+  const { books } = useLibrary();
 
   const {
     isLoading,
     data: bookToShow,
     error,
   } = useQuery({
-    queryKey: ["bookToShow"],
+    queryKey: ["bookToShow", id],
     queryFn: () => getBook(books, id),
   });
 
