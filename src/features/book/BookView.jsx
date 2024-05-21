@@ -1,14 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useCountries } from "../../contexts/CountriesContext";
 import { useGetBook } from "./useGetBook";
 import { CLASSIC_LIMIT } from "../../utils/config";
 import { useViews } from "../../contexts/ViewsContext";
+import EditBookForm from "../../ui/EditBookForm";
 import Loader from "../../ui/Loader";
+import Button from "../../ui/Button";
+import Dialog from "../../ui/Dialog";
 
 import styles from "./BookView.module.css";
 
 export default function BookView() {
   const { currentView, changeView } = useViews();
   const { bookToShow, isLoading } = useGetBook();
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(
     function () {
@@ -36,11 +41,18 @@ export default function BookView() {
     return <h1 className={styles.noBook}>No such book</h1>;
 
   return (
-    <div className={styles.bookInfo}>
-      <BookTitle bookToShow={bookToShow} />
-      <BookStats bookToShow={bookToShow} />
-      <BookDescription bookToShow={bookToShow} />
-    </div>
+    <>
+      {isEditing && (
+        <Dialog type="wide" onClick={() => setIsEditing(false)}>
+          <EditBookForm bookToEdit={bookToShow} />
+        </Dialog>
+      )}
+      <div className={styles.bookInfo}>
+        <BookTitle bookToShow={bookToShow} />
+        <BookStats bookToShow={bookToShow} setIsEditing={setIsEditing} />
+        <BookDescription bookToShow={bookToShow} />
+      </div>
+    </>
   );
 }
 
@@ -56,10 +68,22 @@ function BookTitle({ bookToShow }) {
   );
 }
 
-function BookStats({ bookToShow }) {
+function BookStats({ bookToShow, setIsEditing }) {
+  const { countries } = useCountries();
+
+  const bookCountry = countries.find(
+    (c) => c.name.common === bookToShow.country
+  );
   const bookStyle = bookToShow?.year < CLASSIC_LIMIT ? "classic" : "modern";
   return (
     <div className={styles.bookInfoTop}>
+      {bookCountry?.flags.svg && (
+        <img
+          src={bookCountry.flags.svg}
+          className={styles.medFlag}
+          alt="flag"
+        />
+      )}
       <h2
         className={styles.viewAuthor}
         style={{ fontFamily: `var(--font-${bookStyle})` }}
@@ -77,9 +101,12 @@ function BookStats({ bookToShow }) {
         >
           Pages: {bookToShow.pages}
         </div>
+        {bookToShow.year && (
+          <Button type="blackBtn" onClick={() => setIsEditing(true)}>
+            Edit
+          </Button>
+        )}
       </div>
-      {/* <button className="edit-btn">Edit</button>
-      <button className="save-btn">Save</button> */}
     </div>
   );
 }
