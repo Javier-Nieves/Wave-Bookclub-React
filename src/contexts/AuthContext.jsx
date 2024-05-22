@@ -49,7 +49,7 @@ function reducer(state, action) {
       return {
         ...state,
         isLoggedIn: false,
-        user: null,
+        user: {},
         jwt: null,
         loadingLogin: false,
       };

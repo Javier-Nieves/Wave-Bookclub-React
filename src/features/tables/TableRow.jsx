@@ -9,7 +9,8 @@ export function TableRow({ book }) {
   const { countries } = useCountries();
   const navigate = useNavigate();
 
-  const bookCountry = countries.find((c) => c.name.common === book.country);
+  const bookCountry =
+    countries.find((c) => c.name.common === book.country) || "";
 
   return (
     <tr
@@ -26,11 +27,13 @@ export function TableRow({ book }) {
       <td className={styles.mobileOnly}>
         <div className={styles.flagContainer}>
           <div>{book.country}</div>
-          <img
-            src={bookCountry?.flags.svg}
-            className={styles.smallFlag}
-            alt="flag"
-          />
+          {bookCountry?.flags?.svg && (
+            <img
+              src={bookCountry?.flags?.svg}
+              className={styles.smallFlag}
+              alt="flag"
+            />
+          )}
         </div>
       </td>
       <td className={styles.mobileOnly}>{book.pages}</td>
