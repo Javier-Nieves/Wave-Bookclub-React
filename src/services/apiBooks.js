@@ -3,7 +3,7 @@ import { SERVER_URL, BOOK_API, RES_PAGE } from "../utils/config";
 import { makeUniformedBook, makeUniformedList } from "../utils/helpers";
 
 export async function getAllBooks(id) {
-  //   console.log("getting books for", id);
+  console.log("getting books for", id);
   // id - is userId. function returns all the books for this user
   let books = [];
   if (id === undefined) return books;

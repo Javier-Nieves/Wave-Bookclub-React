@@ -9,7 +9,7 @@ export function useLibrary() {
   const {data: books, isLoading, error} = useQuery({
         queryKey: ['books'],
         queryFn: () => getAllBooks(user.id),
-        enabled: Object.keys(user).length !== 0 // Enable the query when user is defined
+        enabled: Boolean(user.id) // Enable the query when user is defined
     })
 
   const upcomingBook = books?.find((book) => book.upcoming === true);

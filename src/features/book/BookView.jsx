@@ -77,7 +77,7 @@ function BookStats({ bookToShow, setIsEditing }) {
   const bookStyle = bookToShow?.year < CLASSIC_LIMIT ? "classic" : "modern";
   return (
     <div className={styles.bookInfoTop}>
-      {bookCountry?.flags.svg && (
+      {bookCountry?.flags?.svg && (
         <img
           src={bookCountry.flags.svg}
           className={styles.medFlag}
