@@ -1,14 +1,43 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useViews } from "../contexts/ViewsContext";
+import { useCountries } from "../contexts/CountriesContext";
+import { useUpdateBook } from "../features/book/useUpdateBook";
+import Button from "./Button";
+
 import styles from "./EditBookForm.module.css";
 
-function EditBookForm({ bookToEdit }) {
-  const { register, handleSubmit, reset, getValues, formState } = useForm({
-    defaultValues: { ...bookToEdit },
-  });
+function EditBookForm({ bookToEdit, setIsEditing }) {
+  const [country, setCountry] = useState(bookToEdit.country);
+  const { countries } = useCountries();
+  const { changeBook } = useUpdateBook();
+  const { showMessage } = useViews();
+  const { register, handleSubmit, reset, setValue, getValues, formState } =
+    useForm({
+      defaultValues: { ...bookToEdit },
+    });
   const { errors } = formState;
 
+  const selectedCountry = countries.find((c) => c.name.common === country);
+
+  function onSubmit(data) {
+    // adding controlled field Country into the form data
+    setValue("country", country);
+    const { title, author, year, desc, pages } = data;
+    data = { title, author, year, desc, pages, country };
+    console.log(data);
+    changeBook({ id: bookToEdit._id, data });
+    // todo - message
+    showMessage("Book data is updated");
+    setIsEditing(false);
+  }
+
   return (
-    <>
+    <form
+      className={styles.modalFormAdd}
+      onClick={(e) => e.stopPropagation()}
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <div className={styles.formRow}>
         <span className={styles.formText}>Title:</span>
         <input
@@ -40,13 +69,36 @@ function EditBookForm({ bookToEdit }) {
         </div>
 
         <div className={styles.lilBlock}>
+          {selectedCountry && (
+            <span>
+              <img
+                className={styles.tinyFlag}
+                src={selectedCountry.flags.svg}
+                alt={selectedCountry.flags.alt}
+              />
+            </span>
+          )}
           <span className={styles.formText}>Country:</span>
           <input
             type="text"
             id="country"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+            list="countryList"
+            placeholder="Country"
+            // {...register("country", { required: "This field is required" })}
+          />
+          <datalist id="countryList">
+            {countries.map((country) => (
+              <option key={country.name.common}>{country.name.common}</option>
+            ))}
+          </datalist>
+          {/* <input
+            type="text"
+            id="country"
             //   disabled={isWorking}
             {...register("country", { required: "This field is required" })}
-          />
+          /> */}
         </div>
       </div>
 
@@ -54,12 +106,15 @@ function EditBookForm({ bookToEdit }) {
         <span className={styles.formText}>Description:</span>
         <textarea
           type="text"
+          className={styles.bookDesc}
           id="desc"
           //   disabled={isWorking}
           {...register("desc", { required: "This field is required" })}
         />
       </div>
-    </>
+
+      <Button type="brightBtn">Save changes</Button>
+    </form>
   );
 }
 

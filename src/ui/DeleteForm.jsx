@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useGetBook } from "../features/book/useGetBook";
 import { useRemoveBook } from "../features/book/useRemoveBook";
 import { useViews } from "../contexts/ViewsContext";
 import Button from "./Button";
@@ -7,6 +8,7 @@ import styles from "./Main.module.css";
 
 function DeleteForm({ setDialogIsOpen }) {
   const { removeBook } = useRemoveBook();
+  const { bookToShow } = useGetBook();
   const { message, showMessage } = useViews();
   const navigate = useNavigate();
 
@@ -16,8 +18,8 @@ function DeleteForm({ setDialogIsOpen }) {
   }
   async function handleHistDelete(e) {
     e.preventDefault();
-    await removeBook();
-    navigate("/app");
+    removeBook(bookToShow._id);
+    navigate("/app/modern");
     !message && showMessage("Book is removed from history", "good");
   }
 

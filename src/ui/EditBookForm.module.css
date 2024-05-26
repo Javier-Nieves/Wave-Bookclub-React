@@ -17,3 +17,11 @@
 .lilBlock input {
   width: 85%;
 }
+
+.bookDesc {
+  height: 150px;
+}
+.tinyFlag {
+  width: 30px;
+  margin-right: 8px;
+}

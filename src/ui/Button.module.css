@@ -75,7 +75,7 @@ button:hover,
 .brightBtn:hover {
   background-color: var(--color-bright);
   box-shadow: 0 0 55px #f9f9f9d2;
-  transform: scale(1.1);
+  transform: scale(1.05);
   color: #050801;
   cursor: pointer;
 }

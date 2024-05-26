@@ -10,7 +10,7 @@ export function useAddBook() {
     onSuccess: () => {
       navigate("/app");
       queryClient.invalidateQueries({
-        queryKey: ["books", "bookToShow"],
+        queryKey: ["books"],
       });
     },
     onError: () => console.error("Error adding book!"),

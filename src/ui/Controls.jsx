@@ -66,7 +66,7 @@ export default function Controls() {
       <div className={styles.controlGroup}>
         <Cover image={bookToShow.image_link} />
 
-        {books.some((b) => b === bookToShow) ? (
+        {books.some((b) => b.bookid === bookToShow.bookid) ? (
           <>
             <Button type="greyBtn" onClick={handleRemoveBook}>
               Remove from the reading list

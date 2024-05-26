@@ -44,7 +44,7 @@ export default function BookView() {
     <>
       {isEditing && (
         <Dialog type="wide" onClick={() => setIsEditing(false)}>
-          <EditBookForm bookToEdit={bookToShow} />
+          <EditBookForm bookToEdit={bookToShow} setIsEditing={setIsEditing} />
         </Dialog>
       )}
       <div className={styles.bookInfo}>

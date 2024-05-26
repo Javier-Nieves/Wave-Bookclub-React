@@ -15,7 +15,7 @@ dialog {
 .dialogContent {
   width: 30%;
   padding: 50px;
-  margin-bottom: 150px;
+  /* margin-bottom: 150px; */
   border-radius: 20px;
   border: 1px solid yellow;
   background-color: rgba(0, 0, 0, 0.8);

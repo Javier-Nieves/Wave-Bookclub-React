@@ -27,7 +27,7 @@ export default function Table({ section }) {
 
   if (isLoading) return <Loader />;
 
-  const sortedBooks = books.sort((a, b) => {
+  const sortedBooks = books?.sort((a, b) => {
     const columnA = a[sortedColumn];
     const columnB = b[sortedColumn];
     if (columnA < columnB) return sortDirection === "asc" ? -1 : 1;
@@ -35,14 +35,14 @@ export default function Table({ section }) {
     return 0;
   });
 
-  const classicBooks = sortedBooks.filter(
+  const classicBooks = sortedBooks?.filter(
     (book) => book.year < CLASSIC_LIMIT && !book.read
   );
-  const modernBooks = sortedBooks.filter(
+  const modernBooks = sortedBooks?.filter(
     (book) => book.year > CLASSIC_LIMIT && !book.read
   );
 
-  if (section === "classic" && !classicBooks.length)
+  if (section === "classic" && !classicBooks?.length)
     return (
       <NoContentYet>
         <p>Your classic reading list will be here.</p>
@@ -50,7 +50,7 @@ export default function Table({ section }) {
       </NoContentYet>
     );
 
-  if (section === "modern" && !modernBooks.length)
+  if (section === "modern" && !modernBooks?.length)
     return (
       <NoContentYet>
         <p>Your modern reading list will be here.</p>

@@ -10,7 +10,7 @@ export function useRemoveBook() {
     onSuccess: () => {
       navigate("/app");
       queryClient.invalidateQueries({
-        queryKey: ["books", "bookToShow"],
+        queryKey: ["books"],
       });
     },
     onError: () => console.error("Can't delete book"),

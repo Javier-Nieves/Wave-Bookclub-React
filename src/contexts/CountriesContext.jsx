@@ -1,6 +1,7 @@
 import { useState, useEffect, createContext, useContext } from "react";
 
-import { COUNTRIES_API } from "../utils/config";
+import { COUNTRIES_API, TIMEOUT_SEC } from "../utils/config";
+import { timeout } from "../utils/helpers";
 
 const CountriesContext = createContext();
 
@@ -13,8 +14,12 @@ function CountriesProvider({ children }) {
     async function getCountryList() {
       try {
         setLoadingCountries(true);
-        const res = await fetch(COUNTRIES_API);
-        const data = await res.json();
+        const countriesFetch = await fetch(COUNTRIES_API);
+        const response = await Promise.race([
+          countriesFetch,
+          timeout(TIMEOUT_SEC),
+        ]);
+        const data = await response.json();
         setCountries(
           data.map((item) => {
             if (item.name.common === "United States") item.name.common = "USA";

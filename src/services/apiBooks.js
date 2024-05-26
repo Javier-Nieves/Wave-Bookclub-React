@@ -3,7 +3,7 @@ import { SERVER_URL, BOOK_API, RES_PAGE } from "../utils/config";
 import { makeUniformedBook, makeUniformedList } from "../utils/helpers";
 
 export async function getAllBooks(id) {
-  console.log("getting books for", id);
+  // console.log("getting books for", id);
   // id - is userId. function returns all the books for this user
   let books = [];
   if (id === undefined) return books;
@@ -68,8 +68,8 @@ export async function removeBook(id) {
 }
 
 export async function changeBook({ id, type, data }) {
-  // can update: 1) meeting-date 2) upcoming status 3) rate book
-  if (!id || !type) return;
+  // can update: 1) meeting-date 2) upcoming status 3) rate book 4) Book data (without type)
+  if (!id) return;
 
   if (type === "Next") data = { upcoming: true };
 
@@ -83,9 +83,10 @@ export async function changeBook({ id, type, data }) {
       meeting_date: data.meetingDate,
     };
   }
-
+  // console.log("API: ", id, data);
+  let updatedBook = {};
   try {
-    await axios({
+    updatedBook = await axios({
       method: "PATCH",
       url: `${SERVER_URL}api/v1/books/${id}`,
       data,
@@ -93,6 +94,7 @@ export async function changeBook({ id, type, data }) {
   } catch (err) {
     console.error("Error updating book", err);
   }
+  return updatedBook.data.data.book;
 }
 
 export async function searchBooks(title, page) {
