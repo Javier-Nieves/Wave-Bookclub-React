@@ -1,5 +1,5 @@
 export const RES_PAGE = 20; // todo - make changable
-export const TIMEOUT_SEC = 10;
+export const TIMEOUT_SEC = 3;
 export const CLASSIC_LIMIT = new Date().getFullYear() - 50;
 
 // prettier-ignore

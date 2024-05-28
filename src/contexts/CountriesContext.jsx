@@ -14,11 +14,13 @@ function CountriesProvider({ children }) {
     async function getCountryList() {
       try {
         setLoadingCountries(true);
-        const countriesFetch = await fetch(COUNTRIES_API);
+
+        // racing countries fetch request with TIMEOUT_SEC clock:
         const response = await Promise.race([
-          countriesFetch,
+          fetch(COUNTRIES_API),
           timeout(TIMEOUT_SEC),
         ]);
+
         const data = await response.json();
         setCountries(
           data.map((item) => {

@@ -57,6 +57,7 @@ export async function addBook(data) {
 
 export async function removeBook(id) {
   if (!id) return;
+  // console.log("removing:", id);
   try {
     await axios({
       method: "DELETE",

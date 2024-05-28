@@ -31,7 +31,10 @@ export default function Search() {
   useEffect(
     function () {
       function callback(e) {
-        if (document.activeElement === searchInput.current) {
+        if (
+          document.activeElement === searchInput.current &&
+          titleToSearch !== ""
+        ) {
           if (e.code === "Enter") navigate("/app/search");
           return;
         }
@@ -45,16 +48,15 @@ export default function Search() {
         document.removeEventListener("keydown", callback);
       };
     },
-    [navigate]
+    [navigate, titleToSearch]
   );
 
-  // TODO: correct, strange behavior. Navigate back if searchResults are none
   useEffect(
     function () {
       if (currentView === "search" && totalResults === 0) {
         navigate("/app");
         showMessage(`Can't find book with ${titleToSearch} title`, "bad");
-        setTitleToSearch("");
+        // setTitleToSearch("");
       }
     },
     [totalResults, currentView, navigate, showMessage, titleToSearch]
