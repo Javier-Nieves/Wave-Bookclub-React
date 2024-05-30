@@ -3,6 +3,7 @@ import { useViews } from "../../contexts/ViewsContext";
 import { useCountries } from "../../contexts/CountriesContext";
 
 import styles from "./Tables.module.css";
+import { useSort } from "./useSort";
 
 export function TableRow({ book }) {
   const { currentView } = useViews();
@@ -45,14 +46,16 @@ export function TableRow({ book }) {
 export function TableRowYear({ yearChange, book }) {
   return (
     <>
-      <tr className={styles.yearRow}>
-        <td>{yearChange}</td>
-        <td />
-        <td className={styles.mobileOnly} />
-        <td className={styles.mobileOnly} />
-        <td className={styles.mobileOnly} />
-        <td />
-      </tr>
+      {yearChange !== String(new Date().getFullYear()) && (
+        <tr className={styles.yearRow}>
+          <td>{yearChange}</td>
+          <td />
+          <td className={styles.mobileOnly} />
+          <td className={styles.mobileOnly} />
+          <td className={styles.mobileOnly} />
+          <td />
+        </tr>
+      )}
       <TableRow book={book} key={book.bookid} />
     </>
   );

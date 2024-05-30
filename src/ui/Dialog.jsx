@@ -2,6 +2,7 @@ import { createPortal } from "react-dom";
 import styles from "./Dialog.module.css";
 
 function Dialog({ type, title, children, onClick }) {
+  // createPortal attaches this element to the selected one (document.body)
   return createPortal(
     <dialog open onClick={onClick}>
       <div

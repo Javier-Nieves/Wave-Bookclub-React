@@ -137,16 +137,16 @@ th:hover {
   box-shadow: 0 0 5px #ffffff9b, 0 0 25px var(--color-upcoming),
     0 0 30px var(--color-upcoming);
 }
-.histTable,
+.historyTable,
 .searchTable {
   margin-top: 6rem;
 }
 
 @media screen and (max-width: 430px) {
-  .mobileOnly {
+  .mobileHide {
     display: none;
   }
-  .histTable,
+  .historyTable,
   .searchTable {
     margin-top: 10px;
   }
