@@ -34,7 +34,7 @@ function EditBookForm({ bookToEdit, setIsEditing }) {
 
   return (
     <form
-      className={styles.modalFormAdd}
+      className={styles.flex}
       onClick={(e) => e.stopPropagation()}
       onSubmit={handleSubmit(onSubmit)}
     >
@@ -58,7 +58,7 @@ function EditBookForm({ bookToEdit, setIsEditing }) {
       </div>
 
       <div className={styles.horRow}>
-        <div className={styles.lilBlock}>
+        <div className={styles.flex}>
           <span className={styles.formText}>Year:</span>
           <input
             type="text"
@@ -68,17 +68,19 @@ function EditBookForm({ bookToEdit, setIsEditing }) {
           />
         </div>
 
-        <div className={styles.lilBlock}>
-          {selectedCountry && (
-            <span>
-              <img
-                className={styles.tinyFlag}
-                src={selectedCountry.flags.svg}
-                alt={selectedCountry.flags.alt}
-              />
-            </span>
-          )}
-          <span className={styles.formText}>Country:</span>
+        <div className={styles.flex}>
+          <span className={styles.formText}>
+            {selectedCountry && (
+              <span>
+                <img
+                  className={styles.tinyFlag}
+                  src={selectedCountry.flags.svg}
+                  alt={selectedCountry.flags.alt}
+                />
+              </span>
+            )}
+            Country:
+          </span>
           <input
             type="text"
             id="country"
@@ -93,16 +95,10 @@ function EditBookForm({ bookToEdit, setIsEditing }) {
               <option key={country.name.common}>{country.name.common}</option>
             ))}
           </datalist>
-          {/* <input
-            type="text"
-            id="country"
-            //   disabled={isWorking}
-            {...register("country", { required: "This field is required" })}
-          /> */}
         </div>
       </div>
 
-      <div>
+      <div className={styles.flex} style={{ width: "100%" }}>
         <span className={styles.formText}>Description:</span>
         <textarea
           type="text"

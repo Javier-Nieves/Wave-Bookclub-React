@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaFeather, FaFire, FaRegTrashAlt } from "react-icons/fa";
 import { useViews } from "../contexts/ViewsContext";
 import { useLibrary } from "../features/book/useLibrary";
 import { useUpdateBook } from "../features/book/useUpdateBook";
@@ -69,7 +70,8 @@ export default function Controls() {
         {books.some((b) => b.bookid === bookToShow.bookid) ? (
           <>
             <Button type="greyBtn" onClick={handleRemoveBook}>
-              Remove from the reading list
+              <FaFire />
+              <span>Remove from reading list</span>
             </Button>
 
             {!upcomingBook && (
@@ -80,7 +82,8 @@ export default function Controls() {
           </>
         ) : (
           <Button type="greyBtn" onClick={() => setDialogIsOpen(true)}>
-            To the Reading List
+            <FaFeather />
+            <span>Add to reading list</span>
           </Button>
         )}
       </div>

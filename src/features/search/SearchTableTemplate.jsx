@@ -6,8 +6,6 @@ import styles from "../tables/Tables.module.css";
 export default function SearchTable() {
   const { currentSearchResults } = useViews();
 
-  // if (isSearching) return <Loader />;
-
   return (
     <table className={styles.searchTable}>
       <thead>

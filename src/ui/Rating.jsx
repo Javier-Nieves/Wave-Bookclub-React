@@ -4,6 +4,7 @@ import Dialog from "./Dialog";
 import DeleteForm from "./DeleteForm";
 
 import styles from "./Main.module.css";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 export function Rating({ rating }) {
   const [dialogIsOpen, setDialogIsOpen] = useState();
@@ -25,7 +26,7 @@ export function Rating({ rating }) {
           <button className={styles.viewRating}>{rating}</button>
         </div>
         <Button type="redBtn" onClick={() => setDialogIsOpen(true)}>
-          Delete
+          <FaRegTrashAlt />
         </Button>
       </div>
     </>

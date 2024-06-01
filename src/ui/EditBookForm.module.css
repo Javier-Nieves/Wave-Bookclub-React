@@ -1,10 +1,8 @@
 .formRow {
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
   display: grid;
   grid-template-columns: 100px 1fr;
   align-items: center;
+  width: 90%;
 }
 .horRow {
   display: grid;
@@ -14,7 +12,14 @@
   color: white;
   font-size: 20px;
 }
-.lilBlock input {
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+.flex input {
   width: 85%;
 }
 
