@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useViews } from "../../contexts/ViewsContext";
 import Switch from "../../ui/Switch";
+import Filter from "../../ui/Filter";
 import ReadingTableTemplate from "./ReadingTableTemplate";
 import HistoryTableTemplate from "./HistoryTableTemplate";
 import SearchTableTemplate from "../search/SearchTableTemplate";
@@ -15,7 +16,13 @@ export default function Table({ section = "classic" }) {
     [changeView, currentView, section]
   );
 
-  if (section === "history") return <HistoryTableTemplate />;
+  if (section === "history")
+    return (
+      <>
+        <Filter />
+        <HistoryTableTemplate />
+      </>
+    );
 
   if (section === "search") return <SearchTableTemplate />;
 

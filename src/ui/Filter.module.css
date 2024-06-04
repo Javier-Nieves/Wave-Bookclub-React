@@ -1,0 +1,24 @@
+.filterContainer {
+  position: absolute;
+  top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: blur(4px);
+  padding: 8px 20px;
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+
+.filterContainer button {
+  font-size: 21px;
+  height: 80%;
+}
+
+.filterContainer button:hover {
+  box-shadow: none;
+  transform: none;
+  border: 1px solid var(--color-bright);
+  background-color: rgba(9, 9, 9, 0.6);
+}

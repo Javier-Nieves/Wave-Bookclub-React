@@ -12,11 +12,9 @@ function EditBookForm({ bookToEdit, setIsEditing }) {
   const { countries } = useCountries();
   const { changeBook } = useUpdateBook();
   const { showMessage } = useViews();
-  const { register, handleSubmit, reset, setValue, getValues, formState } =
-    useForm({
-      defaultValues: { ...bookToEdit },
-    });
-  const { errors } = formState;
+  const { register, handleSubmit, setValue } = useForm({
+    defaultValues: { ...bookToEdit },
+  });
 
   const selectedCountry = countries.find((c) => c.name.common === country);
 
@@ -27,7 +25,6 @@ function EditBookForm({ bookToEdit, setIsEditing }) {
     data = { title, author, year, desc, pages, country };
     console.log(data);
     changeBook({ id: bookToEdit._id, data });
-    // todo - message
     showMessage("Book data is updated");
     setIsEditing(false);
   }
