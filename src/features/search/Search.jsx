@@ -53,7 +53,7 @@ export default function Search() {
 
   useEffect(
     function () {
-      if (currentView === "search" && totalResults === 0) {
+      if (currentView === "search" && (totalResults === 0 || !totalResults)) {
         navigate("/app");
         showMessage(`Can't find book with ${titleToSearch} title`, "bad");
         // setTitleToSearch("");

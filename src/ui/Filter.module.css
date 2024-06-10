@@ -22,3 +22,9 @@
   border: 1px solid var(--color-bright);
   background-color: rgba(9, 9, 9, 0.6);
 }
+
+@media screen and (max-width: 430px) {
+  .filterContainer {
+    display: none;
+  }
+}

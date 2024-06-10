@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../contexts/AuthContext.jsx";
 import { useViews } from "../contexts/ViewsContext.jsx";
+import { useLogin } from "../features/user/useLogin.js";
 import Button from "../ui/Button";
 import Message from "../ui/Message.jsx";
 import Loader from "../ui/Loader.jsx";
@@ -10,16 +11,18 @@ import Loader from "../ui/Loader.jsx";
 import styles from "./Pages.module.css";
 
 function Login() {
-  const { login, loadingLogin, isLoggedIn } = useAuth();
+  const { login, isLoading } = useLogin();
+  const { loadingLogin, isLoggedIn } = useAuth();
+  // const { login, loadingLogin, isLoggedIn } = useAuth();
   const { message, showMessage } = useViews();
 
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [pass, setPass] = useState("");
+  const [password, setPassword] = useState("");
 
   async function handleLogin(e) {
     e.preventDefault();
-    if (name && pass) await login(name, pass);
+    if (name && password) login({ name, password });
     // setTimeout(() => {
     //   console.log("login?", isLoggedIn);
     //   !isLoggedIn &&
@@ -48,6 +51,7 @@ function Login() {
         <input
           type="text"
           placeholder="Club Name"
+          autoComplete="username"
           required
           className={styles.enterInput}
           onChange={(e) => setName(e.target.value.toLowerCase())}
@@ -56,10 +60,11 @@ function Login() {
         <input
           type="password"
           placeholder="Password"
+          autoComplete="current-password"
           required
           className={styles.enterInput}
-          value={pass}
-          onChange={(e) => setPass(e.target.value)}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           style={{ marginBottom: "25px" }}
         />
         <Button type="brightBtn" disabled={loadingLogin}>

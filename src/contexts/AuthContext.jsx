@@ -130,6 +130,7 @@ function AuthProvider({ children }) {
     },
     [user]
   );
+
   const register = useCallback(
     async function register(name, password, passwordConfirm) {
       if (user === name) return;
