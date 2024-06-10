@@ -3,8 +3,7 @@ import axios from "axios";
 import { SERVER_URL } from "../utils/config";
 
 export async function login(data) {
-  //   if (user === name) return;
-
+  if (!data) return {};
   try {
     const res = await axios({
       method: "POST",
@@ -22,27 +21,26 @@ export async function login(data) {
   }
 }
 
-// export async function checkAuth() {
-//   try {
-//     // check LocalStarage for jwt token. In case of page refresh
-//     // const savedJwt = localStorage.getItem("jwt");
-//     // if (savedJwt) dispatch({ type: "restoreToken", payload: savedJwt });
+export async function checkAuth() {
+  try {
+    // check LocalStarage for jwt token. In case of page refresh
+    const savedJwt = localStorage.getItem("jwt");
+    if (!savedJwt) return false;
 
-//     const res = await axios({
-//       method: "POST",
-//       url: `${SERVER_URL}api/v1/users/logged-check`,
-//       data: { token: jwt },
-//     });
-//     if (res.data.status === "success") {
-//       //   dispatch({
-//       //     type: "userIsAuthenticated",
-//       //     payload: res.data,
-//       //   });
-//     }
-//   } catch (err) {
-//     // dispatch({
-//     //   type: "rejected",
-//     //   payload: `Error while checking login! ${err.message}`,
-//     // });
-//   }
-// }
+    const res = await axios({
+      method: "POST",
+      url: `${SERVER_URL}api/v1/users/logged-check`,
+      data: { token: savedJwt },
+    });
+    if (res.data.status === "success") {
+      // user object:
+      return res.data.data.currentUser;
+    }
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}
+
+export async function logout() {
+  localStorage.removeItem("jwt");
+}

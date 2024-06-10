@@ -1,17 +1,21 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { useAuth } from "../../contexts/AuthContext.jsx";
+
+import { useUser } from "./useUser.js";
+import { useLogout } from "./useLogout.js";
 import Button from "../../ui/Button";
 
 import styles from "./User.module.css";
 
 function User() {
-  const { isLoggedIn, user, logout } = useAuth();
+  const { isLoggedIn, user } = useUser();
+  const { logout } = useLogout();
   const queryClient = useQueryClient();
 
   function handleLogout() {
     // Clear all queries
     queryClient.clear();
     logout();
+    // navigate("/login", { replace: true });
   }
 
   return (

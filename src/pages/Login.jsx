@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-import { useAuth } from "../contexts/AuthContext.jsx";
 import { useViews } from "../contexts/ViewsContext.jsx";
 import { useLogin } from "../features/user/useLogin.js";
 import Button from "../ui/Button";
@@ -11,9 +10,7 @@ import Loader from "../ui/Loader.jsx";
 import styles from "./Pages.module.css";
 
 function Login() {
-  const { login, isLoading } = useLogin();
-  const { loadingLogin, isLoggedIn } = useAuth();
-  // const { login, loadingLogin, isLoggedIn } = useAuth();
+  const { login, isLoading, isLoggedIn } = useLogin();
   const { message, showMessage } = useViews();
 
   const navigate = useNavigate();
@@ -45,7 +42,7 @@ function Login() {
         ⬅ Return
       </NavLink>
       <h1 className={styles.loginTitle}>Login</h1>
-      {loadingLogin && <Loader name="loginLoading" />}
+      {isLoading && <Loader name="loginLoading" />}
       <Message centered={true} />
       <form className={styles.enterForm} onSubmit={handleLogin}>
         <input
@@ -67,8 +64,8 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
           style={{ marginBottom: "25px" }}
         />
-        <Button type="brightBtn" disabled={loadingLogin}>
-          {loadingLogin ? "Wait please..." : "Enter"}
+        <Button type="brightBtn" disabled={isLoading}>
+          {isLoading ? "Wait please..." : "Enter"}
         </Button>
       </form>
     </main>

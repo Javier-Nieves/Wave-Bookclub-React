@@ -3,7 +3,7 @@ import { useViews } from "../contexts/ViewsContext";
 import { useCountries } from "../contexts/CountriesContext";
 import Button from "./Button";
 import { useAddBook } from "../features/book/useAddBook";
-import { useAuth } from "../contexts/AuthContext";
+import { useUser } from "../features/user/useUser";
 import { useGetBook } from "../features/book/useGetBook";
 
 import styles from "./Main.module.css";
@@ -16,7 +16,7 @@ export function AddForm() {
   const { countries } = useCountries();
   const { bookToShow } = useGetBook();
   const { addBook } = useAddBook();
-  const { user } = useAuth();
+  const { user } = useUser();
 
   const selectedCountry = countries.find((c) => c.name.common === country);
 

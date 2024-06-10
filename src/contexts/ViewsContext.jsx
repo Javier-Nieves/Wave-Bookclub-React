@@ -6,7 +6,6 @@ import {
   useReducer,
 } from "react";
 import { CLASSIC_LIMIT } from "../utils/config";
-import { useAuth } from "./AuthContext";
 import { useLibrary } from "../features/book/useLibrary";
 import { arraysEqual, objectsAreEqual } from "../utils/helpers";
 
@@ -60,7 +59,6 @@ function ViewsProvider({ children }) {
     dispatch,
   ] = useReducer(reducer, initialState);
   const { upcomingBook } = useLibrary();
-  // const { isLoggedIn } = useAuth();
 
   function showMessage(text, style = "good") {
     if (!message) dispatch({ type: "message/show", payload: { text, style } });
@@ -83,14 +81,6 @@ function ViewsProvider({ children }) {
     },
     [upcomingBook]
   );
-
-  // logged in message
-  //   useEffect(
-  //     function () {
-  //       isLoggedIn && showMessage("You are logged in");
-  //     },
-  //     [isLoggedIn]
-  //   );
 
   function changeView(view) {
     // console.log("changing view! to", view);

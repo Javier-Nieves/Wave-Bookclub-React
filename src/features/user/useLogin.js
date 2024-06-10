@@ -1,9 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
+import { useViews } from "../../contexts/ViewsContext";
 import { login as loginApi } from "../../services/apiUsers";
 
 export function useLogin() {
+  const { showMessage } = useViews();
   const client = useQueryClient();
   const navigate = useNavigate();
 
@@ -13,25 +15,17 @@ export function useLogin() {
       // manually set data to cash to speed the login up
       client.setQueryData(["user"], user.user);
       // save JWT to localStorage
-      console.log(user);
+      localStorage.setItem("jwt", user.jwt);
+      // show login message
+      showMessage("You are logged in");
+
       navigate("/app", { replace: true });
     },
-    onError: (err) => {
-      console.log("ERROR: ", err);
-      // toast.error("Error in logging user");
+    onError: () => {
+      // console.log("ERROR: ", err);
+      showMessage("Error while logging user", "bad");
     },
   });
 
   return { login, isLoading };
 }
-
-// export async function getCurrentUser() {
-//   const { data: session } = await supabase.auth.getSession();
-//   if (!session.session) return null;
-
-//   const { data, error } = await supabase.auth.getUser();
-
-//   if (error) throw new Error(error.message);
-
-//   return data?.user;
-// }

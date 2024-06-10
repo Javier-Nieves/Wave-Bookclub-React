@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext.jsx";
+import { useUser } from "../features/user/useUser.js";
 import Loader from "./Loader.jsx";
 
 function ProtectedRoutes({ children }) {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useUser();
   const navigate = useNavigate();
 
   // when user logges out - navigate to index

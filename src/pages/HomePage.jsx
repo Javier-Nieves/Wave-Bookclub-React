@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useAuth } from "../contexts/AuthContext.jsx";
+import { useUser } from "../features/user/useUser.js";
 
 import Loader from "../ui/Loader";
 import Button from "../ui/Button";
@@ -9,7 +9,7 @@ import Button from "../ui/Button";
 import styles from "./Pages.module.css";
 
 export default function Homepage() {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useUser();
 
   const navigate = useNavigate();
   useEffect(
