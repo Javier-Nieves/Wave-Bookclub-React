@@ -1,27 +1,29 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-import { useAuth } from "../contexts/AuthContext.jsx";
+import { useRegister } from "../features/user/useRegister.js";
+import { useUser } from "../features/user/useUser.js";
 import Loader from "../ui/Loader.jsx";
 import Button from "../ui/Button";
 
 import styles from "./Pages.module.css";
 
 function Register() {
-  const { register, isLoggedIn } = useAuth();
+  const { isLoggedIn } = useUser();
+  const { register } = useRegister();
 
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [pass, setPass] = useState("");
-  const [passConfirm, setPassConfirm] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function handleRegister(e) {
     setLoading(true);
     e.preventDefault();
-    if (!name || !pass || !passConfirm) return;
-    if (pass !== passConfirm) return;
-    await register(name, pass, passConfirm);
+    if (!name || !password || !passwordConfirm) return;
+    if (password !== passwordConfirm) return;
+    await register({ name, password, passwordConfirm });
     navigate("/app");
     setLoading(false);
     return null;
@@ -65,14 +67,15 @@ function Register() {
             placeholder="Password"
             required
             className={styles.enterInput}
-            value={pass}
-            onChange={(e) => setPass(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
-          {pass.length !== 0 && (pass.length < 8 || pass.length > 20) && (
-            <div className={styles.underline}>
-              Password length should be 8-20 symbols
-            </div>
-          )}
+          {password.length !== 0 &&
+            (password.length < 8 || password.length > 20) && (
+              <div className={styles.underline}>
+                Password length should be 8-20 symbols
+              </div>
+            )}
         </div>
         <div
           className={styles.underlineContainer}
@@ -83,10 +86,10 @@ function Register() {
             placeholder="Confirmation"
             required
             className={styles.enterInput}
-            value={passConfirm}
-            onChange={(e) => setPassConfirm(e.target.value)}
+            value={passwordConfirm}
+            onChange={(e) => setPasswordConfirm(e.target.value)}
           />
-          {pass !== passConfirm && (
+          {password !== passwordConfirm && (
             <div className={styles.underline}>
               Password and confirmation are different
             </div>

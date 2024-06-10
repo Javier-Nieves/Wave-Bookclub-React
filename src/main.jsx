@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-import { AuthProvider } from "./contexts/AuthContext";
 import { ViewsProvider } from "./contexts/ViewsContext.jsx";
 import { CountriesProvider } from "./contexts/CountriesContext";
 
@@ -24,13 +23,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <AuthProvider>
-        <ViewsProvider>
-          <CountriesProvider>
-            <App />
-          </CountriesProvider>
-        </ViewsProvider>
-      </AuthProvider>
+      <ViewsProvider>
+        <CountriesProvider>
+          <App />
+        </CountriesProvider>
+      </ViewsProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );

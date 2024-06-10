@@ -13,7 +13,7 @@ export function useLogout() {
     onSuccess: () => {
       queryClient.removeQueries();
       // toast.success("You're logged out");
-      navigate("/login", { replace: true });
+      navigate("/", { replace: true });
       showMessage("You are logged out");
     },
     onError: () => {

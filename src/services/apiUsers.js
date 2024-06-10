@@ -44,3 +44,24 @@ export async function checkAuth() {
 export async function logout() {
   localStorage.removeItem("jwt");
 }
+
+export async function register(data) {
+  //  structure: data = {name,password,passwordConfirm };
+  if (!data.name || !data.password || !data.passwordConfirm) return;
+
+  try {
+    const res = await axios({
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      url: `${SERVER_URL}api/v1/users`,
+      data,
+    });
+
+    if (res.data.status === "success")
+      return { user: res.data.data.user, jwt: res.data.token };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}
