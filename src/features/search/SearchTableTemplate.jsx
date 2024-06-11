@@ -1,4 +1,5 @@
 import { useViews } from "../../contexts/ViewsContext";
+import NoContentYet from "../../ui/NoContentYet";
 import { SearchRow } from "../tables/TableRow";
 
 import styles from "../tables/Tables.module.css";
@@ -6,6 +7,8 @@ import styles from "../tables/Tables.module.css";
 export default function SearchTable() {
   const { currentSearchResults } = useViews();
 
+  if (!currentSearchResults.length)
+    return <NoContentYet>No results</NoContentYet>;
   return (
     <table className={styles.searchTable}>
       <thead>

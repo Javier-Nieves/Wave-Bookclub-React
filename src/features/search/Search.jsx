@@ -22,6 +22,8 @@ export default function Search() {
     page
   );
 
+  console.log(titleToSearch);
+
   // time to let the page render before rendering results
   setTimeout(() => {
     showSearchResults(searchResults);
@@ -51,16 +53,16 @@ export default function Search() {
     [navigate, titleToSearch]
   );
 
-  useEffect(
-    function () {
-      if (currentView === "search" && (totalResults === 0 || !totalResults)) {
-        navigate("/app");
-        showMessage(`Can't find book with ${titleToSearch} title`, "bad");
-        // setTitleToSearch("");
-      }
-    },
-    [totalResults, currentView, navigate, showMessage, titleToSearch]
-  );
+  // useEffect(
+  //   function () {
+  //     if (currentView === "search" && (totalResults === 0 || !totalResults)) {
+  //       navigate("/app");
+  //       showMessage(`Can't find book with ${titleToSearch} title`, "bad");
+  //       // setTitleToSearch("");
+  //     }
+  //   },
+  //   [totalResults, currentView, navigate, showMessage, titleToSearch]
+  // );
 
   function handleChangeTitle(e) {
     setTitleToSearch(e.target.value);

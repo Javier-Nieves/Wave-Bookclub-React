@@ -23,7 +23,7 @@ function EditBookForm({ bookToEdit, setIsEditing }) {
     setValue("country", country);
     const { title, author, year, desc, pages } = data;
     data = { title, author, year, desc, pages, country };
-    console.log(data);
+    console.log("updated book:", data);
     changeBook({ id: bookToEdit._id, data });
     showMessage("Book data is updated");
     setIsEditing(false);
@@ -82,9 +82,11 @@ function EditBookForm({ bookToEdit, setIsEditing }) {
             type="text"
             id="country"
             value={country}
+            disabled={!countries.length}
             onChange={(e) => setCountry(e.target.value)}
             list="countryList"
-            placeholder="Country"
+            placeholder={countries.length ? "Country" : "Unavailable"}
+            required
             // {...register("country", { required: "This field is required" })}
           />
           <datalist id="countryList">

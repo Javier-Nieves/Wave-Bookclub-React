@@ -1,13 +1,7 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useReducer,
-} from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import { CLASSIC_LIMIT } from "../utils/config";
 import { useLibrary } from "../features/book/useLibrary";
-import { arraysEqual, objectsAreEqual } from "../utils/helpers";
+import { arraysEqual } from "../utils/helpers";
 
 const ViewsContext = createContext();
 

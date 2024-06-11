@@ -23,16 +23,24 @@ export function AddForm() {
   async function handleAddBook(e) {
     e.preventDefault();
     // check if country exist and year is ok
-    if (!countries.find((item) => item.name.common === country)) {
+    // prettier-ignore
+    if (countries.length && !countries.find((item) => item.name.common === country)) {
       !message && showMessage("Country name should be correct", "bad");
       return;
-    }
+      }
+
     if (year < -3000 || year > new Date().getFullYear()) {
       !message && showMessage("No time travel please!", "bad");
       return;
     }
 
-    addBook({ ...bookToShow, country, year, club: user.id });
+    // In case when Countries API is down - country will be 'Unknown'
+    addBook({
+      ...bookToShow,
+      country: country || "Unknown",
+      year,
+      club: user._id,
+    });
     !message && showMessage("New book is added", "good");
   }
   return (
@@ -54,10 +62,11 @@ export function AddForm() {
         type="text"
         className={styles.searchField}
         value={country}
+        disabled={!countries.length}
         onChange={(e) => setCountry(e.target.value)}
         list="countryList"
-        placeholder="Country"
-        required
+        placeholder={countries.length ? `Country` : "Countries unavailable"}
+        required={countries.length}
       />
 
       <datalist id="countryList">
