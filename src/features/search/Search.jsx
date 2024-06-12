@@ -13,7 +13,7 @@ export default function Search() {
   const [page, setPage] = useState(1);
   const searchInput = useRef(null);
 
-  const { currentView, showMessage, showSearchResults } = useViews();
+  const { currentView, showSearchResults } = useViews();
   const navigate = useNavigate();
 
   // activate search on each title change
@@ -21,8 +21,6 @@ export default function Search() {
     titleToSearch,
     page
   );
-
-  console.log(titleToSearch);
 
   // time to let the page render before rendering results
   setTimeout(() => {
@@ -52,17 +50,6 @@ export default function Search() {
     },
     [navigate, titleToSearch]
   );
-
-  // useEffect(
-  //   function () {
-  //     if (currentView === "search" && (totalResults === 0 || !totalResults)) {
-  //       navigate("/app");
-  //       showMessage(`Can't find book with ${titleToSearch} title`, "bad");
-  //       // setTitleToSearch("");
-  //     }
-  //   },
-  //   [totalResults, currentView, navigate, showMessage, titleToSearch]
-  // );
 
   function handleChangeTitle(e) {
     setTitleToSearch(e.target.value);

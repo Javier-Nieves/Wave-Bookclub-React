@@ -1,10 +1,10 @@
 import { useState } from "react";
+import { FaRegTrashAlt } from "react-icons/fa";
 import Button from "./Button";
 import Dialog from "./Dialog";
 import DeleteForm from "./DeleteForm";
 
 import styles from "./Main.module.css";
-import { FaRegTrashAlt } from "react-icons/fa";
 
 export function Rating({ rating }) {
   const [dialogIsOpen, setDialogIsOpen] = useState();

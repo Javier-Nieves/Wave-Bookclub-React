@@ -43,13 +43,17 @@
   font-size: 6rem;
   margin: 30px;
 }
-
 .buttonContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 20%;
   margin-bottom: 50px;
+}
+
+.errorMessage {
+  color: whitesmoke;
+  padding: 20px;
 }
 
 /* for Login - Register page */

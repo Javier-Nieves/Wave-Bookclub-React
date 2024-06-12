@@ -100,7 +100,7 @@ export async function changeBook({ id, type, data }) {
 }
 
 export async function searchBooks(title, page) {
-  console.log("looking for", title);
+  // console.log("looking for", title);
   try {
     // todo - if title contains several words - data is strange in pagination somehow
     // prettier-ignore
@@ -108,7 +108,6 @@ export async function searchBooks(title, page) {
     const result = await response.json();
     const searchResults = makeUniformedList(result);
     const totalResults = result.totalItems;
-    console.log("API:", searchResults);
     return { searchResults, totalResults };
   } catch (err) {
     console.log("Error searching books", err);
