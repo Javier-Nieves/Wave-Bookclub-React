@@ -42,7 +42,7 @@ export async function getBook(books = [], id) {
 }
 
 export async function addBook(data) {
-  console.log("data", data);
+  // console.log("data", data);
   if (!data || !data.club || !data.country || !data.year) return;
   try {
     const reply = await axios({

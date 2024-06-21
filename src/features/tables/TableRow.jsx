@@ -1,17 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import { useViews } from "../../contexts/ViewsContext";
-import { useCountries } from "../../contexts/CountriesContext";
+import { useCountries } from "./useCountries";
+import { useSort } from "./useSort";
 
 import styles from "./Tables.module.css";
-import { useSort } from "./useSort";
 
 export function TableRow({ book }) {
   const { currentView } = useViews();
-  const { countries } = useCountries();
+  const { isLoading, countries } = useCountries();
   const navigate = useNavigate();
 
   const bookCountry =
-    countries.find((c) => c.name.common === book.country) || "";
+    countries?.find((c) => c.name.common === book.country) || "";
 
   return (
     <tr

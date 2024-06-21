@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useCountries } from "../../contexts/CountriesContext";
+import { useCountries } from "../tables/useCountries";
 import { useGetBook } from "./useGetBook";
 import { CLASSIC_LIMIT } from "../../utils/config";
 import { useViews } from "../../contexts/ViewsContext";
@@ -71,7 +71,7 @@ function BookTitle({ bookToShow }) {
 function BookStats({ bookToShow, setIsEditing }) {
   const { countries } = useCountries();
 
-  const bookCountry = countries.find(
+  const bookCountry = countries?.find(
     (c) => c.name.common === bookToShow.country
   );
   const bookStyle = bookToShow?.year < CLASSIC_LIMIT ? "classic" : "modern";

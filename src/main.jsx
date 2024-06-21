@@ -5,7 +5,6 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ErrorBoundary } from "react-error-boundary";
 
 import { ViewsProvider } from "./contexts/ViewsContext.jsx";
-import { CountriesProvider } from "./contexts/CountriesContext";
 import { ErrorFallback } from "./ui/ErrorFallback.jsx";
 import App from "./App.jsx";
 
@@ -29,9 +28,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
         <ViewsProvider>
-          <CountriesProvider>
-            <App />
-          </CountriesProvider>
+          <App />
         </ViewsProvider>
       </QueryClientProvider>
     </ErrorBoundary>

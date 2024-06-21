@@ -13,18 +13,19 @@ export function useLibrary() {
     })
 
   const upcomingBook = books?.find((book) => book.upcoming === true);
-  console.log(books);
-  //* DEV: generate TestBooks list from bookclub's reading history
-  const filteredBooks = books?.map((book) => {
-    const rating = book.rating || +(Math.random() * 6 + 4).toFixed(1);
-    return {
-      ...book,
-      testBook: true,
-      club: ["66754a55d072377eaa0154f6"],
-      _id: 0,
-      rating,
-    };
-  });
+
+  // //* DEV: generate TestBooks list from bookclub's reading history
+  // const filteredBooks = books?.map((book) => {
+  //   const rating =
+  //     book.rating || (book.read && +(Math.random() * 6 + 4).toFixed(1));
+  //   return {
+  //     ...book,
+  //     testBook: true,
+  //     club: ["66754a55d072377eaa0154f6"],
+  //     _id: 0,
+  //     rating,
+  //   };
+  // });
   // console.log(filteredBooks);
 
   return { isLoading, books, upcomingBook, error };
