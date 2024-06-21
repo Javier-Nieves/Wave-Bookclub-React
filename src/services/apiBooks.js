@@ -114,3 +114,15 @@ export async function searchBooks(title, page) {
   }
   return {};
 }
+
+export async function uploadTestBooks() {
+  try {
+    const response = await fetch(`${SERVER_URL}api/v1/books/uploadTestBooks`);
+    const data = await response.json();
+
+    return data;
+  } catch (err) {
+    console.error("Error getting one book", err);
+    return {};
+  }
+}

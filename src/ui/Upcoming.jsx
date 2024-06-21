@@ -69,7 +69,7 @@ export default function Upcoming() {
         )}
         <img
           className={styles.upcomingPic}
-          src={upcomingBook?.image_link || "/img/club2.png"}
+          src={upcomingBook?.image_link || "/img/rate1.webp"}
           loading="lazy"
           alt="upcoming book"
         />

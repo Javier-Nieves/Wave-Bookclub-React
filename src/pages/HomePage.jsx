@@ -7,6 +7,7 @@ import Loader from "../ui/Loader";
 import Button from "../ui/Button";
 
 import styles from "./Pages.module.css";
+import { useLogin } from "../features/user/useLogin.js";
 
 export default function Homepage() {
   const { isLoggedIn } = useUser();
@@ -40,28 +41,42 @@ function WelcomeTitle() {
 
 function ButtonContainer() {
   const navigate = useNavigate();
+  const { login, isLoading } = useLogin();
+
   return (
     <div className={styles.buttonContainer}>
       <div className={styles.flexColumn}>
         <div className={styles.welcomeTextSmall}>Create your bookclub</div>
-        <Button onClick={() => navigate("/register")} type="registerBtn">
+        <Button
+          disabled={isLoading}
+          onClick={() => navigate("/register")}
+          type="registerBtn"
+        >
           Register
         </Button>
       </div>
 
       <div className={styles.flexColumn}>
         <div className={styles.welcomeTextSmall}>Login to a bookclub</div>
-        <Button onClick={() => navigate("/login")} type="pictureBtn">
+        <Button
+          disabled={isLoading}
+          onClick={() => navigate("/login")}
+          type="pictureBtn"
+        >
           Enter
         </Button>
       </div>
 
-      {/* <div className="flex-column">
-      <div className={styles.welcomeTextSmall}>
-        Feel free to check out the original Wave Bookclub (est.2015)
+      <div className="flex-column">
+        <div className={styles.welcomeTextSmall}>Fast enter without login</div>
+        <Button
+          disabled={isLoading}
+          onClick={() => login({ name: "test", password: "testingBookClub" })}
+          type="testBtn"
+        >
+          Test
+        </Button>
       </div>
-      <button className="pictureBtn">Got it!</button>
-    </div> */}
     </div>
   );
 }

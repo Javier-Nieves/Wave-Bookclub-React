@@ -37,7 +37,8 @@ button {
 
 /* buttons with pictures: */
 .pictureBtn,
-.registerBtn {
+.registerBtn,
+.testBtn {
   margin-top: 13px;
   width: 180px;
   height: 100px;
@@ -56,6 +57,11 @@ button {
 .registerBtn {
   font-size: 30px;
   background-image: url("/img/register.png");
+  background-position: center;
+}
+.testBtn {
+  font-size: 30px;
+  background-image: url("/img/eye.png");
   background-position: center;
 }
 
