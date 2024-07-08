@@ -18,7 +18,6 @@ export function useLogout() {
     },
     onError: () => {
       // console.error("Error while logging out");
-      // message:
       showMessage("Error while logging out", "bad");
     },
   });

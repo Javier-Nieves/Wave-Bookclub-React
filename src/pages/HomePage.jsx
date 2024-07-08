@@ -1,13 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { useUser } from "../features/user/useUser.js";
-
+import { useLogin } from "../features/user/useLogin.js";
 import Loader from "../ui/Loader";
 import Button from "../ui/Button";
 
 import styles from "./Pages.module.css";
-import { useLogin } from "../features/user/useLogin.js";
 
 export default function Homepage() {
   const { isLoggedIn } = useUser();
