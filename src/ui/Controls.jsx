@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaFeather, FaFire, FaRegTrashAlt } from "react-icons/fa";
+import { FaFeather, FaFire } from "react-icons/fa";
 import { useViews } from "../contexts/ViewsContext";
 import { useLibrary } from "../features/book/useLibrary";
 import { useUpdateBook } from "../features/book/useUpdateBook";

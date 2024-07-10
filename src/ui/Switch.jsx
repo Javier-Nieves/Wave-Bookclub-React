@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 
 import styles from "./Switch.module.css";
+import { FaFeather, FaTabletAlt } from "react-icons/fa";
 
 export default function Switch({ section = undefined }) {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function Switch({ section = undefined }) {
             }`}
             style={{ fontFamily: "var(--font-classic)" }}
           >
-            Classic
+            <FaFeather />
           </span>
           <label className={styles.switch}>
             <input
@@ -50,7 +51,7 @@ export default function Switch({ section = undefined }) {
             }`}
             style={{ fontFamily: "var(--font-modern)" }}
           >
-            Modern
+            <FaTabletAlt />
           </span>
         </>
       )}
