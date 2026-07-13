@@ -28,9 +28,7 @@ export default function Table({ section }) {
   return (
     <BookTable section={section}>
       <BookTable.Header>
-        <th className="12" onClick={() => handleSort("title")}>
-          Book
-        </th>
+        <th onClick={() => handleSort("title")}>Book</th>
         <th onClick={() => handleSort("author")}>Author</th>
         <th onClick={() => handleSort("year")}>Year</th>
         {/* prettier-ignore */}
