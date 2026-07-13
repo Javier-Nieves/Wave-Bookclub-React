@@ -71,8 +71,8 @@ function EditBookForm({ bookToEdit, setIsEditing }) {
               <span>
                 <img
                   className={styles.tinyFlag}
-                  src={selectedCountry.flags.svg}
-                  alt={selectedCountry.flags.alt}
+                  src={selectedCountry.flag.url_svg}
+                  alt='some flag'
                 />
               </span>
             )}

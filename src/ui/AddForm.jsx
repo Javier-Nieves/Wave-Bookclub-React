@@ -78,8 +78,8 @@ export function AddForm() {
         {selectedCountry && (
           <img
             className={styles.flag}
-            src={selectedCountry.flags.svg}
-            alt={selectedCountry.flags.alt}
+            src={selectedCountry.flag.url_svg}
+            alt='Some flag'
           />
         )}
         <Button type="blackBtn">Add book</Button>
