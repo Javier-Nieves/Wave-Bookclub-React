@@ -15,8 +15,8 @@ export async function getCountries() {
   const data = await response.json();
 
     const updatedData = data.data.objects.map((item) => {
-    if (item.names.common === "United States") item.names.common = "USA";
-    if (item.names.common === "United Kingdom") item.names.common = "UK";
+    if (item?.names.common === "United States") item.names.common = "USA";
+    if (item?.names.common === "United Kingdom") item.names.common = "UK";
     return item;
   });
 

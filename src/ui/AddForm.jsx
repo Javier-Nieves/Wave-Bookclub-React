@@ -18,7 +18,7 @@ export function AddForm() {
   const { addBook } = useAddBook();
   const { user } = useUser();
 
-  const selectedCountry = countries.find((c) => c.name.common === country);
+  const selectedCountry = countries?.find((c) => c.name.common === country);
 
   async function handleAddBook(e) {
     e.preventDefault();
@@ -71,7 +71,7 @@ export function AddForm() {
 
       <datalist id="countryList">
         {countries.map((country) => (
-          <option key={country.name.common}>{country.name.common}</option>
+          <option key={country?.name.common}>{country.name.common}</option>
         ))}
       </datalist>
       <div className={styles.countryContainer}>
