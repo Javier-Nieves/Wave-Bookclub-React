@@ -70,7 +70,7 @@ function BookTitle({ bookToShow }) {
 
 function BookStats({ bookToShow, setIsEditing }) {
   const { countries } = useCountries();
-
+  console.log(countries);
   const bookCountry = countries?.find(
     (c) => c.name?.common === bookToShow.country
   );
