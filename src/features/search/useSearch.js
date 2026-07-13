@@ -5,7 +5,8 @@ export function useSearch(title, page) {
   const { isLoading: isSearching, data } = useQuery({
     queryKey: ["search", title, page],
     queryFn: () => searchBooks(title, page),
-    enabled: Boolean(title),
+    // enabled: Boolean(title),
+    enabled: title.trim().length >= 3,
   });
 
   return {

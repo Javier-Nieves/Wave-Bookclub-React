@@ -1,3 +1,4 @@
+import { useDebounce } from "./useDebounce";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaLongArrowAltRight, FaLongArrowAltLeft } from "react-icons/fa";
@@ -11,6 +12,7 @@ import styles from "./Search.module.css";
 export default function Search() {
   const [titleToSearch, setTitleToSearch] = useState("");
   const [page, setPage] = useState(1);
+  const debouncedTitle = useDebounce(titleToSearch, 500);
   const searchInput = useRef(null);
 
   const { currentView, showSearchResults } = useViews();
@@ -18,7 +20,7 @@ export default function Search() {
 
   // activate search on each title change
   const { searchResults, totalResults, isSearching } = useSearch(
-    titleToSearch,
+    debouncedTitle,
     page
   );
 

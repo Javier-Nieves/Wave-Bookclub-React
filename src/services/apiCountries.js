@@ -13,7 +13,7 @@ export async function getCountries() {
   // const response = await fetch(COUNTRIES_API, 
   //   { headers: { 'Authorization': 'Bearer rc_live_db6c92463d89411499a12745ad770d9a' } });
   // const data = await response.json();
-      const response1 = await fetch(`${COUNTRIES_API}}`,
+      const response1 = await fetch(`${COUNTRIES_API}`,
       { headers: { 'Authorization': 'Bearer rc_live_db6c92463d89411499a12745ad770d9a' } }
     );
     const data = await response1.json();
