@@ -12,7 +12,7 @@ export async function getAllBooks(id) {
     // geting all books for one user/club
     const res = await axios({
       method: "GET",
-      url: `${SERVER_URL}api/v1/books/all/${id}`,
+      url: `${SERVER_URL}api/v5/books/all/${id}`,
     });
     if (res.data.status === "success") {
       books = res.data.data.books.sort((a, b) => a.year - b.year);
