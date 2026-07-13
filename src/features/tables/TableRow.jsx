@@ -28,9 +28,9 @@ export function TableRow({ book }) {
       <td className={styles.mobileOnly}>
         <div className={styles.flagContainer}>
           <div>{book.country}</div>
-          {bookCountry?.flags?.svg && (
+          {bookCountry?.flag?.url_svg && (
             <img
-              src={bookCountry?.flags?.svg}
+              src={bookCountry?.flag?.url_svg}
               className={styles.smallFlag}
               alt="flag"
             />
