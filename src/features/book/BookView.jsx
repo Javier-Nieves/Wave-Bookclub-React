@@ -72,7 +72,7 @@ function BookStats({ bookToShow, setIsEditing }) {
   const { countries } = useCountries();
 
   const bookCountry = countries?.find(
-    (c) => c.name.common === bookToShow.country
+    (c) => c.name?.common === bookToShow.country
   );
   const bookStyle = bookToShow?.year < CLASSIC_LIMIT ? "classic" : "modern";
   return (
