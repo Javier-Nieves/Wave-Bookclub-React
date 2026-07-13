@@ -3,7 +3,7 @@ export const TIMEOUT_SEC = 3;
 export const CLASSIC_LIMIT = new Date().getFullYear() - 50;
 
 // prettier-ignore
-export const COUNTRIES_API = "https://api.restcountries.com/countries/v5?response_fields=names,flag";
+export const COUNTRIES_API = "https://api.restcountries.com/countries/v5?limit=100&response_fields=names,flag";
 export const BOOK_API = "https://www.googleapis.com/books/v1/volumes";
 export const SERVER_URL = "https://wave-library.ew.r.appspot.com/";
 // export const SERVER_URL = "http://127.0.0.1:3000/";
