@@ -18,13 +18,13 @@ export function AddForm() {
   const { addBook } = useAddBook();
   const { user } = useUser();
 
-  const selectedCountry = countries?.find((c) => c?.name?.common === country);
+  const selectedCountry = countries?.find((c) => c?.names.common === country);
 
   async function handleAddBook(e) {
     e.preventDefault();
     // check if country exist and year is ok
     // prettier-ignore
-    if (countries.length && !countries.find((item) => item?.name?.common === country)) {
+    if (countries.length && !countries.find((item) => item?.names.common === country)) {
       !message && showMessage("Country name should be correct", "bad");
       return;
       }
@@ -71,7 +71,7 @@ export function AddForm() {
 
       <datalist id="countryList">
         {countries.map((country) => (
-          <option key={country?.name?.common}>{country.name.common}</option>
+          <option key={country?.names.common}>{country.names.common}</option>
         ))}
       </datalist>
       <div className={styles.countryContainer}>

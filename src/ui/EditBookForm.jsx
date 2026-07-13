@@ -16,7 +16,7 @@ function EditBookForm({ bookToEdit, setIsEditing }) {
     defaultValues: { ...bookToEdit },
   });
 
-  const selectedCountry = countries.find((c) => c?.name?.common === country);
+  const selectedCountry = countries.find((c) => c?.names.common === country);
 
   function onSubmit(data) {
     // adding controlled field Country into the form data
@@ -91,7 +91,7 @@ function EditBookForm({ bookToEdit, setIsEditing }) {
           />
           <datalist id="countryList">
             {countries.map((country) => (
-              <option key={country?.name?.common}>{country.name.common}</option>
+              <option key={country?.names.common}>{country.names.common}</option>
             ))}
           </datalist>
         </div>

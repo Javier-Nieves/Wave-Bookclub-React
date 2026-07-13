@@ -11,7 +11,7 @@ export function TableRow({ book }) {
   const navigate = useNavigate();
 
   const bookCountry =
-    countries?.find((c) => c.name?.common === book.country) || "";
+    countries?.find((c) => c.names.common === book.country) || "";
 
   return (
     <tr
