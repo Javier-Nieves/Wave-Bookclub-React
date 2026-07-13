@@ -14,9 +14,9 @@ export async function getCountries() {
     { headers: { 'Authorization': 'Bearer rc_live_db6c92463d89411499a12745ad770d9a' } });
   const data = await response.json();
 
-  const updatedData = data.map((item) => {
-    if (item.name.common === "United States") item.name.common = "USA";
-    if (item.name.common === "United Kingdom") item.name.common = "UK";
+    const updatedData = data.data.objects.map((item) => {
+    if (item.names.common === "United States") item.names.common = "USA";
+    if (item.names.common === "United Kingdom") item.names.common = "UK";
     return item;
   });
 
