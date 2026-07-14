@@ -30,7 +30,7 @@ export async function getBook(books = [], id) {
     let responseBook = books.find((book) => book.bookid === id);
     // if it's not in the DB - look in the web api
     if (responseBook === undefined) {
-      const response = await fetch(`${BOOK_API}/${id}&key=${BOOKS_API_KEY}`);
+      const response = await fetch(`${BOOK_API}/${id}?key=${BOOKS_API_KEY}`);
       const data = await response.json();
       responseBook = makeUniformedBook(data);
     }
