@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SERVER_URL, BOOK_API, RES_PAGE } from "../utils/config";
+import { SERVER_URL, BOOK_API, RES_PAGE, BOOKS_API_KEY } from "../utils/config";
 import { makeUniformedBook, makeUniformedList } from "../utils/helpers";
 
 export async function getAllBooks(id) {
@@ -104,7 +104,7 @@ export async function searchBooks(title, page) {
   try {
     // todo - if title contains several words - data is strange in pagination somehow
     // prettier-ignore
-    const response = await fetch(`${BOOK_API}?q=+intitle:${title}&startIndex=${(+page - 1) * +RES_PAGE}&maxResults=${RES_PAGE}`);
+    const response = await fetch(`${BOOK_API}?q=+intitle:${title}&startIndex=${(+page - 1) * +RES_PAGE}&maxResults=${RES_PAGE}&key=${BOOKS_API_KEY}`);
     const result = await response.json();
     const searchResults = makeUniformedList(result);
     const totalResults = result.totalItems;

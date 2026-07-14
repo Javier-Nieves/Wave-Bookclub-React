@@ -73,9 +73,9 @@ function BookStats({ bookToShow, setIsEditing }) {
   const bookCountry = countries?.find(
     (c) => c.names.common === bookToShow.country
   );
-  console.log(countries);
-  console.log(bookToShow.country, bookCountry);
-  console.log(bookCountry?.flag?.url_svg);
+  // console.log(countries);
+  // console.log(bookToShow.country, bookCountry);
+  // console.log(bookCountry?.flag?.url_svg);
   const bookStyle = bookToShow?.year < CLASSIC_LIMIT ? "classic" : "modern";
   return (
     <div className={styles.bookInfoTop}>
